@@ -1,0 +1,19 @@
+{
+    "display": {
+        "title": {
+            "text": "Baby Step"
+        },
+        "description": {
+            "text": "Eat a golden apple"
+        },
+        "icon": {
+            "item": "minecraft:golden_apple"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": true
+    },
+    "criteria": {"impossible":{"trigger":"minecraft:impossible"}},
+    "parent": "survie:farmingroot"
+}

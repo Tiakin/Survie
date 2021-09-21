@@ -1,0 +1,20 @@
+{
+    "display": {
+        "title": {
+            "text": "Down Bad Serious Dedication"
+        },
+        "description": {
+            "text": "Craft an infinity hoe"
+        },
+        "icon": {
+            "item": "minecraft:netherite_hoe",
+            "nbt": "{display:{Lore:['[{\"text\":\"Infinity Hoe\"}]']}}"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": true
+    },
+    "criteria": {"impossible":{"trigger":"minecraft:impossible"}},
+    "parent": "survie:farming11"
+}

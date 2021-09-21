@@ -1,0 +1,11 @@
+name: Survie
+author: tiakin69
+version: 0.1
+api-version: 1.17
+main: fr.tiakin.main.main
+load: STARTUP
+commands:
+ save:
+  description: 'save'
+ load:
+  description: 'load'

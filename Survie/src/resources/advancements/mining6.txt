@@ -1,0 +1,20 @@
+{
+    "display": {
+        "title": {
+            "text": "To Infinity And Beyond"
+        },
+        "description": {
+            "text": "Craft an infinity block"
+        },
+        "icon": {
+            "item": "minecraft:netherite_ingot",
+            "nbt": "{display:{Lore:['[{\"text\":\"Infinity Ingot\"}]']}}"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "criteria": {"impossible":{"trigger":"minecraft:impossible"}},
+    "parent": "survie:mining5"
+}

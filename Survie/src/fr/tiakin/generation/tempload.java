@@ -1,0 +1,20 @@
+package fr.tiakin.generation;
+
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+public class tempload implements CommandExecutor {
+
+	@Override
+	public boolean onCommand(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
+		if(arg0 instanceof Player) {
+			Player p = (Player) arg0;
+			if(arg1.getName().equalsIgnoreCase("load"))
+				StructureUtil.load(p.getLocation(), arg3[0]);
+		}
+		return false;
+	}
+
+}

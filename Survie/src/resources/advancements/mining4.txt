@@ -1,0 +1,20 @@
+{
+    "display": {
+        "title": {
+            "text": "Ardite + Cobalt = Manyullyn"
+        },
+        "description": {
+            "text": "10$ for the one who can pronounce it"
+        },
+        "icon": {
+            "item": "minecraft:netherite_ingot",
+            "nbt": "{display:{Lore:['[{\"text\":\"Manyullyn Ingot\"}]']}}"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": true
+    },
+    "criteria": {"impossible":{"trigger":"minecraft:impossible"}},
+    "parent": "survie:mining3"
+}

@@ -1,0 +1,20 @@
+{
+    "display": {
+        "title": {
+            "text": "Medium Step"
+        },
+        "description": {
+            "text": "Eat a diamond apple"
+        },
+        "icon": {
+            "item": "minecraft:golden_apple",
+            "nbt": "{display:{Lore:['[{\"text\":\"Diamond Apple! Shiny\"}]']}}"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": true
+    },
+    "criteria": {"impossible":{"trigger":"minecraft:impossible"}},
+    "parent": "survie:farming2"
+}

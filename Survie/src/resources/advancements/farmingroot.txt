@@ -1,0 +1,27 @@
+{
+    "display": {
+        "title": {
+            "text": "Farming",
+            "color": "gold",
+            "bold": false,
+            "italic": false,
+            "underlined": false,
+            "strikethrough": false,
+            "obfuscated": false
+        },
+        "description": {
+            "text": "Get your first apple",
+            "color": "dark_green",
+            "bold": false
+        },
+        "icon": {
+            "item": "minecraft:apple"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": true,
+        "background": "minecraft:textures/gui/advancements/backgrounds/chaos_log.png"
+    },
+    "criteria": {"impossible":{"trigger":"minecraft:impossible"}}
+}

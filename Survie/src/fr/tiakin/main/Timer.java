@@ -14,7 +14,8 @@ public class Timer extends BukkitRunnable {
 		for(Player p : Bukkit.getOnlinePlayers()) {
 			int totalShield = Custom.getTotalShield(p);
 			if(totalShield > 0)
-				p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("shield :"+ totalShield));
+				p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("shield: "+ totalShield+" & "));
+			//if(damageCooldown.getPlayerTiming(p) > 30l)
 		}
 	}
 

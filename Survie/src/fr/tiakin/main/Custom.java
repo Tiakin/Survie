@@ -953,17 +953,30 @@ public class Custom implements Listener {
 	
 	public static int getTotalShield(Player p) {
 		int shieldpoint = 0;
-		ItemStack[] list = p.getInventory().getArmorContents();
-		list[list.length] = p.getInventory().getItemInMainHand();
-		list[list.length] = p.getInventory().getItemInOffHand();
-		
-		for(ItemStack is : list) {
+		ItemStack mainHand = p.getInventory().getItemInMainHand();
+		ItemStack offHand = p.getInventory().getItemInOffHand();
+		for(ItemStack is : p.getInventory().getArmorContents()) {
+			if(is != null)
 			if(is.hasItemMeta()) {
 				ItemMeta im = is.getItemMeta();
 				if(hasShield(im))
-					shieldpoint =+ getMaxShield(im);
+					shieldpoint += getMaxShield(im);
 			}
 		}
+		if(mainHand != null)
+		if(mainHand.hasItemMeta()) {
+			ItemMeta im = mainHand.getItemMeta();
+			if(hasShield(im))
+				shieldpoint += getMaxShield(im);
+		}
+		if(offHand != null)
+		if(offHand.hasItemMeta()) {
+			ItemMeta im = offHand.getItemMeta();
+			if(hasShield(im))
+				shieldpoint += getMaxShield(im);
+		}
+		
+		
 		return shieldpoint;
 	}
 	

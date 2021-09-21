@@ -27,7 +27,6 @@ import org.bukkit.event.block.BlockPhysicsEvent;
 import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.block.BlockPistonRetractEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -37,6 +36,7 @@ import fr.tiakin.block.AbortBreakingBlockEvent;
 import fr.tiakin.block.BreakListeners;
 import fr.tiakin.block.BrokenBlocksService;
 import fr.tiakin.block.blocks;
+import fr.tiakin.damage.damageEvent;
 import fr.tiakin.generation.tempload;
 import fr.tiakin.generation.tempsave;
 import fr.tiakin.item.items;
@@ -60,6 +60,7 @@ public class main extends JavaPlugin implements Listener{
 		Bukkit.getPluginManager().registerEvents(this, this);
 		Bukkit.getPluginManager().registerEvents(new Custom(), this);
 		Bukkit.getPluginManager().registerEvents(new BreakListeners(), this);
+		Bukkit.getPluginManager().registerEvents(new damageEvent(), this);
 		Bukkit.getPluginManager().registerEvents(advancement, this);
 		getCommand("save").setExecutor(new tempsave());
 		getCommand("load").setExecutor(new tempload());
@@ -165,10 +166,6 @@ public class main extends JavaPlugin implements Listener{
         ChannelPipeline pipeline = ((CraftPlayer) player).getHandle().b.a.k.pipeline();
         pipeline.addBefore("packet_handler", player.getName(), channelDuplexHandler);
 
-    }
-    @EventHandler
-    public void damage(EntityDamageByEntityEvent e) {
-    	getLogger().info("d :"+e.getDamage()+" and :"+e.getFinalDamage());
     }
     @EventHandler
     public void pistonextend(BlockPistonExtendEvent e) {

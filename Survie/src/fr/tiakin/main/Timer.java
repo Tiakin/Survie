@@ -6,6 +6,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
+import fr.tiakin.damage.damageCooldown;
 
 public class Timer extends BukkitRunnable {
 
@@ -13,9 +14,12 @@ public class Timer extends BukkitRunnable {
 	public void run() {
 		for(Player p : Bukkit.getOnlinePlayers()) {
 			int totalShield = Custom.getTotalShield(p);
+			int shield = Custom.getShield(p);
 			if(totalShield > 0)
-				p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("shield: "+ totalShield+" & "));
-			//if(damageCooldown.getPlayerTiming(p) > 30l)
+				p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("shield: "+ shield));
+			if(totalShield == shield)
+			if(damageCooldown.getPlayerTiming(p) > 2000l)
+				Custom.setShield(p, totalShield+1);
 		}
 	}
 

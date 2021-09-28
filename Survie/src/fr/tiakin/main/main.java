@@ -98,7 +98,6 @@ public class main extends JavaPlugin implements Listener{
 			getLogger().info("player retirer");
 		}
 	}
-	boolean scaled = false;
 	@EventHandler
 	public void chat(AsyncPlayerChatEvent e) {
 		String[] message = e.getMessage().split(" ");

@@ -21,6 +21,7 @@ import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.inventory.SmithingRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -939,8 +940,12 @@ public class Custom implements Listener {
 		return im.getPersistentDataContainer().get(new NamespacedKey(main.getPlugin(main.class), "maxshield"), PersistentDataType.INTEGER);
 	}
 	
-	public static boolean hasShield(ItemMeta im) {
+	public static boolean hasItemShield(ItemMeta im) {
 		return im.getPersistentDataContainer().has(new NamespacedKey(main.getPlugin(main.class), "maxshield"), PersistentDataType.INTEGER);
+	}
+	
+	public static boolean hasShield(Player p) {
+		return p.getPersistentDataContainer().has(new NamespacedKey(main.getPlugin(main.class), "shield"), PersistentDataType.FLOAT);
 	}
 	
 	public static void setShield(Player p,float amount) {
@@ -959,20 +964,20 @@ public class Custom implements Listener {
 			if(is != null)
 			if(is.hasItemMeta()) {
 				ItemMeta im = is.getItemMeta();
-				if(hasShield(im))
+				if(hasItemShield(im))
 					shieldpoint += getItemShield(im);
 			}
 		}
 		if(mainHand != null)
 		if(mainHand.hasItemMeta()) {
 			ItemMeta im = mainHand.getItemMeta();
-			if(hasShield(im))
+			if(hasItemShield(im))
 				shieldpoint += getItemShield(im);
 		}
 		if(offHand != null)
 		if(offHand.hasItemMeta()) {
 			ItemMeta im = offHand.getItemMeta();
-			if(hasShield(im))
+			if(hasItemShield(im))
 				shieldpoint += getItemShield(im);
 		}
 		
@@ -991,26 +996,32 @@ public class Custom implements Listener {
 		StringBuilder builder = new StringBuilder("\uF80B\uF80A\uF802");
 		int shieldint = Math.round(shield);
 		for(int r = 0; r<20;) {
+			JavaPlugin.getPlugin(main.class).getLogger().info(r+"");
 			if(shieldint >=r+2) {
-				builder.append('\uF802'+ blueHeart);
-				r =+ 2;
+				builder.append('\uF802');
+				builder.append(blueHeart);
 			}else if(shieldint == r+1) {
 				if(totalShield >=r+2) {
-					builder.append('\uF802'+ darkBlueHeart +"\uF802\uF808");
+					builder.append('\uF802');
+					builder.append(darkBlueHeart);
+					builder.append("\uF802\uF808");
 				}
-				builder.append('\uF802'+ halfBlueHeart + halfVoidHeart);
-				r++;
+				builder.append('\uF802');
+				builder.append(halfBlueHeart);
+				builder.append(halfVoidHeart);
 			}else {
 				if(totalShield >=r+2) {
-					builder.append('\uF802'+ darkBlueHeart);
-					r =+ 2;
+					builder.append("\uF802");
+					builder.append(darkBlueHeart);
 				}else if(totalShield == r+1) {
-					builder.append('\uF802'+ halfDarkBlueHeart + halfVoidHeart);
-					r++;
+					builder.append("\uF802");
+					builder.append(halfDarkBlueHeart);
+					builder.append(halfVoidHeart);
 				}else {
 					builder.append(voidHeart);
 				}
 			}
+			r += 2;
 		}
 		return builder.toString();
 	}

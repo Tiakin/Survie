@@ -2,9 +2,6 @@ package fr.tiakin.damage;
 
 import java.util.HashMap;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
-
-import fr.tiakin.main.main;
 
 public class healCooldown {
 	private static HashMap<Player,Long> timelist = new HashMap<>();

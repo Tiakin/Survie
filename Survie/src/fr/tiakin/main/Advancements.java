@@ -46,6 +46,11 @@ public class Advancements implements Listener {
 		list.add(new NamespacedKey(main.getPlugin(main.class), "mining4"));
 		list.add(new NamespacedKey(main.getPlugin(main.class), "mining5"));
 		list.add(new NamespacedKey(main.getPlugin(main.class), "mining6"));
+		list.add(new NamespacedKey(main.getPlugin(main.class), "adventureroot"));
+		list.add(new NamespacedKey(main.getPlugin(main.class), "adventure1"));
+		list.add(new NamespacedKey(main.getPlugin(main.class), "adventure2"));
+		list.add(new NamespacedKey(main.getPlugin(main.class), "adventure3"));
+		list.add(new NamespacedKey(main.getPlugin(main.class), "adventure4"));
 		
 		try {
 			createadvancements(list);

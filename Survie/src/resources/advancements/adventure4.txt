@@ -1,0 +1,20 @@
+{
+    "display": {
+        "title": {
+            "text": "You what?"
+        },
+        "description": {
+            "text": "Kill 10 ERROR303"
+        },
+        "icon": {
+            "item": "minecraft:netherite_sword",
+            "nbt": "{display:{Lore:['[{\"text\":\"Infinity Sword\"}]']}}"
+        },
+        "frame": "goal",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": true
+    },
+    "criteria": {"impossible":{"trigger":"minecraft:impossible"}},
+    "parent": "survie:adventure3"
+}

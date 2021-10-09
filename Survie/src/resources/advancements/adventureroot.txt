@@ -1,0 +1,27 @@
+{
+    "display": {
+        "title": {
+            "text": "Adventure",
+            "color": "gold",
+            "bold": false,
+            "italic": false,
+            "underlined": false,
+            "strikethrough": false,
+            "obfuscated": false
+        },
+        "description": {
+            "text": "Go on an adventure",
+            "color": "dark_green",
+            "bold": false
+        },
+        "icon": {
+            "item": "minecraft:netherite_sword"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": true,
+        "background": "minecraft:textures/gui/advancements/backgrounds/chaos_planks.png"
+    },
+    "criteria": {"impossible":{"trigger":"minecraft:impossible"}}
+}

@@ -15,7 +15,7 @@ public class Timer extends BukkitRunnable {
 	@Override
 	public void run() {
 		for(Player p : Bukkit.getOnlinePlayers()) {
-			if(p.getGameMode().equals(GameMode.SURVIVAL) || p.getGameMode().equals(GameMode.SPECTATOR))
+			if(p.getGameMode() == GameMode.SURVIVAL || p.getGameMode() == GameMode.ADVENTURE) {
 				if(Custom.hasShield(p)) {
 					int totalShield = Custom.getTotalShield(p);
 					float shield = Custom.getShield(p);
@@ -38,7 +38,7 @@ public class Timer extends BukkitRunnable {
 				}else {
 					Custom.setShield(p, 0);
 				}
+			}
 		}
 	}
-
 }

@@ -16,19 +16,18 @@ public class damageEvent implements Listener {
 		if(e.getEntity() instanceof Player) {
 			Player p = (Player) e.getEntity();
 			damageCooldown.addPlayerOnTiming(p);
-			float rest = (float) (Custom.getShield(p) - (e.getDamage() / 2.5) );
-			JavaPlugin.getPlugin(main.class).getLogger().info(rest+"");
+			float rest = (float) (  ( (double) Custom.getShield(p) )  -  ( e.getDamage() / 5 )  );
+			JavaPlugin.getPlugin(main.class).getLogger().info(rest+" "+e.getDamage()+" "+e.getFinalDamage());
 			if(rest < 0) {
 				Custom.setShield(p, 0);
-				rest *= 2.5;
+				rest *= 5;
 				rest = Math.abs(rest);
 			}else {
 				Custom.setShield(p, rest);
 				rest = 0;
 			}
-			JavaPlugin.getPlugin(main.class).getLogger().info(rest+"");
 			e.setDamage(rest);
-			JavaPlugin.getPlugin(main.class).getLogger().info(e.getFinalDamage()+"");
+			JavaPlugin.getPlugin(main.class).getLogger().info(e.getDamage()+" "+e.getFinalDamage());
 		}
 	}
 }

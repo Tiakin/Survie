@@ -24,7 +24,7 @@ public class Timer extends BukkitRunnable {
 					if(shield < totalShield) {
 						if(damageCooldown.getPlayerTiming(p) > 5000l)
 							if(healCooldown.isPlayerOnTiming(p)) {
-								if(healCooldown.getPlayerTiming(p) > 1000l) {
+								if(healCooldown.getPlayerTiming(p) > 1500l) {
 									Custom.setShield(p, shield+1);
 									healCooldown.addPlayerOnTiming(p);
 								}

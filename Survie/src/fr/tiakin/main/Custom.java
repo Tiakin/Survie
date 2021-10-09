@@ -1,6 +1,7 @@
 package fr.tiakin.main;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -13,6 +14,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.PrepareSmithingEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
+import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.inventory.FurnaceRecipe;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.RecipeChoice;
@@ -25,6 +27,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import fr.tiakin.block.blocks;
+import fr.tiakin.item.Tool;
 import fr.tiakin.item.items;
 
 public class Custom implements Listener {
@@ -926,6 +929,18 @@ public class Custom implements Listener {
     		p.addPotionEffect(new PotionEffect(PotionEffectType.SATURATION, 24000, 0));
     		p.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 12000, 1));
     		p.addPotionEffect(new PotionEffect(PotionEffectType.HERO_OF_THE_VILLAGE, 30000, 5));
+    	}
+			
+	}
+	@EventHandler
+	public void itemDamage(PlayerItemDamageEvent e) {
+		//Player p = e.getPlayer();
+		ItemStack is = e.getItem();
+    	int max = Tool.getOrder(Tool.getTier(is))-4;
+    	if(max > 1) {
+    		int rand = new Random().nextInt(max);
+    		if(rand != 0)
+    			e.setDamage(0);
     	}
 			
 	}

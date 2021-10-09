@@ -930,12 +930,12 @@ public class Custom implements Listener {
 			
 	}
 	
-	public static ItemMeta setMaxShield(ItemMeta im,int amount) {
+	public static ItemMeta setItemShield(ItemMeta im,int amount) {
 		im.getPersistentDataContainer().set(new NamespacedKey(main.getPlugin(main.class), "maxshield"), PersistentDataType.INTEGER, amount);
 		return im;
 	}
 	
-	public static int getMaxShield(ItemMeta im) {
+	public static int getItemShield(ItemMeta im) {
 		return im.getPersistentDataContainer().get(new NamespacedKey(main.getPlugin(main.class), "maxshield"), PersistentDataType.INTEGER);
 	}
 	
@@ -943,12 +943,12 @@ public class Custom implements Listener {
 		return im.getPersistentDataContainer().has(new NamespacedKey(main.getPlugin(main.class), "maxshield"), PersistentDataType.INTEGER);
 	}
 	
-	public static void setShield(Player p,int amount) {
-		p.getPersistentDataContainer().set(new NamespacedKey(main.getPlugin(main.class), "shield"), PersistentDataType.INTEGER, amount);
+	public static void setShield(Player p,float amount) {
+		p.getPersistentDataContainer().set(new NamespacedKey(main.getPlugin(main.class), "shield"), PersistentDataType.FLOAT, amount);
 	}
 	
-	public static int getShield(Player p) {
-		return p.getPersistentDataContainer().get(new NamespacedKey(main.getPlugin(main.class), "shield"), PersistentDataType.INTEGER);
+	public static float getShield(Player p) {
+		return p.getPersistentDataContainer().get(new NamespacedKey(main.getPlugin(main.class), "shield"), PersistentDataType.FLOAT);
 	}
 	
 	public static int getTotalShield(Player p) {
@@ -960,24 +960,59 @@ public class Custom implements Listener {
 			if(is.hasItemMeta()) {
 				ItemMeta im = is.getItemMeta();
 				if(hasShield(im))
-					shieldpoint += getMaxShield(im);
+					shieldpoint += getItemShield(im);
 			}
 		}
 		if(mainHand != null)
 		if(mainHand.hasItemMeta()) {
 			ItemMeta im = mainHand.getItemMeta();
 			if(hasShield(im))
-				shieldpoint += getMaxShield(im);
+				shieldpoint += getItemShield(im);
 		}
 		if(offHand != null)
 		if(offHand.hasItemMeta()) {
 			ItemMeta im = offHand.getItemMeta();
 			if(hasShield(im))
-				shieldpoint += getMaxShield(im);
+				shieldpoint += getItemShield(im);
 		}
 		
 		
 		return shieldpoint;
+	}
+	
+	static char blueHeart = '\uEff1';
+	static char halfBlueHeart = '\uEff2';
+	static char darkBlueHeart = '\uEff3';
+	static char halfDarkBlueHeart = '\uEff4';
+	static char voidHeart = '\uF828';
+	static char halfVoidHeart = '\uF824';
+	
+	public static String actionShield(float shield, int totalShield) {
+		StringBuilder builder = new StringBuilder("\uF80B\uF80A\uF802");
+		int shieldint = Math.round(shield);
+		for(int r = 0; r<20;) {
+			if(shieldint >=r+2) {
+				builder.append('\uF802'+ blueHeart);
+				r =+ 2;
+			}else if(shieldint == r+1) {
+				if(totalShield >=r+2) {
+					builder.append('\uF802'+ darkBlueHeart +"\uF802\uF808");
+				}
+				builder.append('\uF802'+ halfBlueHeart + halfVoidHeart);
+				r++;
+			}else {
+				if(totalShield >=r+2) {
+					builder.append('\uF802'+ darkBlueHeart);
+					r =+ 2;
+				}else if(totalShield == r+1) {
+					builder.append('\uF802'+ halfDarkBlueHeart + halfVoidHeart);
+					r++;
+				}else {
+					builder.append(voidHeart);
+				}
+			}
+		}
+		return builder.toString();
 	}
 	
 }

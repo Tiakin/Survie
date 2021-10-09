@@ -294,6 +294,7 @@ public enum items {
 			im.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(), "ar", 4, Operation.ADD_NUMBER, EquipmentSlot.HEAD));
 			im.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), "art", 4, Operation.ADD_NUMBER, EquipmentSlot.HEAD));
 			im.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(UUID.randomUUID(), "kb", .1, Operation.ADD_NUMBER, EquipmentSlot.HEAD));
+			im = Custom.setItemShield(im, 1);
 			this.setItemMeta(im);
 		}
 	}),
@@ -305,6 +306,7 @@ public enum items {
 			im.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(), "ar", 9, Operation.ADD_NUMBER, EquipmentSlot.CHEST));
 			im.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), "art", 4, Operation.ADD_NUMBER, EquipmentSlot.CHEST));
 			im.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(UUID.randomUUID(), "kb", .1, Operation.ADD_NUMBER, EquipmentSlot.CHEST));
+			im = Custom.setItemShield(im, 3);
 			this.setItemMeta(im);
 		}
 	}),
@@ -316,6 +318,7 @@ public enum items {
 			im.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(), "ar", 7, Operation.ADD_NUMBER, EquipmentSlot.LEGS));
 			im.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), "art", 4, Operation.ADD_NUMBER, EquipmentSlot.LEGS));
 			im.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(UUID.randomUUID(), "kb", .1, Operation.ADD_NUMBER, EquipmentSlot.LEGS));
+			im = Custom.setItemShield(im, 2);
 			this.setItemMeta(im);
 		}
 	}),
@@ -327,6 +330,7 @@ public enum items {
 			im.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(), "ar", 4, Operation.ADD_NUMBER, EquipmentSlot.FEET));
 			im.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), "art", 4, Operation.ADD_NUMBER, EquipmentSlot.FEET));
 			im.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(UUID.randomUUID(), "kb", .1, Operation.ADD_NUMBER, EquipmentSlot.FEET));
+			im = Custom.setItemShield(im, 1);
 			this.setItemMeta(im);
 		}
 	}),
@@ -421,6 +425,7 @@ public enum items {
 			im.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(), "ar", 4.5, Operation.ADD_NUMBER, EquipmentSlot.HEAD));
 			im.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), "art", 4.5, Operation.ADD_NUMBER, EquipmentSlot.HEAD));
 			im.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(UUID.randomUUID(), "kb", .1, Operation.ADD_NUMBER, EquipmentSlot.HEAD));
+			im = Custom.setItemShield(im, 2);
 			this.setItemMeta(im);
 		}
 	}),
@@ -432,6 +437,7 @@ public enum items {
 			im.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(), "ar", 9.5, Operation.ADD_NUMBER, EquipmentSlot.CHEST));
 			im.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), "art", 9.5, Operation.ADD_NUMBER, EquipmentSlot.CHEST));
 			im.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(UUID.randomUUID(), "kb", .1, Operation.ADD_NUMBER, EquipmentSlot.CHEST));
+			im = Custom.setItemShield(im, 5);
 			this.setItemMeta(im);
 		}
 	}),
@@ -443,6 +449,7 @@ public enum items {
 			im.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(), "ar", 7.5, Operation.ADD_NUMBER, EquipmentSlot.LEGS));
 			im.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), "art", 4.5, Operation.ADD_NUMBER, EquipmentSlot.LEGS));
 			im.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(UUID.randomUUID(), "kb", .1, Operation.ADD_NUMBER, EquipmentSlot.LEGS));
+			im = Custom.setItemShield(im, 3);
 			this.setItemMeta(im);
 		}
 	}),
@@ -454,6 +461,7 @@ public enum items {
 			im.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(), "ar", 4.5, Operation.ADD_NUMBER, EquipmentSlot.FEET));
 			im.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), "art", 4.5, Operation.ADD_NUMBER, EquipmentSlot.FEET));
 			im.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(UUID.randomUUID(), "kb", .1, Operation.ADD_NUMBER, EquipmentSlot.FEET));
+			im = Custom.setItemShield(im, 1);
 			this.setItemMeta(im);
 		}
 	}),
@@ -556,6 +564,7 @@ public enum items {
 			im.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(), "ar", 5, Operation.ADD_NUMBER, EquipmentSlot.HEAD));
 			im.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), "art", 5, Operation.ADD_NUMBER, EquipmentSlot.HEAD));
 			im.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(UUID.randomUUID(), "kb", .1, Operation.ADD_NUMBER, EquipmentSlot.HEAD));
+			im = Custom.setItemShield(im, 2);
 			this.setItemMeta(im);
 		}
 	}),
@@ -567,6 +576,7 @@ public enum items {
 			im.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(), "ar", 10, Operation.ADD_NUMBER, EquipmentSlot.CHEST));
 			im.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), "art", 5, Operation.ADD_NUMBER, EquipmentSlot.CHEST));
 			im.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(UUID.randomUUID(), "kb", .1, Operation.ADD_NUMBER, EquipmentSlot.CHEST));
+			im = Custom.setItemShield(im, 5);
 			this.setItemMeta(im);
 		}
 	}),
@@ -578,6 +588,7 @@ public enum items {
 			im.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(), "ar", 8, Operation.ADD_NUMBER, EquipmentSlot.LEGS));
 			im.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), "art", 5, Operation.ADD_NUMBER, EquipmentSlot.LEGS));
 			im.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(UUID.randomUUID(), "kb", .1, Operation.ADD_NUMBER, EquipmentSlot.LEGS));
+			im = Custom.setItemShield(im, 4);
 			this.setItemMeta(im);
 		}
 	}),
@@ -589,6 +600,7 @@ public enum items {
 			im.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(), "ar", 5, Operation.ADD_NUMBER, EquipmentSlot.FEET));
 			im.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), "art", 5, Operation.ADD_NUMBER, EquipmentSlot.FEET));
 			im.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(UUID.randomUUID(), "kb", .1, Operation.ADD_NUMBER, EquipmentSlot.FEET));
+			im = Custom.setItemShield(im, 1);
 			this.setItemMeta(im);
 		}
 	}),
@@ -683,6 +695,7 @@ public enum items {
 			im.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(), "ar", 5.5, Operation.ADD_NUMBER, EquipmentSlot.HEAD));
 			im.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), "art", 5.5, Operation.ADD_NUMBER, EquipmentSlot.HEAD));
 			im.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(UUID.randomUUID(), "kb", .1, Operation.ADD_NUMBER, EquipmentSlot.HEAD));
+			im = Custom.setItemShield(im, 2);
 			this.setItemMeta(im);
 		}
 	}),
@@ -694,6 +707,7 @@ public enum items {
 			im.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(), "ar", 10.5, Operation.ADD_NUMBER, EquipmentSlot.CHEST));
 			im.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), "art", 5.5, Operation.ADD_NUMBER, EquipmentSlot.CHEST));
 			im.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(UUID.randomUUID(), "kb", .1, Operation.ADD_NUMBER, EquipmentSlot.CHEST));
+			im = Custom.setItemShield(im, 6);
 			this.setItemMeta(im);
 		}
 	}),
@@ -705,6 +719,7 @@ public enum items {
 			im.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(), "ar", 8.5, Operation.ADD_NUMBER, EquipmentSlot.LEGS));
 			im.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), "art", 5.5, Operation.ADD_NUMBER, EquipmentSlot.LEGS));
 			im.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(UUID.randomUUID(), "kb", .1, Operation.ADD_NUMBER, EquipmentSlot.LEGS));
+			im = Custom.setItemShield(im, 5);
 			this.setItemMeta(im);
 		}
 	}),
@@ -716,6 +731,7 @@ public enum items {
 			im.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(), "ar", 5.5, Operation.ADD_NUMBER, EquipmentSlot.FEET));
 			im.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), "art", 5.5, Operation.ADD_NUMBER, EquipmentSlot.FEET));
 			im.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(UUID.randomUUID(), "kb", .1, Operation.ADD_NUMBER, EquipmentSlot.FEET));
+			im = Custom.setItemShield(im, 2);
 			this.setItemMeta(im);
 		}
 	}),
@@ -810,7 +826,7 @@ public enum items {
 			im.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(), "ar", 6, Operation.ADD_NUMBER, EquipmentSlot.HEAD));
 			im.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), "art", 6, Operation.ADD_NUMBER, EquipmentSlot.HEAD));
 			im.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(UUID.randomUUID(), "kb", .1, Operation.ADD_NUMBER, EquipmentSlot.HEAD));
-			im = Custom.setItemShield(im, 4);
+			im = Custom.setItemShield(im, 3);
 			this.setItemMeta(im);
 		}
 	}),
@@ -834,7 +850,7 @@ public enum items {
 			im.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(), "ar", 9, Operation.ADD_NUMBER, EquipmentSlot.LEGS));
 			im.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), "art", 6, Operation.ADD_NUMBER, EquipmentSlot.LEGS));
 			im.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(UUID.randomUUID(), "kb", .1, Operation.ADD_NUMBER, EquipmentSlot.LEGS));
-			im = Custom.setItemShield(im, 5);
+			im = Custom.setItemShield(im, 6);
 			this.setItemMeta(im);
 			}
 	}),

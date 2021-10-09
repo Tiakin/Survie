@@ -996,7 +996,6 @@ public class Custom implements Listener {
 		StringBuilder builder = new StringBuilder("\uF80B\uF80A\uF802");
 		int shieldint = Math.round(shield);
 		for(int r = 0; r<20;) {
-			JavaPlugin.getPlugin(main.class).getLogger().info(r+"");
 			if(shieldint >=r+2) {
 				builder.append('\uF802');
 				builder.append(blueHeart);

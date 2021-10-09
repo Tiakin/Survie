@@ -1,0 +1,20 @@
+{
+    "display": {
+        "title": {
+            "text": "Is... It... Over?"
+        },
+        "description": {
+            "text": "Kill ERROR303"
+        },
+        "icon": {
+            "item": "minecraft:netherite_sword",
+            "nbt": "{display:{Lore:['[{\"text\":\"Infinity Ingot\"}]']}}"
+        },
+        "frame": "challenge",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": true
+    },
+    "criteria": {"impossible":{"trigger":"minecraft:impossible"}},
+    "parent": "survie:adventure2"
+}

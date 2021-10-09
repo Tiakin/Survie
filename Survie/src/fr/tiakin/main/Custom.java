@@ -1002,7 +1002,7 @@ public class Custom implements Listener {
 				if(totalShield >=r+2) {
 					builder.append('\uF802');
 					builder.append(darkBlueHeart);
-					builder.append("\uF802\uF808");
+					builder.append("\uF808");
 				}
 				builder.append('\uF802');
 				builder.append(halfBlueHeart);

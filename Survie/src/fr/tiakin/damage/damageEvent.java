@@ -1,13 +1,11 @@
 package fr.tiakin.damage;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.plugin.java.JavaPlugin;
 
-import fr.tiakin.main.main;
+import fr.tiakin.main.Custom;
 
 public class damageEvent implements Listener {
 	
@@ -15,7 +13,16 @@ public class damageEvent implements Listener {
     public void damage(EntityDamageByEntityEvent e) {
 		if(e.getEntity() instanceof Player) {
 			Player p = (Player) e.getEntity();
-			Bukkit.getScheduler().runTaskAsynchronously(JavaPlugin.getPlugin(main.class), () -> damageCooldown.addPlayerOnTiming(p));
+			damageCooldown.addPlayerOnTiming(p);
+			float rest = (float) (Custom.getShield(p) - e.getDamage()) / 10;
+			if(rest < 0) {
+				Custom.setShield(p, 0);
+				rest *= 10;
+			}else {
+				Custom.setShield(p, rest);
+				rest = 0;
+			}
+			e.setDamage(rest);
 		}
 	}
 }

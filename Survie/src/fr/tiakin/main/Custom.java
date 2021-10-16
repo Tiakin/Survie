@@ -4,15 +4,21 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.Jukebox;
 import org.bukkit.block.data.MultipleFacing;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.PrepareSmithingEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.inventory.FurnaceRecipe;
@@ -23,6 +29,7 @@ import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.inventory.SmithingRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -38,7 +45,10 @@ public class Custom implements Listener {
 	static FurnaceRecipe furnacerecipe;
 	static SmithingRecipe smithingrecipe;
 	static ArrayList<NamespacedKey> recipe = new ArrayList<NamespacedKey>();
-	   
+	 
+	
+	// Recipe :
+	
 	public static void customrecipe() {
         Gold();
 		Diamond();
@@ -859,6 +869,9 @@ public class Custom implements Listener {
 		  }
 	}
 	
+	
+	// Compare :
+	
 	public static boolean isSimilar(ItemStack is1,ItemStack is2) {
 		if(is1.getType().equals(Material.PLAYER_WALL_HEAD)) is1.setType(Material.PLAYER_HEAD);
 		if(is2.getType().equals(Material.PLAYER_WALL_HEAD)) is2.setType(Material.PLAYER_HEAD);
@@ -872,6 +885,9 @@ public class Custom implements Listener {
 			return true;
 		return false;
 	}
+	
+	
+	// Getters :
 	
 	public static final BlockFace[] faces = {
 		    BlockFace.DOWN,
@@ -913,6 +929,9 @@ public class Custom implements Listener {
 		return null;
 	}
 	
+	
+	// EventHandler :
+	
 	@EventHandler
 	public void customApple(PlayerItemConsumeEvent e) {
 		Player p = e.getPlayer();
@@ -932,6 +951,7 @@ public class Custom implements Listener {
     	}
 			
 	}
+
 	@EventHandler
 	public void itemDamage(PlayerItemDamageEvent e) {
 		//Player p = e.getPlayer();
@@ -944,6 +964,51 @@ public class Custom implements Listener {
     	}
 			
 	}
+	
+	@EventHandler
+	public void customdisc(PlayerInteractEvent e) {
+		if(e.hasBlock()) {
+			Block b = e.getClickedBlock();
+			if(b.getType().equals(Material.JUKEBOX)) {
+				Player p = e.getPlayer();
+				ItemStack item = p.getInventory().getItemInMainHand();
+				Jukebox jb = (Jukebox) b.getState();
+				if(jb.isPlaced()) {
+					JavaPlugin.getPlugin(main.class).getLogger().info("test1");
+					if(isSimilar(item, items.melo_disc.getItemStack())) {
+						JavaPlugin.getPlugin(main.class).getLogger().info("test2");
+						stopsound(jb.getLocation());
+						jb.getWorld().playSound(jb.getLocation(), "minecraft:custom.melo_coton",SoundCategory.RECORDS, 3.0F, 1F);
+					} else if(isSimilar(item, items.moonlight_disc.getItemStack())) {
+						JavaPlugin.getPlugin(main.class).getLogger().info("test3");
+						jb.update(true);
+						stopsound(jb.getLocation());
+						jb.getWorld().playSound(jb.getLocation(), "minecraft:custom.moonlight",SoundCategory.RECORDS, 3.0F, 1F);
+					}
+				} else {
+						for(Entity ent : jb.getWorld().getNearbyEntities(jb.getLocation(), 75, 50, 75)) {
+							if (ent instanceof Player all ) {
+								if(isSimilar(jb.getRecord(), items.melo_disc.getItemStack())) {
+									all.stopSound("minecraft:custom.melo_coton",SoundCategory.RECORDS);
+								}else if(isSimilar(jb.getRecord(), items.moonlight_disc.getItemStack())) {
+									all.stopSound("minecraft:custom.moonlight",SoundCategory.RECORDS);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	public void stopsound(Location loc) {
+		for(Entity ent : loc.getWorld().getNearbyEntities(loc, 75, 50, 75)) {
+			if(ent instanceof Player all) {
+				all.stopSound(Sound.MUSIC_DISC_PIGSTEP,SoundCategory.RECORDS);
+		}
+	}
+	}
+	
+	// Shield :
 	
 	public static ItemMeta setItemShield(ItemMeta im,int amount) {
 		im.getPersistentDataContainer().set(new NamespacedKey(main.getPlugin(main.class), "maxshield"), PersistentDataType.INTEGER, amount);

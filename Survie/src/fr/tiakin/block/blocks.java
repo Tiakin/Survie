@@ -165,7 +165,7 @@ public enum blocks {
 			Material.STONE
 		),
 		
-		//chaos -> manyullyn
+		//cobalt -> manyullyn
 		cobalt_ore(
 			new ItemStack(Material.PLAYER_HEAD) {
 				ItemMeta im;{

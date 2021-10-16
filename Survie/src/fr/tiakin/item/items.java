@@ -11,13 +11,30 @@ import org.bukkit.attribute.AttributeModifier.Operation;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-
+import org.bukkit.inventory.ItemFlag;
 import fr.tiakin.main.Custom;
 
 public enum items {
 	
 	//diamant
-	
+	melo_disc(new ItemStack(Material.MUSIC_DISC_PIGSTEP) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+""+ChatColor.AQUA+"Music Disc");
+			im.setLore(Arrays.asList(ChatColor.GRAY+"Melo Coton - PARTOUZE ANALE"));
+			im.addItemFlags(ItemFlag.values());
+			this.setItemMeta(im);
+		}
+	}),
+	moonlight_disc(new ItemStack(Material.MUSIC_DISC_PIGSTEP) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+""+ChatColor.AQUA+"Music Disc");
+			im.setLore(Arrays.asList(ChatColor.GRAY+"XXXTENTACION - MOONLIGHT"));
+			im.addItemFlags(ItemFlag.values());
+			this.setItemMeta(im);
+		}
+	}),
 	//apple
 	diamond_apple(new ItemStack(Material.GOLDEN_APPLE) {
 		ItemMeta im;{
@@ -272,7 +289,7 @@ public enum items {
 			this.setItemMeta(im);
 		}
 	}),
-	//hamer
+	//hammer
 	discordium_hammer(new ItemStack(Material.NETHERITE_PICKAXE) {
 		ItemMeta im;{
 			im = this.getItemMeta();
@@ -403,7 +420,7 @@ public enum items {
 			this.setItemMeta(im);
 		}
 	}),
-	//hamer
+	//hammer
 	blazite_hammer(new ItemStack(Material.NETHERITE_PICKAXE) {
 		ItemMeta im;{
 			im = this.getItemMeta();
@@ -542,7 +559,7 @@ public enum items {
 			this.setItemMeta(im);
 		}
 	}),
-	//hamer
+	//hammer
 	manyullyn_hammer(new ItemStack(Material.NETHERITE_PICKAXE) {
 		ItemMeta im;{
 			im = this.getItemMeta();
@@ -673,7 +690,7 @@ public enum items {
 			this.setItemMeta(im);
 		}
 	}),
-	//hamer
+	//hammer
 	chaos_hammer(new ItemStack(Material.NETHERITE_PICKAXE) {
 		ItemMeta im;{
 			im = this.getItemMeta();
@@ -804,7 +821,7 @@ public enum items {
 			this.setItemMeta(im);
 		}
 	}),
-	//hamer
+	//hammer
 	infinity_hammer(new ItemStack(Material.NETHERITE_PICKAXE) {
 		ItemMeta im;{
 			im = this.getItemMeta();

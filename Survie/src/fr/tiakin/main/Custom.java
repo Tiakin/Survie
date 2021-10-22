@@ -28,7 +28,6 @@ import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.inventory.SmithingRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import fr.tiakin.block.blocks;
@@ -859,7 +858,10 @@ public class Custom implements Listener {
 				  if(ingot.getType().equals(Material.NETHERITE_INGOT)) {
 					  if(isSimilar(tool, items.diamond_hammer.getItemStack())) {
 						  e.setResult(items.netherite_hammer.getItemStack());
-						  
+					  }
+				  }else if(ingot.getType().equals(Material.NETHER_STAR)) {
+					  if(isSimilar(tool, items.infinity_catalyst.getItemStack())) {
+						  e.setResult(items.infinity_ingot.getItemStack());
 					  }
 				  }
 			  }
@@ -966,6 +968,7 @@ public class Custom implements Listener {
 	@EventHandler
 	public void customdisc(PlayerInteractEvent e) {
 		if(e.getAction() != Action.RIGHT_CLICK_BLOCK) return;
+		if(e.getPlayer().isSneaking() && e.getPlayer().getInventory().getItemInMainHand().getType().isBlock()) return;
 		if(e.hasBlock()) {
 			Block b = e.getClickedBlock();
 			if(b.getType().equals(Material.JUKEBOX)) {
@@ -973,15 +976,10 @@ public class Custom implements Listener {
 				ItemStack item = p.getInventory().getItemInMainHand();
 				Jukebox jb = (Jukebox) b.getState();
 				if(jb.getRecord().getType().equals(Material.AIR)) {
-					JavaPlugin.getPlugin(main.class).getLogger().info("test1");
 					if(isSimilar(item, items.melo_disc.getItemStack())) {
-						JavaPlugin.getPlugin(main.class).getLogger().info("test2");
-						//go voir si ça ça marche
 						Bukkit.getScheduler().runTaskLaterAsynchronously(main.getPlugin(main.class), () -> jb.stopPlaying(),2l);
 						jb.getWorld().playSound(jb.getLocation(), "minecraft:custom.melo_coton",SoundCategory.RECORDS, 3.0F, 1F);
 					} else if(isSimilar(item, items.moonlight_disc.getItemStack())) {
-						JavaPlugin.getPlugin(main.class).getLogger().info("test3");
-						
 						Bukkit.getScheduler().runTaskLaterAsynchronously(main.getPlugin(main.class), () -> jb.stopPlaying(),2l);
 						jb.getWorld().playSound(jb.getLocation(), "minecraft:custom.moonlight",SoundCategory.RECORDS, 3.0F, 1F);
 					}

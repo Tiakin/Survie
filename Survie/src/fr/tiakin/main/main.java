@@ -14,6 +14,7 @@ import java.util.Set;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World.Environment;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.BlockData;
@@ -30,6 +31,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.tiakin.block.AbortBreakingBlockEvent;
@@ -37,6 +39,7 @@ import fr.tiakin.block.BreakListeners;
 import fr.tiakin.block.BrokenBlocksService;
 import fr.tiakin.block.blocks;
 import fr.tiakin.damage.damageEvent;
+import fr.tiakin.generation.chaosBiome;
 import fr.tiakin.generation.tempload;
 import fr.tiakin.generation.tempsave;
 import fr.tiakin.item.items;
@@ -57,6 +60,12 @@ public class main extends JavaPlugin implements Listener{
 	
 	public void onEnable(){
 		getLogger().info("c lancer");
+		try {
+			chaosBiome.create();
+		} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Bukkit.getPluginManager().registerEvents(this, this);
 		Bukkit.getPluginManager().registerEvents(new Custom(), this);
 		Bukkit.getPluginManager().registerEvents(new BreakListeners(), this);
@@ -120,6 +129,12 @@ public class main extends JavaPlugin implements Listener{
 		Custom.discoverrecipe(e.getPlayer());
 		injectPlayer(e.getPlayer());
 	}
+	
+	@EventHandler
+    public void chunkLoad(ChunkLoadEvent e){
+		if(e.getWorld().getEnvironment().equals(Environment.THE_END))
+			chaosBiome.generateBiome(e.getChunk());
+    }
 	
 	@EventHandler
     public void onleave(PlayerQuitEvent e){

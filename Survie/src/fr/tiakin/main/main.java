@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.bukkit.Bukkit;
+import org.bukkit.HeightMap;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World.Environment;
@@ -19,6 +20,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.MultipleFacing;
+import org.bukkit.craftbukkit.v1_17_R1.block.data.CraftBlockData;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftPlayer;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -52,6 +54,8 @@ import net.minecraft.core.BlockPosition;
 import net.minecraft.core.EnumDirection;
 import net.minecraft.network.protocol.game.PacketPlayInBlockDig;
 import net.minecraft.network.protocol.game.PacketPlayInBlockDig.EnumPlayerDigType;
+import net.minecraft.world.level.levelgen.SeededRandom;
+import net.minecraft.world.level.levelgen.synth.NoiseGenerator3Handler;
 
 public class main extends JavaPlugin implements Listener{
 	public static BrokenBlocksService brokenBlocksService = new BrokenBlocksService();
@@ -118,9 +122,8 @@ public class main extends JavaPlugin implements Listener{
 			blocks block = blocks.valueOf(message[1]);
 			if(block != null)
 				e.getPlayer().getInventory().addItem(block.getItemStack());
-		} else if(message[0].equalsIgnoreCase("scale")) {
-			getLogger().info("sheeeesh");
-			Bukkit.getOnlinePlayers().forEach(p -> p.setHealthScaled(false));
+		} else if(message[0].equalsIgnoreCase("setbiome")) {
+			chaosBiome.setBiome(message[1],e.getPlayer().getWorld().getChunkAt(new Location(e.getPlayer().getWorld(), Integer.parseInt(message[2]) , 0 , Integer.parseInt(message[3]) )));
 		}
 	}
 	
@@ -132,9 +135,29 @@ public class main extends JavaPlugin implements Listener{
 	
 	@EventHandler
     public void chunkLoad(ChunkLoadEvent e){
-		if(e.getWorld().getEnvironment().equals(Environment.THE_END))
-			chaosBiome.generateBiome(e.getChunk());
-    }
+		if(e.getWorld().getEnvironment().equals(Environment.THE_END)) {
+			SeededRandom tr = new net.minecraft.world.level.levelgen.SeededRandom(e.getWorld().getSeed());
+			tr.a(17292);
+			NoiseGenerator3Handler islandnoise = new net.minecraft.world.level.levelgen.synth.NoiseGenerator3Handler(tr);
+			
+			chaosBiome.generateBiome(e.getChunk(),islandnoise);
+			if(e.isNewChunk()) {
+				for (int x = 0; x <= 15; x++) {
+					for (int z = 0; z <= 15; z++) {
+						int i = (e.getChunk().getX() * 16 + x) >> 2;
+				      	int j = (e.getChunk().getZ() * 16 + z) >> 2;
+						Block b = Custom.gethighestendstone(e.getWorld(),e.getChunk().getX() * 16 + x, e.getChunk().getZ() * 16 + z);
+						if(b != null) {
+							if(i*i + j*j > 4096L)
+							if(net.minecraft.world.level.biome.WorldChunkManagerTheEnd.a(islandnoise, i*2 + 1, j*2 + 1) > 50) {
+								b.setBlockData(CraftBlockData.fromData(Custom.createCustomBlock(blocks.chaos_nylium)));
+							}
+						}
+			        }
+				}
+			}
+		}
+	}
 	
 	@EventHandler
     public void onleave(PlayerQuitEvent e){

@@ -7,10 +7,14 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.SoundCategory;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.BlockState;
 import org.bukkit.block.Jukebox;
 import org.bukkit.block.data.MultipleFacing;
+import org.bukkit.craftbukkit.v1_17_R1.block.CraftBlockState;
+import org.bukkit.craftbukkit.v1_17_R1.block.data.CraftBlockData;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -33,6 +37,7 @@ import org.bukkit.potion.PotionEffectType;
 import fr.tiakin.block.blocks;
 import fr.tiakin.item.Tool;
 import fr.tiakin.item.items;
+import net.minecraft.world.level.block.state.IBlockData;
 
 public class Custom implements Listener {
 	
@@ -929,6 +934,27 @@ public class Custom implements Listener {
 		return null;
 	}
 	
+	public static Block gethighestendstone(World world,int x,int z) {
+		for (int y = 128; y >= 0; y--) {
+			Block block = world.getBlockAt(x, y, z);
+			if(block.getType().equals(Material.END_STONE))
+				return block;
+		}
+		return null;
+	}
+	
+	public static IBlockData createCustomBlock(blocks b) {
+		
+		BlockState state = new CraftBlockState(b.getMaterial());
+		MultipleFacing e = (MultipleFacing) state.getBlockData();
+		for(BlockFace face : faces) {
+			if(!e.getAllowedFaces().contains(face)) return null;
+			e.setFace(face, b.getBlockFace(face));
+			}
+		state.setBlockData(e);
+		return CraftBlockData.newData(null, state.getBlockData().getAsString()).getState();
+	}
+	
 	
 	// EventHandler :
 	
@@ -971,6 +997,7 @@ public class Custom implements Listener {
 		if(e.getPlayer().isSneaking() && e.getPlayer().getInventory().getItemInMainHand().getType().isBlock()) return;
 		if(e.hasBlock()) {
 			Block b = e.getClickedBlock();
+			b.getState();
 			if(b.getType().equals(Material.JUKEBOX)) {
 				Player p = e.getPlayer();
 				ItemStack item = p.getInventory().getItemInMainHand();

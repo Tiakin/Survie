@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.bukkit.Bukkit;
-import org.bukkit.HeightMap;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World.Environment;
@@ -148,9 +147,10 @@ public class main extends JavaPlugin implements Listener{
 				      	int j = (e.getChunk().getZ() * 16 + z) >> 2;
 						Block b = Custom.gethighestendstone(e.getWorld(),e.getChunk().getX() * 16 + x, e.getChunk().getZ() * 16 + z);
 						if(b != null) {
-							if(i*i + j*j > 4096L)
-							if(net.minecraft.world.level.biome.WorldChunkManagerTheEnd.a(islandnoise, i*2 + 1, j*2 + 1) > 50) {
-								b.setBlockData(CraftBlockData.fromData(Custom.createCustomBlock(blocks.chaos_nylium)));
+							if(i*i + j*j > 4096L) {
+								if(net.minecraft.world.level.biome.WorldChunkManagerTheEnd.a(islandnoise, i*2 + 1, j*2 + 1) > 50) {
+									b.setBlockData(CraftBlockData.fromData(Custom.createCustomBlock(blocks.chaos_nylium)));
+								}
 							}
 						}
 			        }

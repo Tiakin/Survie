@@ -3,7 +3,7 @@ package fr.tiakin.generation;
 import java.util.Random;
 
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_17_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_18_R1.CraftWorld;
 import org.bukkit.util.Vector;
 
 import net.minecraft.core.BlockPosition;
@@ -43,7 +43,7 @@ public class StructureUtil {
         } else {
             DefinedStructureInfo structureInfo = (new DefinedStructureInfo()).a(EnumBlockMirror.a).a(EnumBlockRotation.a).a(false).c(true);
             //structure.a(world, originPos, structureInfo);
-            structure.a(world, originPos, originPos2, structureInfo, new Random(world.getSeed()), 2);
+            structure.a(world, originPos, originPos2, structureInfo, new Random(origin.getWorld().getSeed()), 2);
             return true;
         }
     }

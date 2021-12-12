@@ -16,7 +16,7 @@ import fr.tiakin.main.Custom;
 
 public enum items {
 	
-	//diamant
+	//disc
 	melo_disc(new ItemStack(Material.MUSIC_DISC_PIGSTEP) {
 		ItemMeta im;{
 			im = this.getItemMeta();
@@ -35,6 +35,9 @@ public enum items {
 			this.setItemMeta(im);
 		}
 	}),
+	
+	//diamant
+	
 	//apple
 	diamond_apple(new ItemStack(Material.GOLDEN_APPLE) {
 		ItemMeta im;{

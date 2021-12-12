@@ -19,8 +19,8 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.MultipleFacing;
-import org.bukkit.craftbukkit.v1_17_R1.block.data.CraftBlockData;
-import org.bukkit.craftbukkit.v1_17_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_18_R1.block.data.CraftBlockData;
+import org.bukkit.craftbukkit.v1_18_R1.entity.CraftPlayer;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -53,6 +53,7 @@ import net.minecraft.core.BlockPosition;
 import net.minecraft.core.EnumDirection;
 import net.minecraft.network.protocol.game.PacketPlayInBlockDig;
 import net.minecraft.network.protocol.game.PacketPlayInBlockDig.EnumPlayerDigType;
+import net.minecraft.world.level.levelgen.LegacyRandomSource;
 import net.minecraft.world.level.levelgen.SeededRandom;
 import net.minecraft.world.level.levelgen.synth.NoiseGenerator3Handler;
 
@@ -134,9 +135,10 @@ public class main extends JavaPlugin implements Listener{
 	
 	@EventHandler
     public void chunkLoad(ChunkLoadEvent e){
+		SeededRandom tr = new SeededRandom(new LegacyRandomSource(e.getWorld().getSeed()));
+		tr.b(17292);
 		if(e.getWorld().getEnvironment().equals(Environment.THE_END)) {
-			SeededRandom tr = new net.minecraft.world.level.levelgen.SeededRandom(e.getWorld().getSeed());
-			tr.a(17292);
+			
 			NoiseGenerator3Handler islandnoise = new net.minecraft.world.level.levelgen.synth.NoiseGenerator3Handler(tr);
 			
 			chaosBiome.generateBiome(e.getChunk(),islandnoise);
@@ -148,12 +150,41 @@ public class main extends JavaPlugin implements Listener{
 						Block b = Custom.gethighestendstone(e.getWorld(),e.getChunk().getX() * 16 + x, e.getChunk().getZ() * 16 + z);
 						if(b != null) {
 							if(i*i + j*j > 4096L) {
-								if(net.minecraft.world.level.biome.WorldChunkManagerTheEnd.a(islandnoise, i*2 + 1, j*2 + 1) > 50) {
+								if(net.minecraft.world.level.biome.WorldChunkManagerTheEnd.a(islandnoise, i*2 + 1, j*2 + 1) > 40) {
 									b.setBlockData(CraftBlockData.fromData(Custom.createCustomBlock(blocks.chaos_nylium)));
+								}
+							}
+							
+							if(tr.nextInt(128) == 0) {
+								int down = tr.nextInt(20);
+								if(b.getY() - down >= 0) {
+									b = b.getRelative(BlockFace.DOWN, down);
+									if(b.getType().equals(Material.END_STONE))
+										b.setBlockData(CraftBlockData.fromData(Custom.createCustomBlock(blocks.enderite_ore)));
+									for (int n = 0; n <= 1; n++) {
+										int luck = tr.nextInt(5);
+										if(luck == 0) {
+											Block tb = b.getRelative(tr.nextInt(3)-1, tr.nextInt(2), tr.nextInt(3)-1);
+											if(tb.getType().equals(Material.END_STONE))
+											tb.setBlockData(CraftBlockData.fromData(Custom.createCustomBlock(blocks.enderite_ore)));
+										}
+									}
 								}
 							}
 						}
 			        }
+				}
+			}
+		}else if(e.getWorld().getEnvironment().equals(Environment.NORMAL)) {
+			if(e.isNewChunk()) {
+				for (int x = 0; x <= 15; x++) {
+					for (int z = 0; z <= 15; z++) {
+						if(tr.nextInt(200) == 0) {
+							
+						}else if(tr.nextInt(200) == 0) {
+							
+						}
+					}
 				}
 			}
 		}

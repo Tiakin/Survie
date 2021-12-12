@@ -3,8 +3,8 @@ package fr.tiakin.block.nms;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.block.Block;
-import org.bukkit.craftbukkit.v1_17_R1.CraftServer;
-import org.bukkit.craftbukkit.v1_17_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_18_R1.CraftServer;
+import org.bukkit.craftbukkit.v1_18_R1.CraftWorld;
 import org.bukkit.entity.Player;
 
 import fr.tiakin.item.Tool;
@@ -14,8 +14,8 @@ import net.minecraft.network.protocol.game.PacketPlayOutBlockBreakAnimation;
 public class nmsHandler {
 
     public static void sendBreakPacket(int animation, Block block) {
-        ((CraftServer) Bukkit.getServer()).getHandle().sendPacketNearby(null, block.getX(), block.getY(), block.getZ(), 120,
-                ((CraftWorld) block.getWorld()).getHandle().getDimensionKey(), new PacketPlayOutBlockBreakAnimation(getBlockEntityId(block), getBlockPosition(block), animation));
+        ((CraftServer) Bukkit.getServer()).getHandle().a(null, block.getX(), block.getY(), block.getZ(), 120,
+                ((CraftWorld) block.getWorld()).getHandle().aa(), new PacketPlayOutBlockBreakAnimation(getBlockEntityId(block), getBlockPosition(block), animation));
     }
 
     public static void sendBreakBlock(Player player, Block block) {

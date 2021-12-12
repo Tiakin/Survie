@@ -79,7 +79,8 @@ public class BreakListeners implements Listener {
     	Player p = event.getPlayer();
     	World w = p.getWorld();
     	BlockPosition b = event.getBlockPosition();
-        Location loc = new Location(w,b.getX(),b.getY(),b.getZ());
+    	// u v w ?
+        Location loc = new Location(w,b.u(),b.v(),b.w());
         BrokenBlock a = main.brokenBlocksService.getBrokenBlock(loc);
         JavaPlugin.getPlugin(main.class).getLogger().info("aborted");
         

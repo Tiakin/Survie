@@ -13,8 +13,8 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Jukebox;
 import org.bukkit.block.data.MultipleFacing;
-import org.bukkit.craftbukkit.v1_17_R1.block.CraftBlockState;
-import org.bukkit.craftbukkit.v1_17_R1.block.data.CraftBlockData;
+import org.bukkit.craftbukkit.v1_18_R1.block.CraftBlockStates;
+import org.bukkit.craftbukkit.v1_18_R1.block.data.CraftBlockData;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -945,7 +945,8 @@ public class Custom implements Listener {
 	
 	public static IBlockData createCustomBlock(blocks b) {
 		
-		BlockState state = new CraftBlockState(b.getMaterial());
+		
+		BlockState state = CraftBlockStates.getBlockState(b.getMaterial(), null);
 		MultipleFacing e = (MultipleFacing) state.getBlockData();
 		for(BlockFace face : faces) {
 			if(!e.getAllowedFaces().contains(face)) return null;

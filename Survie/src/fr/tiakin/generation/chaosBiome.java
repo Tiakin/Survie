@@ -1,20 +1,13 @@
 package fr.tiakin.generation;
 
-import java.lang.reflect.Field;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Server;
-import org.bukkit.craftbukkit.v1_17_R1.CraftChunk;
-import org.bukkit.craftbukkit.v1_17_R1.CraftServer;
-import org.bukkit.craftbukkit.v1_17_R1.CraftWorld;
-import org.bukkit.craftbukkit.v1_17_R1.entity.CraftPlayer;
-import org.bukkit.entity.Player;
+import org.bukkit.craftbukkit.v1_18_R1.CraftServer;
+import org.bukkit.craftbukkit.v1_18_R1.CraftWorld;
 import net.minecraft.core.BlockPosition;
 import net.minecraft.core.IRegistry;
 import net.minecraft.core.IRegistryWritable;
-import net.minecraft.data.worldgen.BiomeDecoratorGroups;
-import net.minecraft.data.worldgen.StructureFeatures;
-import net.minecraft.network.protocol.game.PacketPlayOutMapChunk;
 import net.minecraft.resources.MinecraftKey;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.dedicated.DedicatedServer;
@@ -22,17 +15,8 @@ import net.minecraft.world.level.World;
 import net.minecraft.world.level.biome.BiomeBase;
 import net.minecraft.world.level.biome.BiomeFog;
 import net.minecraft.world.level.biome.BiomeFog.GrassColor;
-import net.minecraft.world.level.biome.BiomeSettingsGeneration;
-import net.minecraft.world.level.biome.BiomeSettingsMobs;
-import net.minecraft.world.level.levelgen.WorldGenStage;
-import net.minecraft.world.level.levelgen.surfacebuilders.WorldGenSurface;
-import net.minecraft.world.level.levelgen.surfacebuilders.WorldGenSurfaceComposite;
-import net.minecraft.world.level.levelgen.surfacebuilders.WorldGenSurfaceConfigurationBase;
 import net.minecraft.world.level.levelgen.synth.NoiseGenerator3Handler;
 import com.mojang.serialization.Lifecycle;
-
-import fr.tiakin.block.blocks;
-import fr.tiakin.main.Custom;
 
 public class chaosBiome {
 	
@@ -42,32 +26,19 @@ public class chaosBiome {
 	
 	public static void create() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
 		
-		ResourceKey<BiomeBase> newKey = ResourceKey.a(IRegistry.aO, new MinecraftKey("survie", "chaos"));
+		ResourceKey<BiomeBase> newKey = ResourceKey.a(IRegistry.aR, new MinecraftKey("survie", "chaos"));
 		
-		ResourceKey<BiomeBase> oldKey = ResourceKey.a(IRegistry.aO, new MinecraftKey("minecraft", "end_highlands"));
-		IRegistryWritable<BiomeBase> registrywritable = dedicatedserver.getCustomRegistry().b(IRegistry.aO);
+		ResourceKey<BiomeBase> oldKey = ResourceKey.a(IRegistry.aR, new MinecraftKey("minecraft", "end_highlands"));
+		IRegistryWritable<BiomeBase> registrywritable = dedicatedserver.aV().b(IRegistry.aR);
 		BiomeBase oldbiome = registrywritable.a(oldKey);
 		BiomeBase.a newBiome = new BiomeBase.a();
-		newBiome.a(oldbiome.t());
-		newBiome.a(oldbiome.c());
-		BiomeSettingsGeneration.a chaosGeneration = new BiomeSettingsGeneration.a();
-		  //Custom.createCustomBlock(blocks.chaos_nylium)
-		WorldGenSurfaceComposite<WorldGenSurfaceConfigurationBase> chaosSurface = WorldGenSurface.w.a(new WorldGenSurfaceConfigurationBase(Custom.createCustomBlock(blocks.chaos_nylium) , net.minecraft.world.level.block.Blocks.gg.getBlockData(), net.minecraft.world.level.block.Blocks.eq.getBlockData()));
-		
-		chaosGeneration.a(chaosSurface).a(StructureFeatures.q).a(WorldGenStage.Decoration.e, BiomeDecoratorGroups.b).a(WorldGenStage.Decoration.i, BiomeDecoratorGroups.d); //ok inch allah sa passe
-		
-		newBiome.a(chaosGeneration.a());
-		
-		Field biomeSettingMobsField = BiomeBase.class.getDeclaredField("m");
-		biomeSettingMobsField.setAccessible(true);
-		BiomeSettingsMobs biomeSettingMobs = (BiomeSettingsMobs) biomeSettingMobsField.get(oldbiome);
-		newBiome.a(biomeSettingMobs);
-		
-		newBiome.a(0.2F); //Depth of biome
-		newBiome.b(0.05F); //Scale of biome
-		newBiome.c(0.7F); //Temperature of biome
-		newBiome.d(0.8F); //Downfall of biome
+		newBiome.a(oldbiome.r()); //geographie
+		newBiome.a(oldbiome.c()); //precipitation
 		newBiome.a(BiomeBase.TemperatureModifier.a); //BiomeBase.TemperatureModifier.a will make your biome normal, BiomeBase.TemperatureModifier.b will make your biome frozen
+		newBiome.a(oldbiome.e()); //setting generation
+		newBiome.a(oldbiome.b()); //setting mob
+		newBiome.a(oldbiome.i()); //temperature
+		newBiome.b(oldbiome.h()); // downfall
 		
 		BiomeFog.a newFog = new BiomeFog.a();
 		newFog.a(GrassColor.a); //je sais pas frere(obligé)
@@ -86,18 +57,18 @@ public class chaosBiome {
 		
 		newBiome.a(newFog.a());
 		
-		dedicatedserver.getCustomRegistry().b(IRegistry.aO).a(newKey, newBiome.a(), Lifecycle.stable());
+		dedicatedserver.aV().b(IRegistry.aR).a(newKey, newBiome.a(), Lifecycle.stable());
 		
 	}
 	public static BiomeBase getbase(String newBiomeName) {
 		BiomeBase base;
-        IRegistryWritable<BiomeBase> registrywritable = dedicatedserver.getCustomRegistry().b(IRegistry.aO);
+        IRegistryWritable<BiomeBase> registrywritable = dedicatedserver.aV().b(IRegistry.aR);
    
-        ResourceKey<BiomeBase> rkey = ResourceKey.a(IRegistry.aO, new MinecraftKey(newBiomeName.toLowerCase()));
+        ResourceKey<BiomeBase> rkey = ResourceKey.a(IRegistry.aR, new MinecraftKey(newBiomeName.toLowerCase()));
         base = registrywritable.a(rkey);
         if(base == null) {
             if(newBiomeName.contains(":")) {
-                ResourceKey<BiomeBase> newrkey = ResourceKey.a(IRegistry.aO, new MinecraftKey(newBiomeName.split(":")[0].toLowerCase(), newBiomeName.split(":")[1].toLowerCase()));
+                ResourceKey<BiomeBase> newrkey = ResourceKey.a(IRegistry.aR, new MinecraftKey(newBiomeName.split(":")[0].toLowerCase(), newBiomeName.split(":")[1].toLowerCase()));
                 base = registrywritable.a(newrkey);
                 if(base == null) {
                     return null;
@@ -129,25 +100,18 @@ public class chaosBiome {
  
     private static void setBiome(int x, int y, int z, World w, BiomeBase bb) {
           BlockPosition pos = new BlockPosition(x, 0, z);
-          if (w.isLoaded(pos)) {
-             net.minecraft.world.level.chunk.Chunk chunk = w.getChunkAtWorldCoords(pos);
+          if (w.n(pos)) {
+             net.minecraft.world.level.chunk.Chunk chunk = w.l(pos);
              if (chunk != null) {
-                chunk.getBiomeIndex().setBiome(x >> 2, y >> 2, z >> 2, bb);
-                chunk.markDirty();
+                chunk.setBiome(x >> 2, y >> 2, z >> 2, bb);
                 
              }
           }
       }
 
     private static void refreshChunksForAll(Chunk chunk) {
-        net.minecraft.world.level.chunk.Chunk c = ((CraftChunk)chunk).getHandle();
-        for (Player player : chunk.getWorld().getPlayers()) {
-            if (player.isOnline()) {
-                if((player.getLocation().distance(chunk.getBlock(0, 0, 0).getLocation()) < (Bukkit.getServer().getViewDistance() * 16))) {
-                    ((CraftPlayer) player).getHandle().b.sendPacket(new PacketPlayOutMapChunk(c));
-                }
-            }
-        }
+    	chunk.unload();
+    	chunk.load();
     }
     
     
@@ -160,7 +124,7 @@ public class chaosBiome {
             	int j = chunk.getZ() * 16 + z;
             	int i2 = i >> 2;
             	int j2 = j >> 2;
-            	if(net.minecraft.world.level.biome.WorldChunkManagerTheEnd.a(islandnoise, i2*2+1, j2*2+1) > 50) {
+            	if(net.minecraft.world.level.biome.WorldChunkManagerTheEnd.a(islandnoise, i2*2+1, j2*2+1) > 40) {
             		for(int y = 0; y <= chunk.getWorld().getMaxHeight(); y++) {
                 		setBiome(i, y, j, w, getbase("survie:chaos"));
                 	}

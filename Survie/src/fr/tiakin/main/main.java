@@ -159,14 +159,14 @@ public class main extends JavaPlugin implements Listener{
 								int down = tr.nextInt(20);
 								if(b.getY() - down >= 0) {
 									b = b.getRelative(BlockFace.DOWN, down);
-									if(b.getType().equals(Material.END_STONE))
+									if(Custom.materialsWhitelist(b.getType()))
 										b.setBlockData(CraftBlockData.fromData(Custom.createCustomBlock(blocks.enderite_ore)));
 									for (int n = 0; n <= 1; n++) {
 										int luck = tr.nextInt(5);
 										if(luck == 0) {
 											Block tb = b.getRelative(tr.nextInt(3)-1, tr.nextInt(2), tr.nextInt(3)-1);
-											if(tb.getType().equals(Material.END_STONE))
-											tb.setBlockData(CraftBlockData.fromData(Custom.createCustomBlock(blocks.enderite_ore)));
+											if(Custom.materialsWhitelist(tb.getType()))
+												tb.setBlockData(CraftBlockData.fromData(Custom.createCustomBlock(blocks.enderite_ore)));
 										}
 									}
 								}
@@ -180,14 +180,35 @@ public class main extends JavaPlugin implements Listener{
 				for (int x = 0; x <= 15; x++) {
 					for (int z = 0; z <= 15; z++) {
 						if(tr.nextInt(200) == 0) {
-							
+							Block b = new Location(e.getWorld(),e.getChunk().getX() * 16 + x,tr.nextInt(20)-60, e.getChunk().getZ() * 16 + z).getBlock();
+							if(Custom.materialsWhitelist(b.getType()))
+								b.setBlockData(CraftBlockData.fromData(Custom.createCustomBlock(blocks.discordium_ore)));
+							for (int n = 0; n <= 2; n++) {
+								int luck = tr.nextInt(5);
+								if(luck == 0) {
+									Block tb = b.getRelative(tr.nextInt(3)-1, tr.nextInt(2), tr.nextInt(3)-1);
+									if(Custom.materialsWhitelist(tb.getType()))
+									tb.setBlockData(CraftBlockData.fromData(Custom.createCustomBlock(blocks.discordium_ore)));
+								}
+							}
 						}else if(tr.nextInt(200) == 0) {
-							
+							Block b = new Location(e.getWorld(),e.getChunk().getX() * 16 + x,tr.nextInt(40)-40, e.getChunk().getZ() * 16 + z).getBlock();
+							if(Custom.materialsWhitelist(b.getType()))
+								b.setBlockData(CraftBlockData.fromData(Custom.createCustomBlock(blocks.cobalt_ore)));
+							for (int n = 0; n <= 6; n++) {
+								int luck = tr.nextInt(5);
+								if(luck == 0) {
+									Block tb = b.getRelative(tr.nextInt(3)-1, tr.nextInt(2), tr.nextInt(3)-1);
+									if(Custom.materialsWhitelist(tb.getType()))
+									tb.setBlockData(CraftBlockData.fromData(Custom.createCustomBlock(blocks.cobalt_ore)));
+								}
+							}
 						}
 					}
 				}
 			}
 		}
+		
 	}
 	
 	@EventHandler

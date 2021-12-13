@@ -20,12 +20,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.event.inventory.PrepareSmithingEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.inventory.FurnaceRecipe;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
@@ -52,6 +54,7 @@ public class Custom implements Listener {
 	// Recipe :
 	
 	public static void customrecipe() {
+		other();
         Gold();
 		Diamond();
 		Emerald();
@@ -63,7 +66,26 @@ public class Custom implements Listener {
         Chaos();
         Infinity();
 	}
-	
+	private static void other() {
+		//disc
+		key = new NamespacedKey(main.getPlugin(main.class), "melo_disc");
+		recipe.add(key);
+        shapedrecipe = new ShapedRecipe(key,items.melo_disc.getItemStack());
+        shapedrecipe.shape("SMS","MEM","SMS");
+        shapedrecipe.setIngredient('M', new RecipeChoice.ExactChoice(items.manyullyn_ingot.getItemStack()));
+        shapedrecipe.setIngredient('S', Material.END_STONE);
+        shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(items.enderite_ingot.getItemStack()));
+        Bukkit.addRecipe(shapedrecipe);
+        
+        key = new NamespacedKey(main.getPlugin(main.class), "moonlight_disc");
+		recipe.add(key);
+        shapedrecipe = new ShapedRecipe(key,items.moonlight_disc.getItemStack());
+        shapedrecipe.shape("CIC","INI","CIC");
+        shapedrecipe.setIngredient('C', new RecipeChoice.ExactChoice(items.chaos_ingot.getItemStack()));
+        shapedrecipe.setIngredient('I', new RecipeChoice.ExactChoice(items.infinity_ingot.getItemStack()));
+        shapedrecipe.setIngredient('N', Material.NETHER_STAR);
+        Bukkit.addRecipe(shapedrecipe);
+	}
 	private static void Gold() {
 		//apple
 		key = new NamespacedKey(main.getPlugin(main.class), "enchanted_golden_apple");
@@ -814,6 +836,19 @@ public class Custom implements Listener {
 	}
 	
 	@EventHandler
+	public void craft(PrepareItemCraftEvent e) {
+		ItemStack[] itemStacks = e.getInventory().getMatrix();
+		for(int i=0;i<itemStacks.length;i++) {
+			items item = getCustomItem(itemStacks[i]);
+			if(item != null) itemStacks[i] = item.getItemStack();
+		}
+		Recipe r = Bukkit.getCraftingRecipe(itemStacks, e.getViewers().get(0).getWorld());
+		if(r != null) {
+			e.getInventory().setResult(r.getResult());
+		}
+	}
+	
+	@EventHandler
 	public void smith(PrepareSmithingEvent e) {
 		  ItemStack tool = e.getInventory().getItem(0);
 		  ItemStack ingot = e.getInventory().getItem(1);
@@ -823,7 +858,6 @@ public class Custom implements Listener {
 					  
 					  if(tool.getType().equals(Material.NETHERITE_SWORD)) {
 						  e.setResult(items.enderite_sword.getItemStack());
-						  
 					  } else if(tool.getType().equals(Material.NETHERITE_PICKAXE)) {
 						  e.setResult(items.enderite_pickaxe.getItemStack());
 						  
@@ -854,7 +888,6 @@ public class Custom implements Listener {
 				  if(isSimilar(ingot,items.enderite_ingot.getItemStack())) {
 					  if(isSimilar(tool, items.netherite_hammer.getItemStack())) {
 						  e.setResult(items.enderite_hammer.getItemStack());
-						  
 					  }
 				  }else if((isSimilar(ingot, items.ardite_ingot.getItemStack()) && isSimilar(tool, items.cobalt_ingot.getItemStack())) || (isSimilar(ingot, items.cobalt_ingot.getItemStack()) && isSimilar(tool, items.ardite_ingot.getItemStack()))) {
 					  e.setResult(items.manyullyn_ingot.getItemStack());
@@ -878,10 +911,19 @@ public class Custom implements Listener {
 	// Compare :
 	
 	public static boolean isSimilar(ItemStack is1,ItemStack is2) {
-		if(is1.getType().equals(Material.PLAYER_WALL_HEAD)) is1.setType(Material.PLAYER_HEAD);
-		if(is2.getType().equals(Material.PLAYER_WALL_HEAD)) is2.setType(Material.PLAYER_HEAD);
-		if(Bukkit.getItemFactory().equals(is1.getItemMeta(), is2.getItemMeta()) && is1.getType().equals(is2.getType()))
-			return true;
+		if(is1 != null && is2 != null) {
+			if(is1.getType().equals(Material.PLAYER_WALL_HEAD)) is1.setType(Material.PLAYER_HEAD);
+			if(is2.getType().equals(Material.PLAYER_WALL_HEAD)) is2.setType(Material.PLAYER_HEAD);
+			if(is1.getType().equals(is2.getType())) {
+				if(!is1.hasItemMeta() && !is2.hasItemMeta()) {
+					return true;
+				}else if(is1.hasItemMeta() && is2.hasItemMeta()) {
+					if(is1.getItemMeta().hasLore() && is2.getItemMeta().hasLore())
+						if(is1.getItemMeta().getLore().equals(is2.getItemMeta().getLore()))
+							return true;
+				}
+			}
+		}
 		return false;
 	}
 	
@@ -1121,6 +1163,13 @@ public class Custom implements Listener {
 			r += 2;
 		}
 		return builder.toString();
+	}
+	
+	public static boolean materialsWhitelist(Material m) {
+		return switch(m) {
+		case STONE,DEEPSLATE,ANDESITE,DIORITE,GRANITE,DIRT,GRAVEL,NETHERRACK,END_STONE -> true;
+		default ->  false;
+		};
 	}
 	
 }

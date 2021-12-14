@@ -135,7 +135,7 @@ public class Tool {
     			return "netherite";
     		}
     	}
-		return null;
+		return "nop";
 	}
 	
 	public static int getHammerRadius(ItemStack itemStack) {

@@ -43,6 +43,7 @@ import fr.tiakin.damage.damageEvent;
 import fr.tiakin.generation.chaosBiome;
 import fr.tiakin.generation.tempload;
 import fr.tiakin.generation.tempsave;
+import fr.tiakin.item.Tool;
 import fr.tiakin.item.items;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelDuplexHandler;
@@ -260,7 +261,7 @@ public class main extends JavaPlugin implements Listener{
     public void pistonextend(BlockPistonExtendEvent e) {
     	HashMap<Location,BlockData> blocklist = new HashMap<>();
     	for(Block b : e.getBlocks()) {
-    		if(Custom.getCustomBlock(b) != null)
+    		if(Tool.isMushroom(b.getType()))
     			blocklist.put(b.getLocation(), b.getBlockData());
     	}
     	if(blocklist.isEmpty()) return;
@@ -281,7 +282,7 @@ public class main extends JavaPlugin implements Listener{
     public void pistonretract(BlockPistonRetractEvent e) {
     	HashMap<Location,BlockData> blocklist = new HashMap<>();
     	for(Block b : e.getBlocks()) {
-    		if(Custom.getCustomBlock(b) != null)
+    		if(Tool.isMushroom(b.getType()))
     			blocklist.put(b.getLocation(), b.getBlockData());
     	}
     	if(blocklist.isEmpty()) return;

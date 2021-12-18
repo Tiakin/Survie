@@ -838,13 +838,15 @@ public class Custom implements Listener {
 	@EventHandler
 	public void craft(PrepareItemCraftEvent e) {
 		ItemStack[] itemStacks = e.getInventory().getMatrix();
-		for(int i=0;i<itemStacks.length;i++) {
-			items item = getCustomItem(itemStacks[i]);
-			if(item != null) itemStacks[i] = item.getItemStack();
-		}
-		Recipe r = Bukkit.getCraftingRecipe(itemStacks, e.getViewers().get(0).getWorld());
-		if(r != null) {
-			e.getInventory().setResult(r.getResult());
+		if(itemStacks.length == 9) {
+			for(int i=0;i<itemStacks.length;i++) {
+				items item = getCustomItem(itemStacks[i]);
+				if(item != null) itemStacks[i] = item.getItemStack();
+			}
+			Recipe r = Bukkit.getCraftingRecipe(itemStacks, e.getViewers().get(0).getWorld());
+			if(r != null) {
+				e.getInventory().setResult(r.getResult());
+			}
 		}
 	}
 	
@@ -1023,7 +1025,6 @@ public class Custom implements Listener {
 
 	@EventHandler
 	public void itemDamage(PlayerItemDamageEvent e) {
-		//Player p = e.getPlayer();
 		ItemStack is = e.getItem();
     	int max = Tool.getOrder(Tool.getTier(is))-4;
     	if(max > 1) {

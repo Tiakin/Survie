@@ -103,17 +103,17 @@ public class Tool {
 	
 	public static String getTier(ItemStack itemStack) {
 		Material m = itemStack.getType();
-		if(m.equals(Material.WOODEN_PICKAXE) || m.equals(Material.WOODEN_AXE) || m.equals(Material.WOODEN_SHOVEL) || m.equals(Material.WOODEN_HOE))
+		if(m.equals(Material.WOODEN_PICKAXE) || m.equals(Material.WOODEN_AXE) || m.equals(Material.WOODEN_SHOVEL) || m.equals(Material.WOODEN_HOE) || m.equals(Material.WOODEN_SWORD))
 			return "wooden";
-		if(m.equals(Material.GOLDEN_PICKAXE) || m.equals(Material.GOLDEN_AXE) || m.equals(Material.GOLDEN_SHOVEL) || m.equals(Material.GOLDEN_HOE))
+		if(m.equals(Material.GOLDEN_PICKAXE) || m.equals(Material.GOLDEN_AXE) || m.equals(Material.GOLDEN_SHOVEL) || m.equals(Material.GOLDEN_HOE) || m.equals(Material.GOLDEN_SWORD))
 			return "golden";
-		if(m.equals(Material.STONE_PICKAXE) || m.equals(Material.STONE_AXE) || m.equals(Material.STONE_SHOVEL) || m.equals(Material.STONE_HOE))
+		if(m.equals(Material.STONE_PICKAXE) || m.equals(Material.STONE_AXE) || m.equals(Material.STONE_SHOVEL) || m.equals(Material.STONE_HOE) || m.equals(Material.STONE_SWORD))
     		return "stone";
-    	if(m.equals(Material.IRON_PICKAXE) || m.equals(Material.IRON_AXE) || m.equals(Material.IRON_SHOVEL) || m.equals(Material.IRON_HOE))
+    	if(m.equals(Material.IRON_PICKAXE) || m.equals(Material.IRON_AXE) || m.equals(Material.IRON_SHOVEL) || m.equals(Material.IRON_HOE) || m.equals(Material.IRON_SWORD))
     		return "iron";
-    	if(m.equals(Material.DIAMOND_PICKAXE) || m.equals(Material.DIAMOND_AXE) || m.equals(Material.DIAMOND_SHOVEL) || m.equals(Material.DIAMOND_HOE))
+    	if(m.equals(Material.DIAMOND_PICKAXE) || m.equals(Material.DIAMOND_AXE) || m.equals(Material.DIAMOND_SHOVEL) || m.equals(Material.DIAMOND_HOE) || m.equals(Material.DIAMOND_SWORD))
     		return "diamond";
-    	if(m.equals(Material.NETHERITE_PICKAXE) || m.equals(Material.NETHERITE_AXE) || m.equals(Material.NETHERITE_SHOVEL) || m.equals(Material.NETHERITE_HOE)) {
+    	if(m.equals(Material.NETHERITE_PICKAXE) || m.equals(Material.NETHERITE_AXE) || m.equals(Material.NETHERITE_SHOVEL) || m.equals(Material.NETHERITE_HOE) || m.equals(Material.NETHERITE_SWORD)) {
     		if(itemStack.hasItemMeta() && itemStack.getItemMeta().hasLore()) {
     			switch(itemStack.getItemMeta().getLore().get(0).split(" ")[0]) {
     			case "Netherite":

@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -17,7 +16,6 @@ import org.bukkit.Material;
 import org.bukkit.World.Environment;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.MultipleFacing;
 import org.bukkit.craftbukkit.v1_18_R1.block.data.CraftBlockData;
 import org.bukkit.craftbukkit.v1_18_R1.entity.CraftPlayer;
@@ -257,46 +255,23 @@ public class main extends JavaPlugin implements Listener{
         pipeline.addBefore("packet_handler", player.getName(), channelDuplexHandler);
 
     }
+    
     @EventHandler
     public void pistonextend(BlockPistonExtendEvent e) {
-    	HashMap<Location,BlockData> blocklist = new HashMap<>();
     	for(Block b : e.getBlocks()) {
-    		if(Tool.isMushroom(b.getType()))
-    			blocklist.put(b.getLocation(), b.getBlockData());
-    	}
-    	if(blocklist.isEmpty()) return;
-    	BlockFace Direction = e.getDirection();
-    	Bukkit.getScheduler().runTaskLater(getPlugin(main.class), () -> {
-    		for(Location loc : blocklist.keySet()) {
-    			BlockData data = blocklist.get(loc);
-    			Block blockNewLoc = loc.getBlock().getRelative(Direction);
-    			if(blockNewLoc.getType().equals(data.getMaterial())) {
-    				blockNewLoc.setBlockData(data);
-    				updateclient(blockNewLoc, blockNewLoc.getWorld().getNearbyEntities(blockNewLoc.getLocation(), 50, 50, 50));
-    			}
+    		if(Tool.isMushroom(b.getType())) {
+    			e.setCancelled(true);
     		}
-    	},3L);
+    	}
     }
     
     @EventHandler
     public void pistonretract(BlockPistonRetractEvent e) {
-    	HashMap<Location,BlockData> blocklist = new HashMap<>();
     	for(Block b : e.getBlocks()) {
-    		if(Tool.isMushroom(b.getType()))
-    			blocklist.put(b.getLocation(), b.getBlockData());
-    	}
-    	if(blocklist.isEmpty()) return;
-    	BlockFace Direction = e.getDirection();
-    	Bukkit.getScheduler().runTaskLater(getPlugin(main.class), () -> {
-    		for(Location loc : blocklist.keySet()) {
-    			BlockData data = blocklist.get(loc);
-    			Block blockNewLoc = loc.getBlock().getRelative(Direction);
-    			if(blockNewLoc.getType().equals(data.getMaterial())) {
-    				blockNewLoc.setBlockData(data);
-    				updateclient(blockNewLoc, blockNewLoc.getWorld().getNearbyEntities(blockNewLoc.getLocation(), 50, 50, 50));
-    			}
+    		if(Tool.isMushroom(b.getType())) {
+    			e.setCancelled(true);
     		}
-    	},3L);
+    	}
     }
     
 	@EventHandler

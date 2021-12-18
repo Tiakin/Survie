@@ -19,6 +19,7 @@ import fr.tiakin.main.Custom;
 import fr.tiakin.main.main;
 
 public class Tool {
+	
 	public static boolean canHarvest(Block block, ItemStack item) {
 		blocks customblock = Custom.getCustomBlock(block);
 		if(customblock != null) {

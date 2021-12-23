@@ -14,14 +14,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import fr.tiakin.block.blocks;
+import fr.tiakin.block.Blocks;
 import fr.tiakin.main.Custom;
-import fr.tiakin.main.main;
+import fr.tiakin.main.Main;
 
 public class Tool {
 	
 	public static boolean canHarvest(Block block, ItemStack item) {
-		blocks customblock = Custom.getCustomBlock(block);
+		Blocks customblock = Custom.getCustomBlock(block);
 		if(customblock != null) {
 			if(getOrder(getTier(item)) >= getOrder(customblock.getTier()))
 				return true;
@@ -33,7 +33,7 @@ public class Tool {
 	}
 	
 	public static Material getSound(Block block) {
-		blocks customblock = Custom.getCustomBlock(block);
+		Blocks customblock = Custom.getCustomBlock(block);
 		Material hardness;
 		if(customblock != null)
 			hardness = customblock.getSound();
@@ -44,7 +44,7 @@ public class Tool {
     }
 	
 	public static float getHardness(Block block) {
-		blocks customblock = Custom.getCustomBlock(block);
+		Blocks customblock = Custom.getCustomBlock(block);
 		float hardness;
 		if(customblock != null)
 			hardness = customblock.getHardness();
@@ -60,7 +60,7 @@ public class Tool {
 		};
 	}
 	public static boolean isBestTool(Block block, ItemStack item) {
-		blocks customblocks = Custom.getCustomBlock(block);
+		Blocks customblocks = Custom.getCustomBlock(block);
 		switch(getTool(item)) {
 		case 1:
 			if((Tag.MINEABLE_PICKAXE.isTagged(block.getType()) && customblocks == null) ||(customblocks != null && customblocks.getTool().equalsIgnoreCase("pickaxe")))
@@ -99,44 +99,39 @@ public class Tool {
     		return 3;
     	if(m.toString().contains("_HOE"))
     		return 4;
+    	if(m.toString().contains("_SWORD"))
+    		return 5;
 		return 0;
 	}
 	
 	public static String getTier(ItemStack itemStack) {
 		Material m = itemStack.getType();
-		if(m.equals(Material.WOODEN_PICKAXE) || m.equals(Material.WOODEN_AXE) || m.equals(Material.WOODEN_SHOVEL) || m.equals(Material.WOODEN_HOE) || m.equals(Material.WOODEN_SWORD))
-			return "wooden";
-		if(m.equals(Material.GOLDEN_PICKAXE) || m.equals(Material.GOLDEN_AXE) || m.equals(Material.GOLDEN_SHOVEL) || m.equals(Material.GOLDEN_HOE) || m.equals(Material.GOLDEN_SWORD))
-			return "golden";
-		if(m.equals(Material.STONE_PICKAXE) || m.equals(Material.STONE_AXE) || m.equals(Material.STONE_SHOVEL) || m.equals(Material.STONE_HOE) || m.equals(Material.STONE_SWORD))
-    		return "stone";
-    	if(m.equals(Material.IRON_PICKAXE) || m.equals(Material.IRON_AXE) || m.equals(Material.IRON_SHOVEL) || m.equals(Material.IRON_HOE) || m.equals(Material.IRON_SWORD))
-    		return "iron";
-    	if(m.equals(Material.DIAMOND_PICKAXE) || m.equals(Material.DIAMOND_AXE) || m.equals(Material.DIAMOND_SHOVEL) || m.equals(Material.DIAMOND_HOE) || m.equals(Material.DIAMOND_SWORD))
-    		return "diamond";
-    	if(m.equals(Material.NETHERITE_PICKAXE) || m.equals(Material.NETHERITE_AXE) || m.equals(Material.NETHERITE_SHOVEL) || m.equals(Material.NETHERITE_HOE) || m.equals(Material.NETHERITE_SWORD)) {
-    		if(itemStack.hasItemMeta() && itemStack.getItemMeta().hasLore()) {
-    			switch(itemStack.getItemMeta().getLore().get(0).split(" ")[0]) {
-    			case "Netherite":
-    				return "netherite";
-    			case "Enderite":
-    				return "enderite";
-    			case "Discordium":
-    				return "discordium";
-    			case "Blazite":
-    				return "blazite";
-    			case "Manyullyn":
-    				return "manyullyn";
-    			case "Chaos":
-    				return "chaos";
-    			case "Infinity":
-    				return "infinity";
-    			}
-    		} else { 
-    			return "netherite";
-    		}
-    	}
-		return "nop";
+		return switch(m) {
+		case WOODEN_PICKAXE,WOODEN_AXE,WOODEN_SHOVEL,WOODEN_HOE,WOODEN_SWORD -> "wooden";
+		case LEATHER_HELMET,LEATHER_CHESTPLATE,LEATHER_LEGGINGS,LEATHER_BOOTS -> "leather";
+		case GOLDEN_PICKAXE,GOLDEN_AXE,GOLDEN_SHOVEL,GOLDEN_HOE,GOLDEN_SWORD,GOLDEN_HELMET,GOLDEN_CHESTPLATE,GOLDEN_LEGGINGS,GOLDEN_BOOTS -> "golden";
+		case STONE_PICKAXE,STONE_AXE,STONE_SHOVEL,STONE_HOE,STONE_SWORD -> "stone";
+		case CHAINMAIL_HELMET,CHAINMAIL_CHESTPLATE,CHAINMAIL_LEGGINGS,CHAINMAIL_BOOTS -> "chainmail";
+		case IRON_PICKAXE,IRON_AXE,IRON_SHOVEL,IRON_HOE,IRON_SWORD,IRON_HELMET,IRON_CHESTPLATE,IRON_LEGGINGS,IRON_BOOTS -> "iron";
+		case DIAMOND_PICKAXE,DIAMOND_AXE,DIAMOND_SHOVEL,DIAMOND_HOE,DIAMOND_SWORD,DIAMOND_HELMET,DIAMOND_CHESTPLATE,DIAMOND_LEGGINGS,DIAMOND_BOOTS -> "diamond";
+		case NETHERITE_PICKAXE,NETHERITE_AXE,NETHERITE_SHOVEL,NETHERITE_HOE,NETHERITE_SWORD,NETHERITE_HELMET,NETHERITE_CHESTPLATE,NETHERITE_LEGGINGS,NETHERITE_BOOTS -> {
+			if(itemStack.hasItemMeta() && itemStack.getItemMeta().hasLore()) {
+				yield switch(itemStack.getItemMeta().getLore().get(0).split(" ")[0]) {
+				case "Netherite" -> "netherite";
+				case "Enderite" -> "enderite";
+				case "Discordium" -> "discordium";
+    			case "Blazite" -> "blazite";
+    			case "Manyullyn" -> "manyullyn";
+    			case "Chaos" -> "chaos";
+    			case "Infinity" -> "infinity";
+				default -> "netherite";
+				};
+			}else {
+				yield "netherite";
+			}
+		}
+		default -> "nop";
+		};
 	}
 	
 	public static int getHammerRadius(ItemStack itemStack) {
@@ -152,34 +147,21 @@ public class Tool {
 	}
 	
 	public static int getOrder(String e) {
-		switch(e) {
-		case "wooden":
-			return 1;
-		case "golden":
-			return 2;
-		case "stone":
-			return 3;
-		case "iron":
-			return 4;
-		case "diamond":
-			return 5;
-		case "netherite":
-			return 6;
-		case "enderite":
-			return 7;
-		case "discordium":
-			return 8;
-		case "blazite":
-			return 9;
-		case "manyullyn":
-			return 10;
-		case "chaos":
-			return 11;
-		case "infinity":
-			return 12;
-		default:
-			return 0;
-		}
+		return switch(e) {
+		case "wooden","leather" -> 1;
+		case "golden" -> 2;
+		case "stone","chainmail" -> 3;
+		case "iron" -> 4;
+		case "diamond" -> 5;
+		case "netherite" -> 6;
+		case "enderite" -> 7;
+		case "discordium" -> 8;
+		case "blazite" -> 9;
+		case "manyullyn" -> 10;
+		case "chaos" -> 11;
+		case "infinity" -> 12;
+		default -> 0;
+		};
 	}
 	
     public static float getToolSpeed(ItemStack itemStack) {
@@ -213,7 +195,7 @@ public class Tool {
     	}
     }
 	
-    public static void breakblock(Block b, Player p, blocks block) {
+    public static void breakblock(Block b, Player p, Blocks block) {
     	if(canHarvest(b, p.getInventory().getItemInMainHand())) {
     		boolean silkTouch = false;
     		int fortune = 0;
@@ -230,7 +212,7 @@ public class Tool {
 	
     public static BlockFace getFacing(Player player) {
     	float pitch = player.getEyeLocation().getPitch();
-    	JavaPlugin.getPlugin(main.class).getLogger().info("truc : "+ pitch);
+    	JavaPlugin.getPlugin(Main.class).getLogger().info("truc : "+ pitch);
 		if(pitch < -45)
 			return BlockFace.UP;
 		else if(pitch > 45)
@@ -241,19 +223,11 @@ public class Tool {
 
     public static List<Block> getSquare(Location loc, BlockFace face,int radius) {
     	List<Block> blocks = new ArrayList<>();
-    	int axis = 0;
-    	switch(face) {
-    	case NORTH:
-    	case SOUTH:
-    		axis = 1;
-    		break;
-    	case EAST:
-    	case WEST:
-    		axis = 2;
-    		break;
-		default:
-			break;
-    	}
+    	int axis = switch(face) {
+    	case NORTH,SOUTH -> 1;
+    	case EAST,WEST -> 2;
+		default -> 0;
+    	};
     	int relativeX = 0, relativeY = 0, relativeZ = 0;
     	switch(axis) {
     	case 0:
@@ -275,15 +249,9 @@ public class Tool {
         for(int rx = relativeX - radius; rx <= relativeX + radius; rx++) {
             for(int rz = relativeZ - radius; rz <= relativeZ + radius; rz++) {
             	switch(axis) {
-            	case 0:
-            		blocks.add(loc.getWorld().getBlockAt(rx, relativeY, rz));
-            		break;
-            	case 1:
-            		blocks.add(loc.getWorld().getBlockAt(rx, rz, relativeY));
-            		break;
-            	case 2:
-            		blocks.add(loc.getWorld().getBlockAt(relativeY, rx, rz));
-            		break;
+            	case 0 -> blocks.add(loc.getWorld().getBlockAt(rx, relativeY, rz));
+            	case 1 -> blocks.add(loc.getWorld().getBlockAt(rx, rz, relativeY));
+            	case 2 -> blocks.add(loc.getWorld().getBlockAt(relativeY, rx, rz));
             	}
             }
         }

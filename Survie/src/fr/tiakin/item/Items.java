@@ -14,7 +14,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.ItemFlag;
 import fr.tiakin.main.Custom;
 
-public enum items {
+public enum Items {
 	
 	//disc
 	melo_disc(new ItemStack(Material.MUSIC_DISC_PIGSTEP) {
@@ -894,7 +894,7 @@ public enum items {
 	static final float hoe_speed = -3f;
 	
 	private ItemStack is;
-    items(ItemStack itemStack){
+    Items(ItemStack itemStack){
         this.is = itemStack;
     }
     public ItemStack getItemStack() {

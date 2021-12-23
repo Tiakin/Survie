@@ -7,8 +7,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
-import fr.tiakin.damage.damageCooldown;
-import fr.tiakin.damage.healCooldown;
+import fr.tiakin.damage.DamageCooldown;
+import fr.tiakin.damage.HealCooldown;
 
 public class Timer extends BukkitRunnable {
 	
@@ -22,14 +22,14 @@ public class Timer extends BukkitRunnable {
 					if(totalShield > 0)
 						p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(Custom.actionShield(shield, totalShield)));
 					if(shield < totalShield) {
-						if(damageCooldown.getPlayerTiming(p) > 5000l)
-							if(healCooldown.isPlayerOnTiming(p)) {
-								if(healCooldown.getPlayerTiming(p) > 1500l) {
+						if(DamageCooldown.getPlayerTiming(p) > 5000l)
+							if(HealCooldown.isPlayerOnTiming(p)) {
+								if(HealCooldown.getPlayerTiming(p) > 1500l) {
 									Custom.setShield(p, shield+1);
-									healCooldown.addPlayerOnTiming(p);
+									HealCooldown.addPlayerOnTiming(p);
 								}
 							}else {
-								healCooldown.addPlayerOnTiming(p);
+								HealCooldown.addPlayerOnTiming(p);
 							}
 					}
 					if(shield > totalShield) {

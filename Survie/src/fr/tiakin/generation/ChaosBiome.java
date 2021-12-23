@@ -5,6 +5,8 @@ import org.bukkit.Chunk;
 import org.bukkit.Server;
 import org.bukkit.craftbukkit.v1_18_R1.CraftServer;
 import org.bukkit.craftbukkit.v1_18_R1.CraftWorld;
+import org.bukkit.util.noise.SimplexNoiseGenerator;
+
 import net.minecraft.core.BlockPosition;
 import net.minecraft.core.IRegistry;
 import net.minecraft.core.IRegistryWritable;
@@ -15,10 +17,11 @@ import net.minecraft.world.level.World;
 import net.minecraft.world.level.biome.BiomeBase;
 import net.minecraft.world.level.biome.BiomeFog;
 import net.minecraft.world.level.biome.BiomeFog.GrassColor;
-import net.minecraft.world.level.levelgen.synth.NoiseGenerator3Handler;
 import com.mojang.serialization.Lifecycle;
 
-public class chaosBiome {
+import fr.tiakin.main.Custom;
+
+public class ChaosBiome {
 	
 	static Server server = Bukkit.getServer();
 	static CraftServer craftserver = (CraftServer)server;
@@ -34,7 +37,7 @@ public class chaosBiome {
 		BiomeBase.a newBiome = new BiomeBase.a();
 		newBiome.a(oldbiome.r()); //geographie
 		newBiome.a(oldbiome.c()); //precipitation
-		newBiome.a(BiomeBase.TemperatureModifier.a); //BiomeBase.TemperatureModifier.a will make your biome normal, BiomeBase.TemperatureModifier.b will make your biome frozen
+		newBiome.a(BiomeBase.TemperatureModifier.a); //BiomeBase.TemperatureModifier.a = normal
 		newBiome.a(oldbiome.e()); //setting generation
 		newBiome.a(oldbiome.b()); //setting mob
 		newBiome.a(oldbiome.i()); //temperature
@@ -43,7 +46,7 @@ public class chaosBiome {
 		BiomeFog.a newFog = new BiomeFog.a();
 		newFog.a(GrassColor.a); //je sais pas frere(obligé)
 		
-		int darkRed = Integer.parseInt("983D21",16); //Dont forget to remove the # in front of the hex color code
+		int darkRed = Integer.parseInt("983D21",16); 
 		int black = Integer.parseInt("260E06",16);
 		//Necessary values; removing them will break your biome
 		newFog.a(black); //fogcolor
@@ -116,7 +119,7 @@ public class chaosBiome {
     
     
     
-	public static void generateBiome(Chunk chunk, NoiseGenerator3Handler islandnoise) {
+	public static void generateBiome(Chunk chunk, SimplexNoiseGenerator noise) {
 		World w = ((CraftWorld)chunk.getWorld()).getHandle();
 		for (int x = 0; x <= 15; x++) {
             for (int z = 0; z <= 15; z++) {
@@ -124,7 +127,7 @@ public class chaosBiome {
             	int j = chunk.getZ() * 16 + z;
             	int i2 = i >> 2;
             	int j2 = j >> 2;
-            	if(net.minecraft.world.level.biome.WorldChunkManagerTheEnd.a(islandnoise, i2*2+1, j2*2+1) > 40) {
+            	if(Custom.noise(noise,i2*2+1, j2*2+1) > 0) {
             		for(int y = 0; y <= chunk.getWorld().getMaxHeight(); y++) {
                 		setBiome(i, y, j, w, getbase("survie:chaos"));
                 	}

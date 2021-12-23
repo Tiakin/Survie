@@ -7,17 +7,17 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.tiakin.main.Custom;
-import fr.tiakin.main.main;
+import fr.tiakin.main.Main;
 
-public class damageEvent implements Listener {
+public class DamageEvent implements Listener {
 	
 	@EventHandler
     public void damage(EntityDamageEvent e) {
 		if(e.getEntity() instanceof Player) {
 			Player p = (Player) e.getEntity();
-			damageCooldown.addPlayerOnTiming(p);
+			DamageCooldown.addPlayerOnTiming(p);
 			float rest = (float) (  ( (double) Custom.getShield(p) )  -  ( e.getDamage() / 5 )  );
-			JavaPlugin.getPlugin(main.class).getLogger().info(rest+" "+e.getDamage()+" "+e.getFinalDamage());
+			JavaPlugin.getPlugin(Main.class).getLogger().info(rest+" "+e.getDamage()+" "+e.getFinalDamage());
 			if(rest < 0) {
 				Custom.setShield(p, 0);
 				rest *= 5;
@@ -27,7 +27,7 @@ public class damageEvent implements Listener {
 				rest = 0;
 			}
 			e.setDamage(rest);
-			JavaPlugin.getPlugin(main.class).getLogger().info(e.getDamage()+" "+e.getFinalDamage());
+			JavaPlugin.getPlugin(Main.class).getLogger().info(e.getDamage()+" "+e.getFinalDamage());
 		}
 	}
 }

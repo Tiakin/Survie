@@ -8,10 +8,10 @@ import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import fr.tiakin.item.items;
+import fr.tiakin.item.Items;
 import fr.tiakin.main.Custom;
 
-public enum blocks {
+public enum Blocks {
 		
 	
 		//enderite
@@ -66,7 +66,7 @@ public enum blocks {
 			Material.MUSHROOM_STEM,
 			"pickaxe","enderite",
 			55,
-			false,items.discordium_chunk.getItemStack(),
+			false,Items.discordium_chunk.getItemStack(),
 			true,false,false,false,false,true,
 			Material.STONE
 		),
@@ -104,7 +104,7 @@ public enum blocks {
 			Material.MUSHROOM_STEM,
 			"pickaxe","discordium",
 			60,
-			false,items.blazite_chunk.getItemStack(),
+			false,Items.blazite_chunk.getItemStack(),
 			false,false,false,true,false,true,
 			Material.STONE
 		),
@@ -236,7 +236,7 @@ public enum blocks {
 			Material.MUSHROOM_STEM,
 			"pickaxe","manyullyn",
 			110,
-			false,items.chaos_chunk.getItemStack(),
+			false,Items.chaos_chunk.getItemStack(),
 			false,false,true,true,false,false,
 			Material.STONE
 		),
@@ -349,7 +349,7 @@ public enum blocks {
 		private Material sound;
 		
 		
-	    blocks(ItemStack itemStack,Material material, String tool, String tier,float hardness, boolean selfdrop, ItemStack drop, boolean up, boolean down, boolean north, boolean south, boolean east, boolean west, Material sound){
+	    Blocks(ItemStack itemStack,Material material, String tool, String tier,float hardness, boolean selfdrop, ItemStack drop, boolean up, boolean down, boolean north, boolean south, boolean east, boolean west, Material sound){
 	    	
 	        this.is = itemStack; // la playerhead de l'item qui permet de poser le block ou de l'utiliser en tant que recipe c;
 	        

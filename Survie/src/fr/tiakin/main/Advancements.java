@@ -20,37 +20,37 @@ import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.ItemStack;
 import com.google.common.io.Resources;
 
-import fr.tiakin.block.blocks;
-import fr.tiakin.item.items;
+import fr.tiakin.block.Blocks;
+import fr.tiakin.item.Items;
 
 public class Advancements implements Listener {
 	public void loadAdvancements(){
 		LinkedList<NamespacedKey> list = new LinkedList<>();
-		list.add(new NamespacedKey(main.getPlugin(main.class), "farmingroot"));
-		list.add(new NamespacedKey(main.getPlugin(main.class), "farming1"));
-		list.add(new NamespacedKey(main.getPlugin(main.class), "farming2"));
-		list.add(new NamespacedKey(main.getPlugin(main.class), "farming3"));
-		list.add(new NamespacedKey(main.getPlugin(main.class), "farming4"));
-		list.add(new NamespacedKey(main.getPlugin(main.class), "farming5"));
-		list.add(new NamespacedKey(main.getPlugin(main.class), "farming6"));
-		list.add(new NamespacedKey(main.getPlugin(main.class), "farming7"));
-		list.add(new NamespacedKey(main.getPlugin(main.class), "farming8"));
-		list.add(new NamespacedKey(main.getPlugin(main.class), "farming9"));
-		list.add(new NamespacedKey(main.getPlugin(main.class), "farming10"));
-		list.add(new NamespacedKey(main.getPlugin(main.class), "farming11"));
-		list.add(new NamespacedKey(main.getPlugin(main.class), "farming12"));
-		list.add(new NamespacedKey(main.getPlugin(main.class), "miningroot"));
-		list.add(new NamespacedKey(main.getPlugin(main.class), "mining1"));
-		list.add(new NamespacedKey(main.getPlugin(main.class), "mining2"));
-		list.add(new NamespacedKey(main.getPlugin(main.class), "mining3"));
-		list.add(new NamespacedKey(main.getPlugin(main.class), "mining4"));
-		list.add(new NamespacedKey(main.getPlugin(main.class), "mining5"));
-		list.add(new NamespacedKey(main.getPlugin(main.class), "mining6"));
-		list.add(new NamespacedKey(main.getPlugin(main.class), "adventureroot"));
-		list.add(new NamespacedKey(main.getPlugin(main.class), "adventure1"));
-		list.add(new NamespacedKey(main.getPlugin(main.class), "adventure2"));
-		list.add(new NamespacedKey(main.getPlugin(main.class), "adventure3"));
-		list.add(new NamespacedKey(main.getPlugin(main.class), "adventure4"));
+		list.add(new NamespacedKey(Main.getPlugin(Main.class), "farmingroot"));
+		list.add(new NamespacedKey(Main.getPlugin(Main.class), "farming1"));
+		list.add(new NamespacedKey(Main.getPlugin(Main.class), "farming2"));
+		list.add(new NamespacedKey(Main.getPlugin(Main.class), "farming3"));
+		list.add(new NamespacedKey(Main.getPlugin(Main.class), "farming4"));
+		list.add(new NamespacedKey(Main.getPlugin(Main.class), "farming5"));
+		list.add(new NamespacedKey(Main.getPlugin(Main.class), "farming6"));
+		list.add(new NamespacedKey(Main.getPlugin(Main.class), "farming7"));
+		list.add(new NamespacedKey(Main.getPlugin(Main.class), "farming8"));
+		list.add(new NamespacedKey(Main.getPlugin(Main.class), "farming9"));
+		list.add(new NamespacedKey(Main.getPlugin(Main.class), "farming10"));
+		list.add(new NamespacedKey(Main.getPlugin(Main.class), "farming11"));
+		list.add(new NamespacedKey(Main.getPlugin(Main.class), "farming12"));
+		list.add(new NamespacedKey(Main.getPlugin(Main.class), "miningroot"));
+		list.add(new NamespacedKey(Main.getPlugin(Main.class), "mining1"));
+		list.add(new NamespacedKey(Main.getPlugin(Main.class), "mining2"));
+		list.add(new NamespacedKey(Main.getPlugin(Main.class), "mining3"));
+		list.add(new NamespacedKey(Main.getPlugin(Main.class), "mining4"));
+		list.add(new NamespacedKey(Main.getPlugin(Main.class), "mining5"));
+		list.add(new NamespacedKey(Main.getPlugin(Main.class), "mining6"));
+		list.add(new NamespacedKey(Main.getPlugin(Main.class), "adventureroot"));
+		list.add(new NamespacedKey(Main.getPlugin(Main.class), "adventure1"));
+		list.add(new NamespacedKey(Main.getPlugin(Main.class), "adventure2"));
+		list.add(new NamespacedKey(Main.getPlugin(Main.class), "adventure3"));
+		list.add(new NamespacedKey(Main.getPlugin(Main.class), "adventure4"));
 		
 		try {
 			createadvancements(list);
@@ -60,7 +60,7 @@ public class Advancements implements Listener {
 	}
 	
 	private String getResourceFileAsString(String fileName) throws IOException {
-		return Resources.toString(main.class.getClassLoader().getResource(fileName),StandardCharsets.UTF_8);
+		return Resources.toString(Main.class.getClassLoader().getResource(fileName),StandardCharsets.UTF_8);
 	    
 	}
 	
@@ -82,18 +82,18 @@ public class Advancements implements Listener {
     public void onPlayerEat(PlayerItemConsumeEvent event){
     	Player p = event.getPlayer();
 		ItemStack is = event.getItem();
-    	if(Custom.isSimilar(items.diamond_apple.getItemStack(), is))
-			grantAdvancement(p, new NamespacedKey(main.getPlugin(main.class), "farming3"));
-    	else if(Custom.isSimilar(items.enchanted_diamond_apple.getItemStack(), is))
-			grantAdvancement(p, new NamespacedKey(main.getPlugin(main.class), "farming4"));
-    	else if(Custom.isSimilar(items.emerald_apple.getItemStack(), is))
-			grantAdvancement(p, new NamespacedKey(main.getPlugin(main.class), "farming5"));
-    	else if(Custom.isSimilar(items.enchanted_emerald_apple.getItemStack(), is))
-			grantAdvancement(p, new NamespacedKey(main.getPlugin(main.class), "farming6"));
+    	if(Custom.isSimilar(Items.diamond_apple.getItemStack(), is))
+			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming3"));
+    	else if(Custom.isSimilar(Items.enchanted_diamond_apple.getItemStack(), is))
+			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming4"));
+    	else if(Custom.isSimilar(Items.emerald_apple.getItemStack(), is))
+			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming5"));
+    	else if(Custom.isSimilar(Items.enchanted_emerald_apple.getItemStack(), is))
+			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming6"));
     	else if(is.getType().equals(Material.GOLDEN_APPLE))
-			grantAdvancement(p, new NamespacedKey(main.getPlugin(main.class), "farming1"));
+			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming1"));
     	else if(is.getType().equals(Material.ENCHANTED_GOLDEN_APPLE))
-			grantAdvancement(p, new NamespacedKey(main.getPlugin(main.class), "farming2"));
+			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming2"));
     }
     
     @EventHandler
@@ -101,18 +101,18 @@ public class Advancements implements Listener {
     	if(event.getWhoClicked() instanceof Player) {
     		Player p = (Player) event.getWhoClicked();
     		ItemStack is = event.getCurrentItem();
-    		if(Custom.isSimilar(items.discordium_hoe.getItemStack(), is))
-    			grantAdvancement(p, new NamespacedKey(main.getPlugin(main.class), "farming8"));
-    		else if(Custom.isSimilar(items.blazite_hoe.getItemStack(), is))
-    			grantAdvancement(p, new NamespacedKey(main.getPlugin(main.class), "farming9"));
-    		else if(Custom.isSimilar(items.manyullyn_hoe.getItemStack(), is))
-    			grantAdvancement(p, new NamespacedKey(main.getPlugin(main.class), "farming10"));
-    		else if(Custom.isSimilar(items.chaos_hoe.getItemStack(), is))
-    			grantAdvancement(p, new NamespacedKey(main.getPlugin(main.class), "farming11"));
-    		else if(Custom.isSimilar(items.infinity_hoe.getItemStack(), is))
-    			grantAdvancement(p, new NamespacedKey(main.getPlugin(main.class), "farming12"));
-    		else if(Custom.isSimilar(blocks.infinity_block.getItemStack(), is))
-    			grantAdvancement(p, new NamespacedKey(main.getPlugin(main.class), "mining6"));
+    		if(Custom.isSimilar(Items.discordium_hoe.getItemStack(), is))
+    			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming8"));
+    		else if(Custom.isSimilar(Items.blazite_hoe.getItemStack(), is))
+    			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming9"));
+    		else if(Custom.isSimilar(Items.manyullyn_hoe.getItemStack(), is))
+    			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming10"));
+    		else if(Custom.isSimilar(Items.chaos_hoe.getItemStack(), is))
+    			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming11"));
+    		else if(Custom.isSimilar(Items.infinity_hoe.getItemStack(), is))
+    			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming12"));
+    		else if(Custom.isSimilar(Blocks.infinity_block.getItemStack(), is))
+    			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "mining6"));
     	}
     }
     
@@ -121,10 +121,10 @@ public class Advancements implements Listener {
     	if(event.getWhoClicked() instanceof Player) {
     		Player p = (Player) event.getWhoClicked();
     		ItemStack is = event.getCurrentItem();
-    		if(Custom.isSimilar(items.enderite_hoe.getItemStack(), is))
-    			grantAdvancement(p, new NamespacedKey(main.getPlugin(main.class), "farming7"));
-    		else if(Custom.isSimilar(items.manyullyn_ingot.getItemStack(), is))
-    			grantAdvancement(p, new NamespacedKey(main.getPlugin(main.class), "mining4"));
+    		if(Custom.isSimilar(Items.enderite_hoe.getItemStack(), is))
+    			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming7"));
+    		else if(Custom.isSimilar(Items.manyullyn_ingot.getItemStack(), is))
+    			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "mining4"));
     	}
     }
 
@@ -134,15 +134,15 @@ public class Advancements implements Listener {
     		Player p = (Player) event.getEntity();
     		ItemStack is = event.getItem().getItemStack();
 	    	if(is.getType().equals(Material.APPLE))
-	    		grantAdvancement(p, new NamespacedKey(main.getPlugin(main.class), "farmingroot"));
-	    	else if(Custom.isSimilar(blocks.enderite_ore.getItemStack(), is))
-	    		grantAdvancement(p, new NamespacedKey(main.getPlugin(main.class), "mining1"));
-	    	else if(Custom.isSimilar(items.discordium_chunk.getItemStack(), is))
-	    		grantAdvancement(p, new NamespacedKey(main.getPlugin(main.class), "mining2"));
-	    	else if(Custom.isSimilar(items.blazite_chunk.getItemStack(), is))
-	    		grantAdvancement(p, new NamespacedKey(main.getPlugin(main.class), "mining3"));
-	    	else if(Custom.isSimilar(items.chaos_chunk.getItemStack(), is))
-	    		grantAdvancement(p, new NamespacedKey(main.getPlugin(main.class), "mining5"));
+	    		grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farmingroot"));
+	    	else if(Custom.isSimilar(Blocks.enderite_ore.getItemStack(), is))
+	    		grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "mining1"));
+	    	else if(Custom.isSimilar(Items.discordium_chunk.getItemStack(), is))
+	    		grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "mining2"));
+	    	else if(Custom.isSimilar(Items.blazite_chunk.getItemStack(), is))
+	    		grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "mining3"));
+	    	else if(Custom.isSimilar(Items.chaos_chunk.getItemStack(), is))
+	    		grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "mining5"));
 	    
 	    }
     }

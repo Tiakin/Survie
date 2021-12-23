@@ -24,7 +24,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import fr.tiakin.item.Tool;
 import fr.tiakin.main.Custom;
-import fr.tiakin.main.main;
+import fr.tiakin.main.Main;
 import net.minecraft.core.BlockPosition;
 
 public class BreakListeners implements Listener {
@@ -33,7 +33,7 @@ public class BreakListeners implements Listener {
     public void onEffectExpire(EntityPotionEffectEvent e) {
     	if(e.getEntity() instanceof Player && e.getCause().equals(Cause.EXPIRATION) && e.getOldEffect().getType().equals(PotionEffectType.SLOW_DIGGING)) {
     		addSlowDig(((Player)e.getEntity()));
-    		JavaPlugin.getPlugin(main.class).getLogger().info("re-effect");
+    		JavaPlugin.getPlugin(Main.class).getLogger().info("re-effect");
     	}
     }
     
@@ -70,7 +70,7 @@ public class BreakListeners implements Listener {
     	}
     	if(hardness < Tool.getHardness(event.getBlock()))
     		hardness = Tool.getHardness(event.getBlock());
-    	main.brokenBlocksService.createBrokenBlock(event.getBlock(), hardness, (Tool.isHammer(event.getItemInHand())) ? squareBlock.stream().filter(b -> Tool.canHarvest(b, event.getItemInHand()) && Tool.isBestTool(b, event.getItemInHand())) : null);
+    	Main.brokenBlocksService.createBrokenBlock(event.getBlock(), hardness, (Tool.isHammer(event.getItemInHand())) ? squareBlock.stream().filter(b -> Tool.canHarvest(b, event.getItemInHand()) && Tool.isBestTool(b, event.getItemInHand())) : null);
     	addSlowDig(event.getPlayer());
     }
     
@@ -81,11 +81,11 @@ public class BreakListeners implements Listener {
     	BlockPosition b = event.getBlockPosition();
     	// u v w ?
         Location loc = new Location(w,b.u(),b.v(),b.w());
-        BrokenBlock a = main.brokenBlocksService.getBrokenBlock(loc);
-        JavaPlugin.getPlugin(main.class).getLogger().info("aborted");
+        BrokenBlock a = Main.brokenBlocksService.getBrokenBlock(loc);
+        JavaPlugin.getPlugin(Main.class).getLogger().info("aborted");
         
         if(a.getDamage() != 0 || a.getHardeness() == 0 || a.isBroken()) {
-        	JavaPlugin.getPlugin(main.class).getLogger().info("really aborted");
+        	JavaPlugin.getPlugin(Main.class).getLogger().info("really aborted");
 	        resetpotion(p);
 	        a.destroyBlockObject();
         }
@@ -96,12 +96,12 @@ public class BreakListeners implements Listener {
     	Player p = e.getPlayer();
     	Block b = e.getBlock();
     	if(!e.getPlayer().getGameMode().equals(GameMode.CREATIVE)) {
-	    	blocks block = Custom.getCustomBlock(b);
+	    	Blocks block = Custom.getCustomBlock(b);
 	    	if(block != null) {
 	    		e.setDropItems(false);
 	    		Tool.breakblock(b, p, block);
 	    	}
-	    	if(main.brokenBlocksService.isBrokenBlock(b.getLocation())) {
+	    	if(Main.brokenBlocksService.isBrokenBlock(b.getLocation())) {
 	    		BrokenBlocksService.removeBrokenBlock(b.getLocation());
 	    	}
     	}
@@ -113,7 +113,7 @@ public class BreakListeners implements Listener {
         Block block = player.getTargetBlockExact(5);
         if(block == null) return;
         Location blockPosition = block.getLocation();
-        if(!main.brokenBlocksService.isBrokenBlock(blockPosition)) return;
+        if(!Main.brokenBlocksService.isBrokenBlock(blockPosition)) return;
         
         ItemStack itemStack = player.getInventory().getItemInMainHand();
         
@@ -122,71 +122,71 @@ public class BreakListeners implements Listener {
         double distanceZ = blockPosition.getZ() - player.getLocation().getZ();
 
         if(distanceX * distanceX + distanceY * distanceY + distanceZ * distanceZ >= 1024.0D) return;
-        main.brokenBlocksService.getBrokenBlock(blockPosition).incrementDamage(player, Tool.getToolSpeed(itemStack));
+        Main.brokenBlocksService.getBrokenBlock(blockPosition).incrementDamage(player, Tool.getToolSpeed(itemStack));
     }
 
 	public static void resetpotion(Player breaker) {
-		JavaPlugin.getPlugin(main.class).getLogger().info("Reset");
+		JavaPlugin.getPlugin(Main.class).getLogger().info("Reset");
     	if(breaker.hasPotionEffect(PotionEffectType.SLOW_DIGGING)) {
         	PotionEffect p = breaker.getPotionEffect(PotionEffectType.SLOW_DIGGING);
         	switch(p.getAmplifier()) {
         	case -1:
         		removeSlowDig(breaker);
         		breaker.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, Integer.MAX_VALUE , -1, false, false));
-        		JavaPlugin.getPlugin(main.class).getLogger().info("R -1 = -1 "+p.getDuration());
+        		JavaPlugin.getPlugin(Main.class).getLogger().info("R -1 = -1 "+p.getDuration());
         		break;
         	case 3:
         		removeSlowDig(breaker);
         		breaker.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, p.getDuration(), 0, false, true));
-        		JavaPlugin.getPlugin(main.class).getLogger().info("R 3 > 0 "+p.getDuration());
+        		JavaPlugin.getPlugin(Main.class).getLogger().info("R 3 > 0 "+p.getDuration());
         		break;
         	case 4:
         		removeSlowDig(breaker);
         		breaker.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, p.getDuration(), 1, false, true));
-        		JavaPlugin.getPlugin(main.class).getLogger().info("R 4 > 1 "+p.getDuration());
+        		JavaPlugin.getPlugin(Main.class).getLogger().info("R 4 > 1 "+p.getDuration());
         		break;
         	case 5:
         		removeSlowDig(breaker);
         		breaker.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, p.getDuration(), 2, false, true));
-        		JavaPlugin.getPlugin(main.class).getLogger().info("R 5 > 2 "+p.getDuration());
+        		JavaPlugin.getPlugin(Main.class).getLogger().info("R 5 > 2 "+p.getDuration());
         		break;
         	}
         } else {
         	breaker.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, Integer.MAX_VALUE , -1, false, false));
-    		JavaPlugin.getPlugin(main.class).getLogger().info("R(impossible) X > -1 ");
+    		JavaPlugin.getPlugin(Main.class).getLogger().info("R(impossible) X > -1 ");
         }
     }
 	
 	public static void addSlowDig(Player player){
-		JavaPlugin.getPlugin(main.class).getLogger().info("Add");
+		JavaPlugin.getPlugin(Main.class).getLogger().info("Add");
         if(player.hasPotionEffect(PotionEffectType.SLOW_DIGGING)) {
         	PotionEffect p = player.getPotionEffect(PotionEffectType.SLOW_DIGGING);
         	switch(p.getAmplifier()) {
         	case -1:
         		removeSlowDig(player);
         		player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, Integer.MAX_VALUE , -1, false, false));
-        		JavaPlugin.getPlugin(main.class).getLogger().info("A -1 = -1");
+        		JavaPlugin.getPlugin(Main.class).getLogger().info("A -1 = -1");
         		break;
         	case 0:
         		removeSlowDig(player);
         		player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, p.getDuration(), 3, false, true));
-        		JavaPlugin.getPlugin(main.class).getLogger().info("A 0 > 3");
+        		JavaPlugin.getPlugin(Main.class).getLogger().info("A 0 > 3");
         		break;
         	case 1:
         		removeSlowDig(player);
         		player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, p.getDuration(), 4, false, true));
-        		JavaPlugin.getPlugin(main.class).getLogger().info("A 1 > 4");
+        		JavaPlugin.getPlugin(Main.class).getLogger().info("A 1 > 4");
         		break;
         	case 2:
         		removeSlowDig(player);
         		player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, p.getDuration(), 5, false, true));
-        		JavaPlugin.getPlugin(main.class).getLogger().info("A 1 > 5");
+        		JavaPlugin.getPlugin(Main.class).getLogger().info("A 1 > 5");
         		break;
         	
         	}
         } else {
         	player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, Integer.MAX_VALUE , -1, false, false));
-        	JavaPlugin.getPlugin(main.class).getLogger().info("A X > -1");
+        	JavaPlugin.getPlugin(Main.class).getLogger().info("A X > -1");
         }
     }
 	

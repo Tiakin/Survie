@@ -11,9 +11,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffectType;
 
-import fr.tiakin.block.nms.nmsHandler;
+import fr.tiakin.block.nms.NmsHandler;
 import fr.tiakin.item.Tool;
-import fr.tiakin.main.main;
+import fr.tiakin.main.Main;
 
 public class BrokenBlock {
 	private float hardeness;
@@ -82,11 +82,11 @@ public class BrokenBlock {
 
     public void breakBlock(Player breaker){
         destroyBlockObject();
-        nmsHandler.playBlockSound(block);
+        NmsHandler.playBlockSound(block);
         if(breaker == null) return;
         if(!isInstantBreak())
-        	Bukkit.getScheduler().runTaskAsynchronously(JavaPlugin.getPlugin(main.class), () -> BreakCooldown.addPlayerOnCooldown(breaker));
-        nmsHandler.sendBreakBlock(breaker, block);
+        	Bukkit.getScheduler().runTaskAsynchronously(JavaPlugin.getPlugin(Main.class), () -> BreakCooldown.addPlayerOnCooldown(breaker));
+        NmsHandler.sendBreakBlock(breaker, block);
         BreakListeners.resetpotion(breaker);
         
     }
@@ -102,7 +102,7 @@ public class BrokenBlock {
     }
 
     public void sendBreakPacket(int animation){
-        nmsHandler.sendBreakPacket(animation, block);
+        NmsHandler.sendBreakPacket(animation, block);
     }
 
 	public Boolean isInstantBreak() {

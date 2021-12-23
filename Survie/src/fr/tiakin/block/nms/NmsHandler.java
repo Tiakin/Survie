@@ -11,7 +11,7 @@ import fr.tiakin.item.Tool;
 import net.minecraft.core.BlockPosition;
 import net.minecraft.network.protocol.game.PacketPlayOutBlockBreakAnimation;
 
-public class nmsHandler {
+public class NmsHandler {
 
     public static void sendBreakPacket(int animation, Block block) {
         ((CraftServer) Bukkit.getServer()).getHandle().a(null, block.getX(), block.getY(), block.getZ(), 120,

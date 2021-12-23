@@ -7,16 +7,16 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import fr.tiakin.main.main;
+import fr.tiakin.main.Main;
 
 public class BreakCooldown {
 	
 	private static Set<Player> cooldownlist = new HashSet<>();
 	
 	public static void addPlayerOnCooldown(Player p){
-    	JavaPlugin.getPlugin(main.class).getLogger().info("cooldown :x");
+    	JavaPlugin.getPlugin(Main.class).getLogger().info("cooldown :x");
     	cooldownlist.add(p);
-    	Bukkit.getScheduler().runTaskLater(JavaPlugin.getPlugin(main.class), new Runnable() {
+    	Bukkit.getScheduler().runTaskLater(JavaPlugin.getPlugin(Main.class), new Runnable() {
     		  @Override
     		  public void run() {
     			  removePlayerOnCooldown(p);
@@ -27,7 +27,7 @@ public class BreakCooldown {
     public static void removePlayerOnCooldown(Player p){
     	if(isPlayerOnCooldown(p)) {
     		cooldownlist.remove(p);
-    		JavaPlugin.getPlugin(main.class).getLogger().info("cooldown enlever :)");
+    		JavaPlugin.getPlugin(Main.class).getLogger().info("cooldown enlever :)");
     	}
     }
     

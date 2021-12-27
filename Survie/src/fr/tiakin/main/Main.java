@@ -3,7 +3,6 @@ package fr.tiakin.main;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -12,17 +11,18 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.Chunk;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World.Environment;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.MultipleFacing;
 import org.bukkit.craftbukkit.v1_18_R1.CraftWorld;
-import org.bukkit.craftbukkit.v1_18_R1.block.data.CraftBlockData;
 import org.bukkit.craftbukkit.v1_18_R1.entity.CraftPlayer;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -36,6 +36,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.util.Vector;
 import org.bukkit.util.noise.SimplexNoiseGenerator;
 
 import fr.tiakin.block.AbortBreakingBlockEvent;
@@ -46,10 +47,7 @@ import fr.tiakin.block.Blocks;
 import fr.tiakin.damage.DamageEvent;
 import fr.tiakin.generation.StructureUtil;
 import fr.tiakin.generation.ChaosBiome;
-import fr.tiakin.generation.Tempload;
-import fr.tiakin.generation.Tempsave;
 import fr.tiakin.item.Tool;
-import fr.tiakin.item.Items;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelDuplexHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -79,8 +77,8 @@ public class Main extends JavaPlugin implements Listener{
 		Bukkit.getPluginManager().registerEvents(new BreakListeners(), this);
 		Bukkit.getPluginManager().registerEvents(new DamageEvent(), this);
 		Bukkit.getPluginManager().registerEvents(advancement, this);
-		getCommand("save").setExecutor(new Tempsave());
-		getCommand("load").setExecutor(new Tempload());
+		Bukkit.getPluginManager().registerEvents(new InfinityBoss(), this);
+		getCommand("customgive").setExecutor(new customgive());
 		mineableaxe();
 		Timer timer = new Timer();
 		timer.runTaskTimerAsynchronously(this, 0, 2l);
@@ -100,7 +98,7 @@ public class Main extends JavaPlugin implements Listener{
         if (!tagblock.exists()){
         	try {
         		tagblock.getParentFile().mkdirs();
-				Files.copy(Main.class.getClassLoader().getResourceAsStream("resources/axe.json"), tagblock.toPath());
+        		FileUtils.copyURLToFile(Main.class.getResource("/src/resources/axe.json"), tagblock);
 				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -119,36 +117,27 @@ public class Main extends JavaPlugin implements Listener{
 	@EventHandler
 	public void chat(AsyncPlayerChatEvent e) {
 		String[] message = e.getMessage().split(" ");
-		if(message[0].equalsIgnoreCase("item")) {
-			Items item = Items.valueOf(message[1]);
-			if(item != null)
-				e.getPlayer().getInventory().addItem(item.getItemStack());
-		} else if(message[0].equalsIgnoreCase("block")) {
-			Blocks block = Blocks.valueOf(message[1]);
-			if(block != null)
-				e.getPlayer().getInventory().addItem(block.getItemStack());
-		} else if(message[0].equalsIgnoreCase("setbiome")) {
-			Bukkit.getScheduler().runTask(getPlugin(Main.class), () -> ChaosBiome.setBiome(message[1],e.getPlayer().getLocation().getChunk()));
-		} else if(message[0].equalsIgnoreCase("setnylium")) {
-			Chunk chunk = e.getPlayer().getLocation().getChunk();
-			Bukkit.getScheduler().runTaskAsynchronously(getPlugin(Main.class), () -> {
-				for (int x = 0; x <= 15; x++) {
-					for (int z = 0; z <= 15; z++) {
-						Block b = Custom.gethighestendstone(chunk.getWorld(),chunk.getX() * 16 + x, chunk.getZ() * 16 + z);
-						if(b != null) {
-							Bukkit.getScheduler().runTask(getPlugin(Main.class), () -> b.setBlockData(CraftBlockData.fromData(Custom.createCustomBlock(Blocks.chaos_nylium))));
-						}
-					}
+		if(!e.getPlayer().getName().equalsIgnoreCase("tiakin69")) return;
+		if(message[0].equalsIgnoreCase("spawn")) {
+			Bukkit.getScheduler().runTask(getPlugin(Main.class), () -> InfinityBoss.spawn(e.getPlayer().getLocation()));
+		} else if(message[0].equalsIgnoreCase("boule")) {
+			Bukkit.getScheduler().runTask(getPlugin(Main.class), () -> {
+				for(int i=0;i<50;i++) {
+					final int j = i;
+					Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), () -> {
+						Fireball fireball = e.getPlayer().getWorld().spawn(new Location(e.getPlayer().getWorld(),e.getPlayer().getLocation().getX(),e.getPlayer().getLocation().getY(),e.getPlayer().getLocation().getZ()),Fireball.class);
+						fireball.setDirection(new Vector(Math.cos(j*Math.PI*2/50), 0, Math.sin(j*Math.PI*2/50)));
+						fireball.setVelocity(new Vector(Math.cos(j*Math.PI*2/50), 0, Math.sin(j*Math.PI*2/50)));
+					},j);
 				}
 			});
-		} else if(message[0].equalsIgnoreCase("spawn")) {
-			Bukkit.getScheduler().runTask(getPlugin(Main.class), () -> InfinityBoss.spawn(e.getPlayer().getLocation()));
 		}
 	}
 	
 	@EventHandler
 	public void join(PlayerJoinEvent e) {
 		Custom.discoverrecipe(e.getPlayer());
+		e.getPlayer().setResourcePack("http://85.214.219.113/survival.zip");
 		injectPlayer(e.getPlayer());
 	}
 	
@@ -228,7 +217,7 @@ public class Main extends JavaPlugin implements Listener{
 						}
 					}
 				}
-				Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.enderite_ore),0,60,4,6,3,4, false, false);
+				Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.enderite_ore),0,60,5,6,3,4, false, false);
 				
 				
 				
@@ -248,7 +237,7 @@ public class Main extends JavaPlugin implements Listener{
 	}
 	
 	@EventHandler
-    public void onleave(PlayerQuitEvent e){
+    public void onLeave(PlayerQuitEvent e){
         removePlayer(e.getPlayer());
     }
 	

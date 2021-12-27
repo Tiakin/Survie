@@ -143,7 +143,7 @@ public class BrokenBlock {
         		break;
         	}
     	
-        if(from.getLocation().getBlock().isLiquid() && !from.getInventory().getHelmet().containsEnchantment(Enchantment.WATER_WORKER))
+        if(from.getLocation().getBlock().isLiquid() && (!(from.getInventory().getHelmet() != null) || !(from.getInventory().getHelmet().hasItemMeta()) || !(from.getInventory().getHelmet().getItemMeta().hasEnchants()) || !from.getInventory().getHelmet().containsEnchantment(Enchantment.WATER_WORKER)))
         	speedMultiplier /= 5;
         if(from.isFlying())
         	speedMultiplier /= 5;

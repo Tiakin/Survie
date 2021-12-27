@@ -1,0 +1,20 @@
+{
+    "display": {
+        "title": {
+            "text": "Getting Raided Tonight"
+        },
+        "description": {
+            "text": "Craft Pillaged"
+        },
+        "icon": {
+            "item": "minecraft:music_disc_pigstep",
+            "nbt": "{display:{Lore:['[{\"text\":\"JamiesName - Pillaged\"}]']}}"
+        },
+        "frame": "challenge",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": true
+    },
+    "criteria": {"impossible":{"trigger":"minecraft:impossible"}}
+    "parent": "survie:eastereggroot"
+}

@@ -15,7 +15,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.SmithItemEvent;
+import org.bukkit.event.player.PlayerAdvancementDoneEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.ItemStack;
 import com.google.common.io.Resources;
@@ -60,7 +62,7 @@ public class Advancements implements Listener {
 	}
 	
 	private String getResourceFileAsString(String fileName) throws IOException {
-		return Resources.toString(Main.class.getClassLoader().getResource(fileName),StandardCharsets.UTF_8);
+		return Resources.toString(Main.class.getResource(fileName),StandardCharsets.UTF_8);
 	    
 	}
 	
@@ -74,7 +76,7 @@ public class Advancements implements Listener {
 			  }
 		  }
 		  for(NamespacedKey key : list) { 
-			  Bukkit.getUnsafe().loadAdvancement(key,getResourceFileAsString("resources/advancements/"+key.getKey()+".txt"));
+			  Bukkit.getUnsafe().loadAdvancement(key,getResourceFileAsString("/src/resources/advancements/"+key.getKey()+".txt"));
 		  }
 	}
 
@@ -111,8 +113,20 @@ public class Advancements implements Listener {
     			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming11"));
     		else if(Custom.isSimilar(Items.infinity_hoe.getItemStack(), is))
     			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming12"));
+    		else if(is.getType() == Material.NETHERITE_INGOT)
+    			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "miningroot"));
     		else if(Custom.isSimilar(Blocks.infinity_block.getItemStack(), is))
     			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "mining6"));
+    		else if(Custom.isSimilar(Items.melo_disc.getItemStack(), is))
+    			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "easteregg1"));
+    		else if(Custom.isSimilar(Items.moonlight_disc.getItemStack(), is))
+    			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "easteregg2"));
+    		else if(Custom.isSimilar(Items.ice_disc.getItemStack(), is))
+    			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "easteregg3"));
+    		else if(Custom.isSimilar(Items.pillaged_disc.getItemStack(), is))
+    			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "easteregg4"));
+    		else if(Custom.isSimilar(Items.shulk_disc.getItemStack(), is))
+    			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "easteregg5"));
     	}
     }
     
@@ -146,10 +160,23 @@ public class Advancements implements Listener {
 	    
 	    }
     }
+    @EventHandler
+    public void onInventoryClick(InventoryClickEvent event){
+    	Player p = (Player) event.getWhoClicked();
+    	ItemStack is = event.getCurrentItem();
+    	if(is.getType().equals(Material.MUSIC_DISC_PIGSTEP))
+    		grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "eastereggroot"));
+    		
+    }
     
     public void grantAdvancement(Player player,NamespacedKey key) {
     	AdvancementProgress progress = player.getAdvancementProgress(Bukkit.getAdvancement(key));
     	for(String criteria : progress.getRemainingCriteria())
     	    progress.awardCriteria(criteria);
+    }
+    
+    @EventHandler
+    public void onAdvancementGrant(PlayerAdvancementDoneEvent event){
+    	Custom.discoverrecipe(event.getPlayer());
     }
 }

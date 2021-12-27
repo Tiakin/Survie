@@ -53,6 +53,12 @@ public class Advancements implements Listener {
 		list.add(new NamespacedKey(Main.getPlugin(Main.class), "adventure2"));
 		list.add(new NamespacedKey(Main.getPlugin(Main.class), "adventure3"));
 		list.add(new NamespacedKey(Main.getPlugin(Main.class), "adventure4"));
+		list.add(new NamespacedKey(Main.getPlugin(Main.class), "eastereggroot"));
+		list.add(new NamespacedKey(Main.getPlugin(Main.class), "easteregg1"));
+		list.add(new NamespacedKey(Main.getPlugin(Main.class), "easteregg2"));
+		list.add(new NamespacedKey(Main.getPlugin(Main.class), "easteregg3"));
+		list.add(new NamespacedKey(Main.getPlugin(Main.class), "easteregg4"));
+		list.add(new NamespacedKey(Main.getPlugin(Main.class), "easteregg5"));
 		
 		try {
 			createadvancements(list);
@@ -164,6 +170,7 @@ public class Advancements implements Listener {
     public void onInventoryClick(InventoryClickEvent event){
     	Player p = (Player) event.getWhoClicked();
     	ItemStack is = event.getCurrentItem();
+    	if(is == null) return;
     	if(is.getType().equals(Material.MUSIC_DISC_PIGSTEP))
     		grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "eastereggroot"));
     		

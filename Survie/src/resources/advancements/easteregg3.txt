@@ -15,6 +15,6 @@
         "announce_to_chat": true,
         "hidden": true
     },
-    "criteria": {"impossible":{"trigger":"minecraft:impossible"}}
+    "criteria": {"impossible":{"trigger":"minecraft:impossible"}},
     "parent": "survie:eastereggroot"
 }

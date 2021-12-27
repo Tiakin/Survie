@@ -122,7 +122,6 @@ public class InfinityBoss implements Listener {
 			        bar.setVisible(false);
 			        cancel();
 			       }
-					// TODO Auto-generated method stub
 					
 				}
 		}.runTaskTimerAsynchronously(Main.getPlugin(Main.class), 2, 2);
@@ -146,7 +145,7 @@ public class InfinityBoss implements Listener {
 				if(i == 4) {
 					e.setCancelled(true);
 					p.sendMessage("§dVous avez été protéger par le chaos !");
-					for(Block b : Tool.getSquare(p.getLocation().add(0, -1, 0),BlockFace.DOWN,3)) {
+					for(Block b : Tool.getSquare(p.getLocation().add(0, -1, 0),BlockFace.DOWN,1)) {
 						BlockPosition bp = new BlockPosition(b.getX(),b.getY(),b.getZ());
 						((CraftWorld) e.getEntity().getWorld()).getHandle().l(bp).a(bp, Custom.createCustomBlock(Blocks.chaos_nylium), true);
 					}

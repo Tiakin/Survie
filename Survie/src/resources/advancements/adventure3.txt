@@ -7,7 +7,7 @@
             "text": "Kill ERROR303"
         },
         "icon": {
-            "item": "minecraft:netherite_sword",
+            "item": "minecraft:netherite_ingot",
             "nbt": "{display:{Lore:['[{\"text\":\"Infinity Ingot\"}]']}}"
         },
         "frame": "challenge",

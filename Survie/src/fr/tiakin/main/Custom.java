@@ -117,7 +117,7 @@ public class Custom implements Listener {
         key = new NamespacedKey(Main.getPlugin(Main.class), "shulk_disc");
 		recipe.get(0).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.shulk_disc.getItemStack());
-        shapedrecipe.shape("OIO","INI","OIO");
+        shapedrecipe.shape("OSO","SNS","OSO");
         shapedrecipe.setIngredient('O', Material.OBSIDIAN);
         shapedrecipe.setIngredient('S', Material.SHULKER_SHELL);
         shapedrecipe.setIngredient('N', Material.NETHER_STAR);

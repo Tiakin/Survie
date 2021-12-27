@@ -35,6 +35,33 @@ public enum Items {
 			this.setItemMeta(im);
 		}
 	}),
+	ice_disc(new ItemStack(Material.MUSIC_DISC_PIGSTEP) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+""+ChatColor.AQUA+"Music Disc");
+			im.setLore(Arrays.asList(ChatColor.GRAY+"Pikpik36 - Ice"));
+			im.addItemFlags(ItemFlag.values());
+			this.setItemMeta(im);
+		}
+	}),
+	pillaged_disc(new ItemStack(Material.MUSIC_DISC_PIGSTEP) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+""+ChatColor.AQUA+"Music Disc");
+			im.setLore(Arrays.asList(ChatColor.GRAY+"JamiesName - Pillaged"));
+			im.addItemFlags(ItemFlag.values());
+			this.setItemMeta(im);
+		}
+	}),
+	shulk_disc(new ItemStack(Material.MUSIC_DISC_PIGSTEP) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+""+ChatColor.AQUA+"Music Disc");
+			im.setLore(Arrays.asList(ChatColor.GRAY+"JamiesName - Shulk"));
+			im.addItemFlags(ItemFlag.values());
+			this.setItemMeta(im);
+		}
+	}),
 	
 	//diamant
 	

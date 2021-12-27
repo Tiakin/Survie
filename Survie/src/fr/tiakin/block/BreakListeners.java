@@ -2,6 +2,7 @@ package fr.tiakin.block;
 
 import java.util.List;
 
+import org.bukkit.FluidCollisionMode;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -110,7 +111,7 @@ public class BreakListeners implements Listener {
     @EventHandler
     public void onBreakingBlock(PlayerAnimationEvent event){
         Player player = event.getPlayer();
-        Block block = player.getTargetBlockExact(5);
+        Block block = player.getTargetBlockExact(5,FluidCollisionMode.NEVER);
         if(block == null) return;
         Location blockPosition = block.getLocation();
         if(!Main.brokenBlocksService.isBrokenBlock(blockPosition)) return;

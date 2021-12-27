@@ -9,6 +9,7 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.SoundCategory;
 import org.bukkit.World;
+import org.bukkit.advancement.AdvancementProgress;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
@@ -42,6 +43,7 @@ import org.bukkit.util.noise.SimplexNoiseGenerator;
 
 import fr.tiakin.block.Blocks;
 import fr.tiakin.item.Tool;
+import fr.tiakin.item.Discs;
 import fr.tiakin.item.Items;
 import net.minecraft.core.BlockPosition;
 import net.minecraft.world.level.block.state.IBlockData;
@@ -53,9 +55,12 @@ public class Custom implements Listener {
 	static ShapelessRecipe shapelessrecipe;
 	static FurnaceRecipe furnacerecipe;
 	static SmithingRecipe smithingrecipe;
-	static ArrayList<NamespacedKey> recipe = new ArrayList<NamespacedKey>();
-	 
-	
+	static ArrayList<ArrayList<NamespacedKey>> recipe = new ArrayList<>(7);
+	{
+		for(int i=0; i < 7; i++) {
+			recipe.add(new ArrayList<NamespacedKey>());
+		}
+	}
 	// Recipe :
 	
 	public static void customrecipe() {
@@ -74,27 +79,54 @@ public class Custom implements Listener {
 	private static void other() {
 		//disc
 		key = new NamespacedKey(Main.getPlugin(Main.class), "melo_disc");
-		recipe.add(key);
+		recipe.get(0).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.melo_disc.getItemStack());
-        shapedrecipe.shape("SMS","MEM","SMS");
-        shapedrecipe.setIngredient('M', new RecipeChoice.ExactChoice(Items.manyullyn_ingot.getItemStack()));
+        shapedrecipe.shape("MSM","SNS","MSM");
+        shapedrecipe.setIngredient('M', new RecipeChoice.ExactChoice(Items.enderite_ingot.getItemStack()));
         shapedrecipe.setIngredient('S', Material.END_STONE);
-        shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.enderite_ingot.getItemStack()));
+        shapedrecipe.setIngredient('N', Material.NETHER_STAR);
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "moonlight_disc");
-		recipe.add(key);
+		recipe.get(0).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.moonlight_disc.getItemStack());
         shapedrecipe.shape("CIC","INI","CIC");
         shapedrecipe.setIngredient('C', new RecipeChoice.ExactChoice(Items.chaos_ingot.getItemStack()));
         shapedrecipe.setIngredient('I', new RecipeChoice.ExactChoice(Items.infinity_ingot.getItemStack()));
         shapedrecipe.setIngredient('N', Material.NETHER_STAR);
         Bukkit.addRecipe(shapedrecipe);
+        
+        key = new NamespacedKey(Main.getPlugin(Main.class), "ice_disc");
+		recipe.get(0).add(key);
+        shapedrecipe = new ShapedRecipe(key,Items.ice_disc.getItemStack());
+        shapedrecipe.shape("DID","INI","DID");
+        shapedrecipe.setIngredient('D', Material.DIAMOND_BLOCK);
+        shapedrecipe.setIngredient('I', Material.PACKED_ICE);
+        shapedrecipe.setIngredient('N', Material.NETHER_STAR);
+        Bukkit.addRecipe(shapedrecipe);
+        
+        key = new NamespacedKey(Main.getPlugin(Main.class), "pillaged_disc");
+		recipe.get(0).add(key);
+        shapedrecipe = new ShapedRecipe(key,Items.pillaged_disc.getItemStack());
+        shapedrecipe.shape("TET","ENE","TET");
+        shapedrecipe.setIngredient('T', Material.TOTEM_OF_UNDYING);
+        shapedrecipe.setIngredient('E', Material.EMERALD);
+        shapedrecipe.setIngredient('N', Material.NETHER_STAR);
+        Bukkit.addRecipe(shapedrecipe);
+        
+        key = new NamespacedKey(Main.getPlugin(Main.class), "shulk_disc");
+		recipe.get(0).add(key);
+        shapedrecipe = new ShapedRecipe(key,Items.shulk_disc.getItemStack());
+        shapedrecipe.shape("OIO","INI","OIO");
+        shapedrecipe.setIngredient('O', Material.OBSIDIAN);
+        shapedrecipe.setIngredient('S', Material.SHULKER_SHELL);
+        shapedrecipe.setIngredient('N', Material.NETHER_STAR);
+        Bukkit.addRecipe(shapedrecipe);
 	}
 	private static void Gold() {
 		//apple
 		key = new NamespacedKey(Main.getPlugin(Main.class), "enchanted_golden_apple");
-		recipe.add(key);
+		recipe.get(0).add(key);
         shapedrecipe = new ShapedRecipe(key,new ItemStack(Material.ENCHANTED_GOLDEN_APPLE));
         shapedrecipe.shape("GGG","GAG","GGG");
         shapedrecipe.setIngredient('G', Material.GOLD_BLOCK);
@@ -105,7 +137,7 @@ public class Custom implements Listener {
 	private static void Diamond() {
 		//hammer
 		key = new NamespacedKey(Main.getPlugin(Main.class), "diamond_hammer");
-		recipe.add(key);
+		recipe.get(0).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.diamond_hammer.getItemStack());
         shapedrecipe.shape("DBD","DSD"," S ");
         shapedrecipe.setIngredient('D', Material.DIAMOND);
@@ -115,7 +147,7 @@ public class Custom implements Listener {
         
         //apple
         key = new NamespacedKey(Main.getPlugin(Main.class), "diamond_apple");
-        recipe.add(key);
+        recipe.get(0).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.diamond_apple.getItemStack());
         shapedrecipe.shape("GGG","GAG","GGG");
         shapedrecipe.setIngredient('G', Material.DIAMOND);
@@ -123,7 +155,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "enchanted_diamond_apple");
-        recipe.add(key);
+        recipe.get(0).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.enchanted_diamond_apple.getItemStack());
         shapedrecipe.shape("GGG","GAG","GGG");
         shapedrecipe.setIngredient('G', Material.DIAMOND_BLOCK);
@@ -134,7 +166,7 @@ public class Custom implements Listener {
 	private static void Emerald() {
 		//apple
 		key = new NamespacedKey(Main.getPlugin(Main.class), "emerald_apple");
-		recipe.add(key);
+		recipe.get(0).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.emerald_apple.getItemStack());
         shapedrecipe.shape("GGG","GAG","GGG");
         shapedrecipe.setIngredient('G', Material.EMERALD);
@@ -142,7 +174,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "enchanted_emerald_apple");
-        recipe.add(key);
+        recipe.get(0).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.enchanted_emerald_apple.getItemStack());
         shapedrecipe.shape("GGG","GAG","GGG");
         shapedrecipe.setIngredient('G', Material.EMERALD_BLOCK);
@@ -161,12 +193,12 @@ public class Custom implements Listener {
 		
 		//base
 		key = new NamespacedKey(Main.getPlugin(Main.class), "enderite_scrap");
-        recipe.add(key);
+        recipe.get(1).add(key);
         furnacerecipe = new FurnaceRecipe(key,Items.enderite_scrap.getItemStack(),new RecipeChoice.ExactChoice(Blocks.enderite_ore.getItemStack()),7f,300);
         Bukkit.addRecipe(furnacerecipe);
 		
         key = new NamespacedKey(Main.getPlugin(Main.class), "enderite_ingot");
-        recipe.add(key);
+        recipe.get(1).add(key);
         shapelessrecipe = new ShapelessRecipe(key, Items.enderite_ingot.getItemStack());
         	shapelessrecipe.addIngredient(new RecipeChoice.ExactChoice(Items.enderite_scrap.getItemStack()));
         	shapelessrecipe.addIngredient(new RecipeChoice.ExactChoice(Items.enderite_scrap.getItemStack()));
@@ -178,14 +210,14 @@ public class Custom implements Listener {
         
         //block
         key = new NamespacedKey(Main.getPlugin(Main.class), "enderite_block");
-        recipe.add(key);
+        recipe.get(1).add(key);
         shapedrecipe = new ShapedRecipe(key,Blocks.enderite_block.getItemStack());
         	shapedrecipe.shape("DDD","DDD","DDD");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.enderite_ingot.getItemStack()));
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "enderite_ingot_from_block");
-        recipe.add(key);
+        recipe.get(1).add(key);
         shapelessrecipe = new ShapelessRecipe(key, multi(Items.enderite_ingot.getItemStack(),9));
         	shapelessrecipe.addIngredient(new RecipeChoice.ExactChoice(Blocks.enderite_block.getItemStack()));
         Bukkit.addRecipe(shapelessrecipe);
@@ -237,32 +269,32 @@ public class Custom implements Listener {
 		
 		//base
 		key = new NamespacedKey(Main.getPlugin(Main.class), "discordium_chunk");
-        recipe.add(key);
+        recipe.get(2).add(key);
         furnacerecipe = new FurnaceRecipe(key,Items.discordium_chunk.getItemStack(),new RecipeChoice.ExactChoice(Blocks.discordium_ore.getItemStack()),5f,400);
         Bukkit.addRecipe(furnacerecipe);
 		
         key = new NamespacedKey(Main.getPlugin(Main.class), "discordium_ingot");
-        recipe.add(key);
+        recipe.get(2).add(key);
         furnacerecipe = new FurnaceRecipe(key,Items.discordium_ingot.getItemStack(),new RecipeChoice.ExactChoice(Items.discordium_chunk.getItemStack()),10f,400);
         Bukkit.addRecipe(furnacerecipe);
         
         //block
         key = new NamespacedKey(Main.getPlugin(Main.class), "discordium_block");
-        recipe.add(key);
+        recipe.get(2).add(key);
         shapedrecipe = new ShapedRecipe(key,Blocks.discordium_block.getItemStack());
         	shapedrecipe.shape("DDD","DDD","DDD");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.discordium_ingot.getItemStack()));
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "discordium_ingot_from_block");
-        recipe.add(key);
+        recipe.get(2).add(key);
         shapelessrecipe = new ShapelessRecipe(key, multi(Items.discordium_ingot.getItemStack(),9));
         	shapelessrecipe.addIngredient(new RecipeChoice.ExactChoice(Blocks.discordium_block.getItemStack()));
         Bukkit.addRecipe(shapelessrecipe);
         
         //Tool
         key = new NamespacedKey(Main.getPlugin(Main.class), "discordium_sword");
-        recipe.add(key);
+        recipe.get(2).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.discordium_sword.getItemStack());
         	shapedrecipe.shape("D","D","E");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.discordium_ingot.getItemStack()));
@@ -270,7 +302,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "discordium_pickaxe");
-        recipe.add(key);
+        recipe.get(2).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.discordium_pickaxe.getItemStack());
         	shapedrecipe.shape("DDD"," E "," D ");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.discordium_ingot.getItemStack()));
@@ -278,7 +310,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "discordium_axe");
-        recipe.add(key);
+        recipe.get(2).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.discordium_axe.getItemStack());
         	shapedrecipe.shape("DD","ED","D ");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.discordium_ingot.getItemStack()));
@@ -286,7 +318,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "discordium_shovel");
-        recipe.add(key);
+        recipe.get(2).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.discordium_shovel.getItemStack());
         	shapedrecipe.shape("D","E","D");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.discordium_ingot.getItemStack()));
@@ -294,7 +326,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "discordium_hoe");
-        recipe.add(key);
+        recipe.get(2).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.discordium_hoe.getItemStack());
         	shapedrecipe.shape("DD"," E"," D");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.discordium_ingot.getItemStack()));
@@ -302,7 +334,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         //hammer
         key = new NamespacedKey(Main.getPlugin(Main.class), "discordium_hammer");
-        recipe.add(key);
+        recipe.get(2).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.discordium_hammer.getItemStack());
         	shapedrecipe.shape("DBD","DED"," D ");
         	shapedrecipe.setIngredient('B', new RecipeChoice.ExactChoice(Blocks.discordium_block.getItemStack()));
@@ -312,7 +344,7 @@ public class Custom implements Listener {
         
         //armor
         key = new NamespacedKey(Main.getPlugin(Main.class), "discordium_helmet");
-        recipe.add(key);
+        recipe.get(2).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.discordium_helmet.getItemStack());
         	shapedrecipe.shape("DDD","DED");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.discordium_ingot.getItemStack()));
@@ -320,7 +352,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "discordium_chestplate");
-        recipe.add(key);
+        recipe.get(2).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.discordium_chestplate.getItemStack());
         	shapedrecipe.shape("DED","DDD","DDD");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.discordium_ingot.getItemStack()));
@@ -328,7 +360,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "discordium_leggings");
-        recipe.add(key);
+        recipe.get(2).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.discordium_leggings.getItemStack());
         	shapedrecipe.shape("DDD","DED","D D");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.discordium_ingot.getItemStack()));
@@ -336,7 +368,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "discordium_boots");
-        recipe.add(key);
+        recipe.get(2).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.discordium_boots.getItemStack());
         	shapedrecipe.shape("D D","DED");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.discordium_ingot.getItemStack()));
@@ -349,32 +381,32 @@ public class Custom implements Listener {
 		
 		//base
 		key = new NamespacedKey(Main.getPlugin(Main.class), "blazite_chunk");
-        recipe.add(key);
+        recipe.get(3).add(key);
         furnacerecipe = new FurnaceRecipe(key,Items.blazite_chunk.getItemStack(),new RecipeChoice.ExactChoice(Blocks.blazite_ore.getItemStack()),5f,400);
         Bukkit.addRecipe(furnacerecipe);
 		
         key = new NamespacedKey(Main.getPlugin(Main.class), "blazite_ingot");
-        recipe.add(key);
+        recipe.get(3).add(key);
         furnacerecipe = new FurnaceRecipe(key,Items.blazite_ingot.getItemStack(),new RecipeChoice.ExactChoice(Items.blazite_chunk.getItemStack()),10f,400);
         Bukkit.addRecipe(furnacerecipe);
         
         //block
         key = new NamespacedKey(Main.getPlugin(Main.class), "blazite_block");
-        recipe.add(key);
+        recipe.get(3).add(key);
         shapedrecipe = new ShapedRecipe(key,Blocks.blazite_block.getItemStack());
         	shapedrecipe.shape("DDD","DDD","DDD");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.blazite_ingot.getItemStack()));
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "blazite_ingot_from_block");
-        recipe.add(key);
+        recipe.get(3).add(key);
         shapelessrecipe = new ShapelessRecipe(key, multi(Items.blazite_ingot.getItemStack(),9));
         	shapelessrecipe.addIngredient(new RecipeChoice.ExactChoice(Blocks.blazite_block.getItemStack()));
         Bukkit.addRecipe(shapelessrecipe);
         
         //Tool
         key = new NamespacedKey(Main.getPlugin(Main.class), "blazite_sword");
-        recipe.add(key);
+        recipe.get(3).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.blazite_sword.getItemStack());
         	shapedrecipe.shape("D","D","E");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.blazite_ingot.getItemStack()));
@@ -382,7 +414,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "blazite_pickaxe");
-        recipe.add(key);
+        recipe.get(3).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.blazite_pickaxe.getItemStack());
         	shapedrecipe.shape("DDD"," E "," D ");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.blazite_ingot.getItemStack()));
@@ -390,7 +422,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "blazite_axe");
-        recipe.add(key);
+        recipe.get(3).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.blazite_axe.getItemStack());
         	shapedrecipe.shape("DD","ED","D ");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.blazite_ingot.getItemStack()));
@@ -398,7 +430,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "blazite_shovel");
-        recipe.add(key);
+        recipe.get(3).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.blazite_shovel.getItemStack());
         	shapedrecipe.shape("D","E","D");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.blazite_ingot.getItemStack()));
@@ -406,7 +438,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "blazite_hoe");
-        recipe.add(key);
+        recipe.get(3).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.blazite_hoe.getItemStack());
         	shapedrecipe.shape("DD"," E"," D");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.blazite_ingot.getItemStack()));
@@ -414,7 +446,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         //hammer
         key = new NamespacedKey(Main.getPlugin(Main.class), "blazite_hammer");
-        recipe.add(key);
+        recipe.get(3).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.blazite_hammer.getItemStack());
         	shapedrecipe.shape("DBD","DED"," D ");
         	shapedrecipe.setIngredient('B', new RecipeChoice.ExactChoice(Blocks.blazite_block.getItemStack()));
@@ -424,7 +456,7 @@ public class Custom implements Listener {
         
         //armor
         key = new NamespacedKey(Main.getPlugin(Main.class), "blazite_helmet");
-        recipe.add(key);
+        recipe.get(3).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.blazite_helmet.getItemStack());
         	shapedrecipe.shape("DDD","DED");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.blazite_ingot.getItemStack()));
@@ -432,7 +464,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "blazite_chestplate");
-        recipe.add(key);
+        recipe.get(3).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.blazite_chestplate.getItemStack());
         	shapedrecipe.shape("DED","DDD","DDD");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.blazite_ingot.getItemStack()));
@@ -440,7 +472,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "blazite_leggings");
-        recipe.add(key);
+        recipe.get(3).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.blazite_leggings.getItemStack());
         	shapedrecipe.shape("DDD","DED","D D");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.blazite_ingot.getItemStack()));
@@ -448,7 +480,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "blazite_boots");
-        recipe.add(key);
+        recipe.get(3).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.blazite_boots.getItemStack());
         	shapedrecipe.shape("D D","DED");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.blazite_ingot.getItemStack()));
@@ -461,12 +493,12 @@ public class Custom implements Listener {
 		
 		//base
 		key = new NamespacedKey(Main.getPlugin(Main.class), "cobalt_ingot");
-        recipe.add(key);
+        recipe.get(4).add(key);
         furnacerecipe = new FurnaceRecipe(key,Items.cobalt_ingot.getItemStack(),new RecipeChoice.ExactChoice(Blocks.cobalt_ore.getItemStack()),12f,600);
         Bukkit.addRecipe(furnacerecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "ardite_ingot");
-        recipe.add(key);
+        recipe.get(4).add(key);
         furnacerecipe = new FurnaceRecipe(key,Items.ardite_ingot.getItemStack(),new RecipeChoice.ExactChoice(Blocks.ardite_ore.getItemStack()),12f,600);
         Bukkit.addRecipe(furnacerecipe);
         
@@ -480,47 +512,47 @@ public class Custom implements Listener {
         
         //block
         key = new NamespacedKey(Main.getPlugin(Main.class), "cobalt_block");
-        recipe.add(key);
+        recipe.get(4).add(key);
         shapedrecipe = new ShapedRecipe(key,Blocks.cobalt_block.getItemStack());
         	shapedrecipe.shape("DDD","DDD","DDD");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.cobalt_ingot.getItemStack()));
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "cobalt_ingot_from_block");
-        recipe.add(key);
+        recipe.get(4).add(key);
         shapelessrecipe = new ShapelessRecipe(key, multi(Items.cobalt_ingot.getItemStack(),9));
         	shapelessrecipe.addIngredient(new RecipeChoice.ExactChoice(Blocks.cobalt_block.getItemStack()));
         Bukkit.addRecipe(shapelessrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "ardite_block");
-        recipe.add(key);
+        recipe.get(4).add(key);
         shapedrecipe = new ShapedRecipe(key,Blocks.ardite_block.getItemStack());
         	shapedrecipe.shape("DDD","DDD","DDD");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.ardite_ingot.getItemStack()));
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "ardite_ingot_from_block");
-        recipe.add(key);
+        recipe.get(4).add(key);
         shapelessrecipe = new ShapelessRecipe(key, multi(Items.ardite_ingot.getItemStack(),9));
         	shapelessrecipe.addIngredient(new RecipeChoice.ExactChoice(Blocks.ardite_block.getItemStack()));
         Bukkit.addRecipe(shapelessrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "manyullyn_block");
-        recipe.add(key);
+        recipe.get(4).add(key);
         shapedrecipe = new ShapedRecipe(key,Blocks.manyullyn_block.getItemStack());
         	shapedrecipe.shape("DDD","DDD","DDD");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.manyullyn_ingot.getItemStack()));
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "manyullyn_ingot_from_block");
-        recipe.add(key);
+        recipe.get(4).add(key);
         shapelessrecipe = new ShapelessRecipe(key, multi(Items.manyullyn_ingot.getItemStack(),9));
         	shapelessrecipe.addIngredient(new RecipeChoice.ExactChoice(Blocks.manyullyn_block.getItemStack()));
         Bukkit.addRecipe(shapelessrecipe);
         
         //Tool
         key = new NamespacedKey(Main.getPlugin(Main.class), "manyullyn_sword");
-        recipe.add(key);
+        recipe.get(4).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.manyullyn_sword.getItemStack());
         	shapedrecipe.shape("D","D","E");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.manyullyn_ingot.getItemStack()));
@@ -528,7 +560,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "manyullyn_pickaxe");
-        recipe.add(key);
+        recipe.get(4).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.manyullyn_pickaxe.getItemStack());
         	shapedrecipe.shape("DDD"," E "," D ");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.manyullyn_ingot.getItemStack()));
@@ -536,7 +568,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "manyullyn_axe");
-        recipe.add(key);
+        recipe.get(4).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.manyullyn_axe.getItemStack());
         	shapedrecipe.shape("DD","ED","D ");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.manyullyn_ingot.getItemStack()));
@@ -544,7 +576,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "manyullyn_shovel");
-        recipe.add(key);
+        recipe.get(4).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.manyullyn_shovel.getItemStack());
         	shapedrecipe.shape("D","E","D");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.manyullyn_ingot.getItemStack()));
@@ -552,7 +584,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "manyullyn_hoe");
-        recipe.add(key);
+        recipe.get(4).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.manyullyn_hoe.getItemStack());
         	shapedrecipe.shape("DD"," E"," D");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.manyullyn_ingot.getItemStack()));
@@ -560,7 +592,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         //hammer
         key = new NamespacedKey(Main.getPlugin(Main.class), "manyullyn_hammer");
-        recipe.add(key);
+        recipe.get(4).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.manyullyn_hammer.getItemStack());
         	shapedrecipe.shape("DBD","DED"," D ");
         	shapedrecipe.setIngredient('B', new RecipeChoice.ExactChoice(Blocks.manyullyn_block.getItemStack()));
@@ -570,7 +602,7 @@ public class Custom implements Listener {
         
         //armor
         key = new NamespacedKey(Main.getPlugin(Main.class), "manyullyn_helmet");
-        recipe.add(key);
+        recipe.get(4).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.manyullyn_helmet.getItemStack());
         	shapedrecipe.shape("DDD","DED");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.manyullyn_ingot.getItemStack()));
@@ -578,7 +610,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "manyullyn_chestplate");
-        recipe.add(key);
+        recipe.get(4).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.manyullyn_chestplate.getItemStack());
         	shapedrecipe.shape("DED","DDD","DDD");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.manyullyn_ingot.getItemStack()));
@@ -586,7 +618,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "manyullyn_leggings");
-        recipe.add(key);
+        recipe.get(4).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.manyullyn_leggings.getItemStack());
         	shapedrecipe.shape("DDD","DED","D D");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.manyullyn_ingot.getItemStack()));
@@ -594,7 +626,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "manyullyn_boots");
-        recipe.add(key);
+        recipe.get(4).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.manyullyn_boots.getItemStack());
         	shapedrecipe.shape("D D","DED");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.manyullyn_ingot.getItemStack()));
@@ -607,32 +639,32 @@ public class Custom implements Listener {
 		
 		//base
 		key = new NamespacedKey(Main.getPlugin(Main.class), "chaos_chunk");
-        recipe.add(key);
+        recipe.get(5).add(key);
         furnacerecipe = new FurnaceRecipe(key,Items.chaos_chunk.getItemStack(),new RecipeChoice.ExactChoice(Blocks.chaos_ore.getItemStack()),12f,800);
         Bukkit.addRecipe(furnacerecipe);
 		
         key = new NamespacedKey(Main.getPlugin(Main.class), "chaos_ingot");
-        recipe.add(key);
+        recipe.get(5).add(key);
         furnacerecipe = new FurnaceRecipe(key,Items.chaos_ingot.getItemStack(),new RecipeChoice.ExactChoice(Items.chaos_chunk.getItemStack()),24f,800);
         Bukkit.addRecipe(furnacerecipe);
         
         //block
         key = new NamespacedKey(Main.getPlugin(Main.class), "chaos_block");
-        recipe.add(key);
+        recipe.get(5).add(key);
         shapedrecipe = new ShapedRecipe(key,Blocks.chaos_block.getItemStack());
         	shapedrecipe.shape("DDD","DDD","DDD");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.chaos_ingot.getItemStack()));
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "chaos_ingot_from_block");
-        recipe.add(key);
+        recipe.get(5).add(key);
         shapelessrecipe = new ShapelessRecipe(key, multi(Items.chaos_ingot.getItemStack(),9));
         	shapelessrecipe.addIngredient(new RecipeChoice.ExactChoice(Blocks.chaos_block.getItemStack()));
         Bukkit.addRecipe(shapelessrecipe);
         
         //Tool
         key = new NamespacedKey(Main.getPlugin(Main.class), "chaos_sword");
-        recipe.add(key);
+        recipe.get(5).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.chaos_sword.getItemStack());
         	shapedrecipe.shape("D","D","E");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.chaos_ingot.getItemStack()));
@@ -640,7 +672,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "chaos_pickaxe");
-        recipe.add(key);
+        recipe.get(5).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.chaos_pickaxe.getItemStack());
         	shapedrecipe.shape("DDD"," E "," D ");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.chaos_ingot.getItemStack()));
@@ -648,7 +680,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "chaos_axe");
-        recipe.add(key);
+        recipe.get(5).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.chaos_axe.getItemStack());
         	shapedrecipe.shape("DD","ED","D ");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.chaos_ingot.getItemStack()));
@@ -656,7 +688,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "chaos_shovel");
-        recipe.add(key);
+        recipe.get(5).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.chaos_shovel.getItemStack());
         	shapedrecipe.shape("D","E","D");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.chaos_ingot.getItemStack()));
@@ -664,7 +696,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "chaos_hoe");
-        recipe.add(key);
+        recipe.get(5).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.chaos_hoe.getItemStack());
         	shapedrecipe.shape("DD"," E"," D");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.chaos_ingot.getItemStack()));
@@ -672,7 +704,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         //hammer
         key = new NamespacedKey(Main.getPlugin(Main.class), "chaos_hammer");
-        recipe.add(key);
+        recipe.get(5).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.chaos_hammer.getItemStack());
         	shapedrecipe.shape("DBD","DED"," D ");
         	shapedrecipe.setIngredient('B', new RecipeChoice.ExactChoice(Blocks.chaos_block.getItemStack()));
@@ -682,7 +714,7 @@ public class Custom implements Listener {
         
         //armor
         key = new NamespacedKey(Main.getPlugin(Main.class), "chaos_helmet");
-        recipe.add(key);
+        recipe.get(5).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.chaos_helmet.getItemStack());
         	shapedrecipe.shape("DDD","DED");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.chaos_ingot.getItemStack()));
@@ -690,7 +722,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "chaos_chestplate");
-        recipe.add(key);
+        recipe.get(5).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.chaos_chestplate.getItemStack());
         	shapedrecipe.shape("DED","DDD","DDD");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.chaos_ingot.getItemStack()));
@@ -698,7 +730,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "chaos_leggings");
-        recipe.add(key);
+        recipe.get(5).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.chaos_leggings.getItemStack());
         	shapedrecipe.shape("DDD","DED","D D");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.chaos_ingot.getItemStack()));
@@ -706,7 +738,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "chaos_boots");
-        recipe.add(key);
+        recipe.get(5).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.chaos_boots.getItemStack());
         	shapedrecipe.shape("D D","DED");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.chaos_ingot.getItemStack()));
@@ -724,21 +756,21 @@ public class Custom implements Listener {
         
         //block
         key = new NamespacedKey(Main.getPlugin(Main.class), "infinity_block");
-        recipe.add(key);
+        recipe.get(6).add(key);
         shapedrecipe = new ShapedRecipe(key,Blocks.infinity_block.getItemStack());
         	shapedrecipe.shape("DDD","DDD","DDD");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.infinity_ingot.getItemStack()));
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "infinity_ingot_from_block");
-        recipe.add(key);
+        recipe.get(6).add(key);
         shapelessrecipe = new ShapelessRecipe(key, multi(Items.infinity_ingot.getItemStack(),9));
         	shapelessrecipe.addIngredient(new RecipeChoice.ExactChoice(Blocks.infinity_block.getItemStack()));
         Bukkit.addRecipe(shapelessrecipe);
         
         //Tool
         key = new NamespacedKey(Main.getPlugin(Main.class), "infinity_sword");
-        recipe.add(key);
+        recipe.get(6).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.infinity_sword.getItemStack());
         	shapedrecipe.shape("B","B","E");
         	shapedrecipe.setIngredient('B', new RecipeChoice.ExactChoice(Blocks.infinity_block.getItemStack()));
@@ -746,7 +778,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "infinity_pickaxe");
-        recipe.add(key);
+        recipe.get(6).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.infinity_pickaxe.getItemStack());
         	shapedrecipe.shape("DDD"," E "," B ");
         	shapedrecipe.setIngredient('B', new RecipeChoice.ExactChoice(Blocks.infinity_block.getItemStack()));
@@ -755,7 +787,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "infinity_axe");
-        recipe.add(key);
+        recipe.get(6).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.infinity_axe.getItemStack());
         	shapedrecipe.shape("DD","ED","B ");
         	shapedrecipe.setIngredient('B', new RecipeChoice.ExactChoice(Blocks.infinity_block.getItemStack()));
@@ -764,7 +796,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "infinity_shovel");
-        recipe.add(key);
+        recipe.get(6).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.infinity_shovel.getItemStack());
         	shapedrecipe.shape("D","E","B");
         	shapedrecipe.setIngredient('B', new RecipeChoice.ExactChoice(Blocks.infinity_block.getItemStack()));
@@ -773,7 +805,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "infinity_hoe");
-        recipe.add(key);
+        recipe.get(6).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.infinity_hoe.getItemStack());
         	shapedrecipe.shape("DD"," E"," B");
         	shapedrecipe.setIngredient('B', new RecipeChoice.ExactChoice(Blocks.infinity_block.getItemStack()));
@@ -782,7 +814,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         //hammer
         key = new NamespacedKey(Main.getPlugin(Main.class), "infinity_hammer");
-        recipe.add(key);
+        recipe.get(6).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.infinity_hammer.getItemStack());
         	shapedrecipe.shape("BDB","DED"," D ");
         	shapedrecipe.setIngredient('B', new RecipeChoice.ExactChoice(Blocks.infinity_block.getItemStack()));
@@ -792,7 +824,7 @@ public class Custom implements Listener {
         
         //armor
         key = new NamespacedKey(Main.getPlugin(Main.class), "infinity_helmet");
-        recipe.add(key);
+        recipe.get(6).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.infinity_helmet.getItemStack());
         	shapedrecipe.shape("DBD","DED");
         	shapedrecipe.setIngredient('B', new RecipeChoice.ExactChoice(Blocks.infinity_block.getItemStack()));
@@ -801,7 +833,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "infinity_chestplate");
-        recipe.add(key);
+        recipe.get(6).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.infinity_chestplate.getItemStack());
         	shapedrecipe.shape("DED","DDD","BDB");
         	shapedrecipe.setIngredient('B', new RecipeChoice.ExactChoice(Blocks.infinity_block.getItemStack()));
@@ -810,7 +842,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "infinity_leggings");
-        recipe.add(key);
+        recipe.get(6).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.infinity_leggings.getItemStack());
         	shapedrecipe.shape("DBD","DED","D D");
         	shapedrecipe.setIngredient('B', new RecipeChoice.ExactChoice(Blocks.infinity_block.getItemStack()));
@@ -819,7 +851,7 @@ public class Custom implements Listener {
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "infinity_boots");
-        recipe.add(key);
+        recipe.get(6).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.infinity_boots.getItemStack());
         	shapedrecipe.shape("D D","BEB");
         	shapedrecipe.setIngredient('B', new RecipeChoice.ExactChoice(Blocks.infinity_block.getItemStack()));
@@ -837,7 +869,27 @@ public class Custom implements Listener {
 	
 	public static void discoverrecipe(Player p) {
 		//add recipe for player
-		p.discoverRecipes(recipe);
+		p.discoverRecipes(recipe.get(0));
+		AdvancementProgress progress = p.getAdvancementProgress(Bukkit.getAdvancement(new NamespacedKey(Main.getPlugin(Main.class), "miningroot")));
+		if(progress.isDone())
+			p.discoverRecipes(recipe.get(1));
+		 progress = p.getAdvancementProgress(Bukkit.getAdvancement(new NamespacedKey(Main.getPlugin(Main.class), "mining1")));
+		if(progress.isDone())
+			p.discoverRecipes(recipe.get(2));
+		 progress = p.getAdvancementProgress(Bukkit.getAdvancement(new NamespacedKey(Main.getPlugin(Main.class), "mining2")));
+		if(progress.isDone())
+			p.discoverRecipes(recipe.get(3));
+		 progress = p.getAdvancementProgress(Bukkit.getAdvancement(new NamespacedKey(Main.getPlugin(Main.class), "mining3")));
+		if(progress.isDone())
+			p.discoverRecipes(recipe.get(4));
+		 progress = p.getAdvancementProgress(Bukkit.getAdvancement(new NamespacedKey(Main.getPlugin(Main.class), "mining4")));
+		if(progress.isDone())
+			p.discoverRecipes(recipe.get(5));
+		 progress = p.getAdvancementProgress(Bukkit.getAdvancement(new NamespacedKey(Main.getPlugin(Main.class), "mining5")));
+		if(progress.isDone())
+			p.discoverRecipes(recipe.get(6));
+
+		
 	}
 	
 	@EventHandler
@@ -951,7 +1003,15 @@ public class Custom implements Listener {
 		    BlockFace.SOUTH,
 		    BlockFace.WEST
 		};
-
+	
+	public static Discs getCustomDisc(ItemStack is) {
+		for(Discs i : Discs.values()) {
+			if(isSimilar(i.getItem().getItemStack(),is))
+				return i;
+		}
+		return null;
+	}
+	
 	public static Items getCustomItem(ItemStack is) {
 		for(Items i : Items.values()) {
 			if(isSimilar(i.getItemStack(),is))
@@ -1053,20 +1113,18 @@ public class Custom implements Listener {
 				ItemStack item = p.getInventory().getItemInMainHand();
 				Jukebox jb = (Jukebox) b.getState();
 				if(jb.getRecord().getType().equals(Material.AIR)) {
-					if(isSimilar(item, Items.melo_disc.getItemStack())) {
+					
+					Discs disc = getCustomDisc(item);
+					if(disc != null) {
 						Bukkit.getScheduler().runTaskLaterAsynchronously(Main.getPlugin(Main.class), () -> jb.stopPlaying(),2l);
-						jb.getWorld().playSound(jb.getLocation(), "minecraft:custom.melo_coton",SoundCategory.RECORDS, 3.0F, 1F);
-					} else if(isSimilar(item, Items.moonlight_disc.getItemStack())) {
-						Bukkit.getScheduler().runTaskLaterAsynchronously(Main.getPlugin(Main.class), () -> jb.stopPlaying(),2l);
-						jb.getWorld().playSound(jb.getLocation(), "minecraft:custom.moonlight",SoundCategory.RECORDS, 3.0F, 1F);
+						jb.getWorld().playSound(jb.getLocation(), disc.getSound() ,SoundCategory.RECORDS, 3.0F, 1F);
 					}
 				} else {
-						for(Entity ent : jb.getWorld().getNearbyEntities(jb.getLocation(), 75, 50, 75)) {
-							if (ent instanceof Player all ) {
-								if(isSimilar(jb.getRecord(), Items.melo_disc.getItemStack())) {
-									all.stopSound("minecraft:custom.melo_coton",SoundCategory.RECORDS);
-								}else if(isSimilar(jb.getRecord(), Items.moonlight_disc.getItemStack())) {
-									all.stopSound("minecraft:custom.moonlight",SoundCategory.RECORDS);
+					for(Entity ent : jb.getWorld().getNearbyEntities(jb.getLocation(), 75, 50, 75)) {
+						if (ent instanceof Player all ) {
+							Discs disc = getCustomDisc(jb.getRecord());
+							if(disc != null) {
+								all.stopSound(disc.getSound(),SoundCategory.RECORDS);
 							}
 						}
 					}

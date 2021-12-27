@@ -110,7 +110,7 @@ public class Custom implements Listener {
         shapedrecipe = new ShapedRecipe(key,Items.pillaged_disc.getItemStack());
         shapedrecipe.shape("TET","ENE","TET");
         shapedrecipe.setIngredient('T', Material.TOTEM_OF_UNDYING);
-        shapedrecipe.setIngredient('E', Material.EMERALD);
+        shapedrecipe.setIngredient('E', Material.EMERALD_BLOCK);
         shapedrecipe.setIngredient('N', Material.NETHER_STAR);
         Bukkit.addRecipe(shapedrecipe);
         
@@ -1236,7 +1236,7 @@ public class Custom implements Listener {
 		default ->  false;
 		};
 	}
-	
+
 	public static void generateOre(World world, Chunk chunk, Random random, IBlockData iBlockData, int minY, int maxY,int chance, int tries,int luck, int maxVein,boolean centered,boolean bypassWhitelist) {
 		int X, Y, Z, vein = 0;
 		boolean Whitelisted;

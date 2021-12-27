@@ -5,10 +5,10 @@
             "obfuscated": true
         },
         "description": {
-            "text": "Summon ERROR404"
+            "text": "Summon ERROR303"
         },
         "icon": {
-            "item": "minecraft:netherite_sword",
+            "item": "minecraft:netherite_scrap",
             "nbt": "{display:{Lore:['[{\"text\":\"Infinity Catalyst\"}]']}}"
         },
         "frame": "task",

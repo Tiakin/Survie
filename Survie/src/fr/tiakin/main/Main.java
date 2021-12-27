@@ -36,6 +36,8 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 import org.bukkit.util.noise.SimplexNoiseGenerator;
 
@@ -139,6 +141,7 @@ public class Main extends JavaPlugin implements Listener{
 		Custom.discoverrecipe(e.getPlayer());
 		e.getPlayer().setResourcePack("http://85.214.219.113/survival.zip");
 		injectPlayer(e.getPlayer());
+		e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 30, 10,true));
 	}
 	
 	

@@ -270,8 +270,8 @@ public enum Blocks {
 				}
 			},
 			Material.MUSHROOM_STEM,
-			"pickaxe","manyullyn",
-			80,
+			"pickaxe","netherite",
+			60,
 			true,null,
 			true,false,true,true,false,false,
 			Material.STONE
@@ -295,23 +295,42 @@ public enum Blocks {
 			Material.OAK_LOG
 		),
 		
+		
 		chaos_planks(
-			new ItemStack(Material.PLAYER_HEAD) {
-				ItemMeta im;{
-					im = this.getItemMeta();
-					im.setDisplayName(ChatColor.RESET+"Chaos Planks");
-					im.setCustomModelData(2015);
-					im.setLore(Arrays.asList("Chaos Planks"));
-					this.setItemMeta(im);
-				}
-			},
-			Material.MUSHROOM_STEM,
-			"axe","manyullyn",
-			80,
-			true,null,
-			false,false,false,false,true,false,
-			Material.OAK_LOG
-		),
+				new ItemStack(Material.PLAYER_HEAD) {
+					ItemMeta im;{
+						im = this.getItemMeta();
+						im.setDisplayName(ChatColor.RESET+"Chaos Planks");
+						im.setCustomModelData(2015);
+						im.setLore(Arrays.asList("Chaos Planks"));
+						this.setItemMeta(im);
+					}
+				},
+				Material.MUSHROOM_STEM,
+				"axe","manyullyn",
+				80,
+				true,null,
+				false,false,false,false,true,false,
+				Material.OAK_LOG
+			),
+		
+		netherstar_block(
+				new ItemStack(Material.PLAYER_HEAD) {
+					ItemMeta im;{
+						im = this.getItemMeta();
+						im.setDisplayName(ChatColor.RESET+"Netherstar Block");
+						im.setCustomModelData(2016);
+						im.setLore(Arrays.asList("Netherstar Block"));
+						this.setItemMeta(im);
+					}
+				},
+				Material.MUSHROOM_STEM,
+				"pickaxe","chaos",
+				130,
+				true,null,
+				true,false,false,false,true,false,
+				Material.STONE
+			),
 		
 		//infinity
 		infinity_block(
@@ -325,7 +344,7 @@ public enum Blocks {
 				}
 			},
 			Material.MUSHROOM_STEM,
-			"pickaxe","chaos",
+			"pickaxe","netherstar",
 			150,
 			true,null,
 			false,false,false,false,true,true,
@@ -400,7 +419,7 @@ public enum Blocks {
 	                if (i < 0) {
 	                   i = 0;
 	                }
-	    			drop = Custom.multi(drop, i + 1);
+	    			return Custom.multi(drop, i + 1).clone();
 	    		}
 	    		
 	    	}

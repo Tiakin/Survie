@@ -12,11 +12,9 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.tiakin.block.Blocks;
 import fr.tiakin.main.Custom;
-import fr.tiakin.main.Main;
 
 public class Tool {
 	
@@ -123,6 +121,7 @@ public class Tool {
     			case "Blazite" -> "blazite";
     			case "Manyullyn" -> "manyullyn";
     			case "Chaos" -> "chaos";
+    			case "Netherstar" -> "netherstar";
     			case "Infinity" -> "infinity";
 				default -> "netherite";
 				};
@@ -140,7 +139,7 @@ public class Tool {
 			return 1;
 		case 9,10,11:
 			return 2;
-		case 12:
+		case 12,13:
 			return 3;
 		}
 		return 0;
@@ -159,7 +158,8 @@ public class Tool {
 		case "blazite" -> 9;
 		case "manyullyn" -> 10;
 		case "chaos" -> 11;
-		case "infinity" -> 12;
+		case "netherstar" -> 12;
+		case "infinity" -> 13;
 		default -> 0;
 		};
 	}
@@ -179,17 +179,19 @@ public class Tool {
     	case "netherite":
     		return 9;
     	case "enderite":
-    		return 11;
+    		return 12;
     	case "discordium":
-    		return 13;
+    		return 16;
     	case "blazite":
-			return 15;
+			return 22;
 		case "manyullyn":
-			return 17;
+			return 26;
 		case "chaos":
-			return 19;
+			return 30;
+		case "netherstar":
+			return 34;	
 		case "infinity":
-			return 21;
+			return 40;
     	default:
     		return 1;
     	}
@@ -212,7 +214,6 @@ public class Tool {
 	
     public static BlockFace getFacing(Player player) {
     	float pitch = player.getEyeLocation().getPitch();
-    	JavaPlugin.getPlugin(Main.class).getLogger().info("truc : "+ pitch);
 		if(pitch < -45)
 			return BlockFace.UP;
 		else if(pitch > 45)

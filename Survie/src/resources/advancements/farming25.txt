@@ -1,0 +1,20 @@
+{
+    "display": {
+        "title": {
+            "text": "Ancient Carrot"
+        },
+        "description": {
+            "text": "Eat a netherite carrot"
+        },
+        "icon": {
+            "item": "minecraft:golden_carrot",
+            "nbt": "{display:{Lore:['{\"text\":\"Netherite Carrot\"}']}}"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": true
+    },
+    "criteria": {"impossible":{"trigger":"minecraft:impossible"}},
+    "parent": "survie:farming24"
+}

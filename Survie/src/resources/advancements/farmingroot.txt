@@ -1,4 +1,5 @@
 {
+    "__comment": "Made with TheDestruc7i0n's advancements generator: https://advancements.thedestruc7i0n.ca",
     "display": {
         "title": {
             "text": "Farming",
@@ -23,5 +24,5 @@
         "hidden": true,
         "background": "minecraft:textures/gui/advancements/backgrounds/chaos_log.png"
     },
-    "criteria": {"impossible":{"trigger":"minecraft:impossible"}}
+    "criteria": {}
 }

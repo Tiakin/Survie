@@ -9,12 +9,96 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.attribute.AttributeModifier.Operation;
 import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.ItemFlag;
+
 import fr.tiakin.main.Custom;
 
 public enum Items {
+	
+	//food
+	
+	uncooked_fries(new ItemStack(Material.APPLE) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Uncooked Fries");
+			im.setLore(Arrays.asList("Uncooked Fries"));
+			this.setItemMeta(im);
+		}
+	}),
+	cooked_fries(new ItemStack(Material.APPLE) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Cooked Fries");
+			im.setLore(Arrays.asList("Cooked Fries"));
+			this.setItemMeta(im);
+		}
+	}),
+	Chocolate_Caramel_fudge(new ItemStack(Material.APPLE) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Chocolate Caramel Fudge");
+			im.setLore(Arrays.asList("Chocolate Caramel Fudge"));
+			this.setItemMeta(im);
+		}
+	}),
+	cotton_candy(new ItemStack(Material.APPLE) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Cotton Candy");
+			im.setLore(Arrays.asList("Cotton Candy"));
+			this.setItemMeta(im);
+		}
+	}),
+	baguette(new ItemStack(Material.APPLE) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Baguette");
+			im.setLore(Arrays.asList("Baguette"));
+			this.setItemMeta(im);
+		}
+	}),
+	hamburger(new ItemStack(Material.APPLE) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Hamburger");
+			im.setLore(Arrays.asList("Hamburger"));
+			this.setItemMeta(im);
+		}
+	}),
+	cheese_burger(new ItemStack(Material.APPLE) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Cheese Burger");
+			im.setLore(Arrays.asList("Cheese Burger"));
+			this.setItemMeta(im);
+		}
+	}),
+	bacon_cheese_burger(new ItemStack(Material.APPLE) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Bacon Cheese Burger");
+			im.setLore(Arrays.asList("Bacon Cheese Burger"));
+			this.setItemMeta(im);
+		}
+	}),
+	 Fish_and_Chips(new ItemStack(Material.APPLE) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Fish & Chips");
+			im.setLore(Arrays.asList("Fish & Chips"));
+			this.setItemMeta(im);
+		}
+	}),
+	cheese(new ItemStack(Material.APPLE) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Cheese");
+			im.setLore(Arrays.asList("Cheese"));
+			this.setItemMeta(im);
+		}
+	}),
 	
 	//disc
 	melo_disc(new ItemStack(Material.MUSIC_DISC_PIGSTEP) {
@@ -63,6 +147,9 @@ public enum Items {
 		}
 	}),
 	
+	//food
+	
+	
 	//diamant
 	
 	//apple
@@ -82,6 +169,18 @@ public enum Items {
 			this.setItemMeta(im);
 		}
 	}),
+	
+	
+	//carrot
+	diamond_carrot(new ItemStack(Material.GOLDEN_CARROT) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Diamond Carrot");
+			im.setLore(Arrays.asList("Diamond Carrot"));
+			this.setItemMeta(im);
+		}
+	}),
+	
 	//hammer
 	diamond_hammer(new ItemStack(Material.DIAMOND_PICKAXE) {
 		ItemMeta im;{
@@ -112,7 +211,47 @@ public enum Items {
 		}
 	}),
 	
+	
+	//carrot
+	emerald_carrot(new ItemStack(Material.GOLDEN_CARROT) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Emerald Carrot");
+			im.setLore(Arrays.asList("Emerald Carrot"));
+			this.setItemMeta(im);
+		}
+	}),
+		
+		
 	//netherite
+	
+	//apple
+	netherite_apple(new ItemStack(Material.GOLDEN_APPLE) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Netherite Apple");
+			im.setLore(Arrays.asList("Netherite Apple"));
+			this.setItemMeta(im);
+		}
+	}),
+	enchanted_netherite_apple(new ItemStack(Material.ENCHANTED_GOLDEN_APPLE) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Enchanted Netherite Apple");
+			im.setLore(Arrays.asList("Enchanted Netherite Apple"));
+			this.setItemMeta(im);
+		}
+	}),
+	
+	//carrot
+	netherite_carrot(new ItemStack(Material.GOLDEN_CARROT) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Netherite Carrot");
+			im.setLore(Arrays.asList("Netherite Carrot"));
+			this.setItemMeta(im);
+		}
+	}),
 	
 	//hammer
 	netherite_hammer(new ItemStack(Material.NETHERITE_PICKAXE) {
@@ -126,6 +265,35 @@ public enum Items {
 	
 	//enderite
 	
+	//apple
+	enderite_apple(new ItemStack(Material.GOLDEN_APPLE) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Enderite Apple");
+			im.setLore(Arrays.asList("Enderite Apple"));
+			this.setItemMeta(im);
+		}
+	}),
+	enchanted_enderite_apple(new ItemStack(Material.ENCHANTED_GOLDEN_APPLE) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Enchanted Enderite Apple");
+			im.setLore(Arrays.asList("Enchanted Enderite Apple"));
+			this.setItemMeta(im);
+		}
+	}),
+		
+	//carrot
+	enderite_carrot(new ItemStack(Material.GOLDEN_CARROT) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Enderite Carrot");
+			im.setLore(Arrays.asList("Enderite Carrot"));
+			this.setItemMeta(im);
+		}
+	}),
+	
+	//base
 	enderite_scrap(new ItemStack(Material.NETHERITE_SCRAP) {
 		ItemMeta im;{
 			im = this.getItemMeta();
@@ -253,6 +421,35 @@ public enum Items {
 	
 	//discordium
 	
+	//apple
+	discordium_apple(new ItemStack(Material.GOLDEN_APPLE) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Discordium Apple");
+			im.setLore(Arrays.asList("Discordium Apple"));
+			this.setItemMeta(im);
+		}
+	}),
+	enchanted_discordium_apple(new ItemStack(Material.ENCHANTED_GOLDEN_APPLE) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Enchanted Discordium Apple");
+			im.setLore(Arrays.asList("Enchanted Discordium Apple"));
+			this.setItemMeta(im);
+		}
+	}),
+	
+	//carrot
+	discordium_carrot(new ItemStack(Material.GOLDEN_CARROT) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Discordium Carrot");
+			im.setLore(Arrays.asList("Discordium Carrot"));
+			this.setItemMeta(im);
+		}
+	}),
+	
+	//base
 	discordium_chunk(new ItemStack(Material.NETHERITE_SCRAP) {
 		ItemMeta im;{
 			im = this.getItemMeta();
@@ -384,6 +581,35 @@ public enum Items {
 	
 	//blazite
 	
+	//apple
+	blazite_apple(new ItemStack(Material.GOLDEN_APPLE) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Blazite Apple");
+			im.setLore(Arrays.asList("Blazite Apple"));
+			this.setItemMeta(im);
+		}
+	}),
+	enchanted_blazite_apple(new ItemStack(Material.ENCHANTED_GOLDEN_APPLE) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Enchanted Blazite Apple");
+			im.setLore(Arrays.asList("Enchanted Blazite Apple"));
+			this.setItemMeta(im);
+		}
+	}),
+	
+	//carrot
+	blazite_carrot(new ItemStack(Material.GOLDEN_CARROT) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Blazite Carrot");
+			im.setLore(Arrays.asList("Blazite Carrot"));
+			this.setItemMeta(im);
+		}
+	}),
+	
+	//base
 	blazite_chunk(new ItemStack(Material.NETHERITE_SCRAP) {
 		ItemMeta im;{
 			im = this.getItemMeta();
@@ -515,6 +741,35 @@ public enum Items {
 	
 	//manyullyn
 	
+	//apple
+	manyullyn_apple(new ItemStack(Material.GOLDEN_APPLE) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Manyullyn Apple");
+			im.setLore(Arrays.asList("Manyullyn Apple"));
+			this.setItemMeta(im);
+		}
+	}),
+	enchanted_manyullyn_apple(new ItemStack(Material.ENCHANTED_GOLDEN_APPLE) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Enchanted Manyullyn Apple");
+			im.setLore(Arrays.asList("Enchanted Manyullyn Apple"));
+			this.setItemMeta(im);
+		}
+	}),
+	
+	//carrot
+	manyullyn_carrot(new ItemStack(Material.GOLDEN_CARROT) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Manyullyn Carrot");
+			im.setLore(Arrays.asList("Manyullyn Carrot"));
+			this.setItemMeta(im);
+		}
+	}),
+	
+	//base
 	cobalt_ingot(new ItemStack(Material.NETHERITE_INGOT) {
 		ItemMeta im;{
 			im = this.getItemMeta();
@@ -654,6 +909,35 @@ public enum Items {
 	
 	//chaos
 	
+	//apple
+	chaos_apple(new ItemStack(Material.GOLDEN_APPLE) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Chaos Apple");
+			im.setLore(Arrays.asList("Chaos Apple"));
+			this.setItemMeta(im);
+		}
+	}),
+	enchanted_chaos_apple(new ItemStack(Material.ENCHANTED_GOLDEN_APPLE) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Enchanted Chaos Apple");
+			im.setLore(Arrays.asList("Enchanted Chaos Apple"));
+			this.setItemMeta(im);
+		}
+	}),
+	
+	//carrot
+	chaos_carrot(new ItemStack(Material.GOLDEN_CARROT) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Chaos Carrot");
+			im.setLore(Arrays.asList("Chaos Carrot"));
+			this.setItemMeta(im);
+		}
+	}),
+	
+	//base
 	chaos_chunk(new ItemStack(Material.NETHERITE_SCRAP) {
 		ItemMeta im;{
 			im = this.getItemMeta();
@@ -783,8 +1067,187 @@ public enum Items {
 		}
 	}),
 	
+	//netherstar
+	
+	//apple
+	netherstar_apple(new ItemStack(Material.GOLDEN_APPLE) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Netherstar Apple");
+			im.setLore(Arrays.asList("Netherstar Apple"));
+			this.setItemMeta(im);
+		}
+	}),
+	enchanted_netherstar_apple(new ItemStack(Material.ENCHANTED_GOLDEN_APPLE) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Enchanted Netherstar Apple");
+			im.setLore(Arrays.asList("Enchanted Netherstar Apple"));
+			this.setItemMeta(im);
+		}
+	}),
+	
+	//carrot
+	netherstar_carrot(new ItemStack(Material.GOLDEN_CARROT) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Netherstar Carrot");
+			im.setLore(Arrays.asList("Netherstar Carrot"));
+			this.setItemMeta(im);
+		}
+	}),
+	
+	//outils
+	netherstar_sword(new ItemStack(Material.NETHERITE_SWORD) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Netherstar Sword");
+			im.setLore(Arrays.asList("Netherstar Sword"));
+			im.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, new AttributeModifier(UUID.randomUUID(), "damage", 13, Operation.ADD_NUMBER, EquipmentSlot.HAND));
+			im.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier(UUID.randomUUID(), "speed", sword_speed, Operation.ADD_NUMBER, EquipmentSlot.HAND));
+			this.setItemMeta(im);
+		}
+	}),
+	netherstar_pickaxe(new ItemStack(Material.NETHERITE_PICKAXE) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Netherstar Pickaxe");
+			im.setLore(Arrays.asList("Netherstar Pickaxe"));
+			im.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, new AttributeModifier(UUID.randomUUID(), "damage", 11, Operation.ADD_NUMBER, EquipmentSlot.HAND));
+			im.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier(UUID.randomUUID(), "speed", pickaxe_speed, Operation.ADD_NUMBER, EquipmentSlot.HAND));
+			this.setItemMeta(im);
+		}
+	}),
+	netherstar_axe(new ItemStack(Material.NETHERITE_AXE) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Netherstar Axe");
+			im.setLore(Arrays.asList("Netherstar Axe"));
+			im.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, new AttributeModifier(UUID.randomUUID(), "damage", 15, Operation.ADD_NUMBER, EquipmentSlot.HAND));
+			im.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier(UUID.randomUUID(), "speed", axe_speed, Operation.ADD_NUMBER, EquipmentSlot.HAND));
+			this.setItemMeta(im);
+		}
+	}),
+	netherstar_shovel(new ItemStack(Material.NETHERITE_SHOVEL) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Netherstar Shovel");
+			im.setLore(Arrays.asList("Netherstar Shovel"));
+			im.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, new AttributeModifier(UUID.randomUUID(), "damage", 11.5, Operation.ADD_NUMBER, EquipmentSlot.HAND));
+			im.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier(UUID.randomUUID(), "speed", shovel_speed, Operation.ADD_NUMBER, EquipmentSlot.HAND));
+			this.setItemMeta(im);
+		}
+	}),
+	netherstar_hoe(new ItemStack(Material.NETHERITE_HOE) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Netherstar Hoe");
+			im.setLore(Arrays.asList("Netherstar Hoe"));
+			this.setItemMeta(im);
+		}
+	}),
+	//hammer
+	netherstar_hammer(new ItemStack(Material.NETHERITE_PICKAXE) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Netherstar Hammer");
+			im.setLore(Arrays.asList("Netherstar Hammer"));
+			im.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, new AttributeModifier(UUID.randomUUID(), "damage", 11, Operation.ADD_NUMBER, EquipmentSlot.HAND));
+			im.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier(UUID.randomUUID(), "speed", pickaxe_speed, Operation.ADD_NUMBER, EquipmentSlot.HAND));
+			this.setItemMeta(im);
+		}
+	}),
+	
+	
+	//armure
+	netherstar_helmet(new ItemStack(Material.NETHERITE_HELMET) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Netherstar Helmet");
+			im.setLore(Arrays.asList("Netherstar Helmet"));
+			im.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(), "ar", 6, Operation.ADD_NUMBER, EquipmentSlot.HEAD));
+			im.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), "art", 6, Operation.ADD_NUMBER, EquipmentSlot.HEAD));
+			im.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(UUID.randomUUID(), "kb", .1, Operation.ADD_NUMBER, EquipmentSlot.HEAD));
+			im = Custom.setItemShield(im, 3);
+			this.setItemMeta(im);
+		}
+	}),
+	netherstar_chestplate(new ItemStack(Material.NETHERITE_CHESTPLATE) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Netherstar Chestplate");
+			im.setLore(Arrays.asList("Netherstar Chestplate"));
+			im.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(), "ar", 11, Operation.ADD_NUMBER, EquipmentSlot.CHEST));
+			im.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), "art", 6, Operation.ADD_NUMBER, EquipmentSlot.CHEST));
+			im.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(UUID.randomUUID(), "kb", .1, Operation.ADD_NUMBER, EquipmentSlot.CHEST));
+			im = Custom.setItemShield(im, 8);
+			this.setItemMeta(im);
+		}
+	}),
+	netherstar_leggings(new ItemStack(Material.NETHERITE_LEGGINGS) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Netherstar Leggings");
+			im.setLore(Arrays.asList("Netherstar Leggings"));
+			im.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(), "ar", 9, Operation.ADD_NUMBER, EquipmentSlot.LEGS));
+			im.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), "art", 6, Operation.ADD_NUMBER, EquipmentSlot.LEGS));
+			im.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(UUID.randomUUID(), "kb", .1, Operation.ADD_NUMBER, EquipmentSlot.LEGS));
+			im = Custom.setItemShield(im, 6);
+			this.setItemMeta(im);
+			}
+	}),
+	netherstar_boots(new ItemStack(Material.NETHERITE_BOOTS) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Netherstar Boots");
+			im.setLore(Arrays.asList("Netherstar Boots"));
+			im.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(), "ar", 6, Operation.ADD_NUMBER, EquipmentSlot.FEET));
+			im.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), "art", 6, Operation.ADD_NUMBER, EquipmentSlot.FEET));
+			im.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(UUID.randomUUID(), "kb", .1, Operation.ADD_NUMBER, EquipmentSlot.FEET));
+			im = Custom.setItemShield(im, 3);
+			this.setItemMeta(im);
+		}
+	}),
+	
 	//infinity
 	
+	//apple
+	infinity_apple(new ItemStack(Material.GOLDEN_APPLE) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Infinity Apple");
+			im.setLore(Arrays.asList("Infinity Apple"));
+			this.setItemMeta(im);
+		}
+	}),
+	enchanted_infinity_apple(new ItemStack(Material.ENCHANTED_GOLDEN_APPLE) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Enchanted Infinity Apple");
+			im.setLore(Arrays.asList("Enchanted Infinity Apple"));
+			this.setItemMeta(im);
+		}
+	}),
+	
+	//carrot
+	infinity_carrot(new ItemStack(Material.GOLDEN_CARROT) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Infinity Carrot");
+			im.setLore(Arrays.asList("Infinity Carrot"));
+			this.setItemMeta(im);
+		}
+	}),
+	
+	//base
+	infinity_egg(new ItemStack(Material.ENDERMITE_SPAWN_EGG) {
+		ItemMeta im;{
+			im = this.getItemMeta();
+			im.setDisplayName(ChatColor.RESET+"Infinity Egg");
+			im.setLore(Arrays.asList("Infinity Egg"));
+			this.setItemMeta(im);
+		}
+	}),
 	infinity_catalyst(new ItemStack(Material.NETHERITE_SCRAP) {
 		ItemMeta im;{
 			im = this.getItemMeta();
@@ -808,7 +1271,7 @@ public enum Items {
 			im = this.getItemMeta();
 			im.setDisplayName(ChatColor.RESET+"Infinity Sword");
 			im.setLore(Arrays.asList("Infinity Sword"));
-			im.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, new AttributeModifier(UUID.randomUUID(), "damage", 13, Operation.ADD_NUMBER, EquipmentSlot.HAND));
+			im.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, new AttributeModifier(UUID.randomUUID(), "damage", 14, Operation.ADD_NUMBER, EquipmentSlot.HAND));
 			im.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier(UUID.randomUUID(), "speed", sword_speed, Operation.ADD_NUMBER, EquipmentSlot.HAND));
 			this.setItemMeta(im);
 		}
@@ -818,7 +1281,7 @@ public enum Items {
 			im = this.getItemMeta();
 			im.setDisplayName(ChatColor.RESET+"Infinity Pickaxe");
 			im.setLore(Arrays.asList("Infinity Pickaxe"));
-			im.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, new AttributeModifier(UUID.randomUUID(), "damage", 11, Operation.ADD_NUMBER, EquipmentSlot.HAND));
+			im.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, new AttributeModifier(UUID.randomUUID(), "damage", 12, Operation.ADD_NUMBER, EquipmentSlot.HAND));
 			im.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier(UUID.randomUUID(), "speed", pickaxe_speed, Operation.ADD_NUMBER, EquipmentSlot.HAND));
 			this.setItemMeta(im);
 		}
@@ -828,7 +1291,7 @@ public enum Items {
 			im = this.getItemMeta();
 			im.setDisplayName(ChatColor.RESET+"Infinity Axe");
 			im.setLore(Arrays.asList("Infinity Axe"));
-			im.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, new AttributeModifier(UUID.randomUUID(), "damage", 15, Operation.ADD_NUMBER, EquipmentSlot.HAND));
+			im.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, new AttributeModifier(UUID.randomUUID(), "damage", 16, Operation.ADD_NUMBER, EquipmentSlot.HAND));
 			im.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier(UUID.randomUUID(), "speed", axe_speed, Operation.ADD_NUMBER, EquipmentSlot.HAND));
 			this.setItemMeta(im);
 		}
@@ -838,7 +1301,7 @@ public enum Items {
 			im = this.getItemMeta();
 			im.setDisplayName(ChatColor.RESET+"Infinity Shovel");
 			im.setLore(Arrays.asList("Infinity Shovel"));
-			im.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, new AttributeModifier(UUID.randomUUID(), "damage", 11.5, Operation.ADD_NUMBER, EquipmentSlot.HAND));
+			im.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, new AttributeModifier(UUID.randomUUID(), "damage", 12.5, Operation.ADD_NUMBER, EquipmentSlot.HAND));
 			im.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier(UUID.randomUUID(), "speed", shovel_speed, Operation.ADD_NUMBER, EquipmentSlot.HAND));
 			this.setItemMeta(im);
 		}
@@ -857,7 +1320,7 @@ public enum Items {
 			im = this.getItemMeta();
 			im.setDisplayName(ChatColor.RESET+"Infinity Hammer");
 			im.setLore(Arrays.asList("Infinity Hammer"));
-			im.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, new AttributeModifier(UUID.randomUUID(), "damage", 11, Operation.ADD_NUMBER, EquipmentSlot.HAND));
+			im.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, new AttributeModifier(UUID.randomUUID(), "damage", 12, Operation.ADD_NUMBER, EquipmentSlot.HAND));
 			im.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier(UUID.randomUUID(), "speed", pickaxe_speed, Operation.ADD_NUMBER, EquipmentSlot.HAND));
 			this.setItemMeta(im);
 		}
@@ -870,10 +1333,10 @@ public enum Items {
 			im = this.getItemMeta();
 			im.setDisplayName(ChatColor.RESET+"Infinity Helmet");
 			im.setLore(Arrays.asList("Infinity Helmet"));
-			im.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(), "ar", 6, Operation.ADD_NUMBER, EquipmentSlot.HEAD));
-			im.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), "art", 6, Operation.ADD_NUMBER, EquipmentSlot.HEAD));
+			im.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(), "ar", 6.5, Operation.ADD_NUMBER, EquipmentSlot.HEAD));
+			im.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), "art", 6.5, Operation.ADD_NUMBER, EquipmentSlot.HEAD));
 			im.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(UUID.randomUUID(), "kb", .1, Operation.ADD_NUMBER, EquipmentSlot.HEAD));
-			im = Custom.setItemShield(im, 3);
+			im = Custom.setItemShield(im, 4);
 			this.setItemMeta(im);
 		}
 	}),
@@ -882,10 +1345,10 @@ public enum Items {
 			im = this.getItemMeta();
 			im.setDisplayName(ChatColor.RESET+"Infinity Chestplate");
 			im.setLore(Arrays.asList("Infinity Chestplate"));
-			im.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(), "ar", 11, Operation.ADD_NUMBER, EquipmentSlot.CHEST));
-			im.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), "art", 6, Operation.ADD_NUMBER, EquipmentSlot.CHEST));
+			im.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(), "ar", 11.5, Operation.ADD_NUMBER, EquipmentSlot.CHEST));
+			im.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), "art", 6.5, Operation.ADD_NUMBER, EquipmentSlot.CHEST));
 			im.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(UUID.randomUUID(), "kb", .1, Operation.ADD_NUMBER, EquipmentSlot.CHEST));
-			im = Custom.setItemShield(im, 8);
+			im = Custom.setItemShield(im, 10);
 			this.setItemMeta(im);
 		}
 	}),
@@ -894,10 +1357,10 @@ public enum Items {
 			im = this.getItemMeta();
 			im.setDisplayName(ChatColor.RESET+"Infinity Leggings");
 			im.setLore(Arrays.asList("Infinity Leggings"));
-			im.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(), "ar", 9, Operation.ADD_NUMBER, EquipmentSlot.LEGS));
-			im.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), "art", 6, Operation.ADD_NUMBER, EquipmentSlot.LEGS));
+			im.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(), "ar", 9.5, Operation.ADD_NUMBER, EquipmentSlot.LEGS));
+			im.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), "art", 6.5, Operation.ADD_NUMBER, EquipmentSlot.LEGS));
 			im.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(UUID.randomUUID(), "kb", .1, Operation.ADD_NUMBER, EquipmentSlot.LEGS));
-			im = Custom.setItemShield(im, 6);
+			im = Custom.setItemShield(im, 7);
 			this.setItemMeta(im);
 			}
 	}),
@@ -906,10 +1369,10 @@ public enum Items {
 			im = this.getItemMeta();
 			im.setDisplayName(ChatColor.RESET+"Infinity Boots");
 			im.setLore(Arrays.asList("Infinity Boots"));
-			im.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(), "ar", 6, Operation.ADD_NUMBER, EquipmentSlot.FEET));
-			im.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), "art", 6, Operation.ADD_NUMBER, EquipmentSlot.FEET));
+			im.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(), "ar", 6.5, Operation.ADD_NUMBER, EquipmentSlot.FEET));
+			im.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), "art", 6.5, Operation.ADD_NUMBER, EquipmentSlot.FEET));
 			im.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(UUID.randomUUID(), "kb", .1, Operation.ADD_NUMBER, EquipmentSlot.FEET));
-			im = Custom.setItemShield(im, 3);
+			im = Custom.setItemShield(im, 4);
 			this.setItemMeta(im);
 		}
 	});

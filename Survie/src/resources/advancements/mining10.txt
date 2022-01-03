@@ -1,0 +1,24 @@
+{
+    "display": {
+        "title": {
+            "text": "Getting Hammered Tonight"
+        },
+        "description": {
+            "text": "Craft an enderite hammer"
+        },
+        "icon": {
+            "item": "minecraft:netherite_pickaxe",
+            "nbt": "{display:{Lore:['{\"text\":\"Enderite Hammer\"}']}}"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": true
+    },
+    "criteria": {
+        "Impossible": {
+            "trigger": "minecraft:impossible"
+        }
+    },
+    "parent": "survie:mining9"
+}

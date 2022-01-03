@@ -127,11 +127,13 @@ public class ChaosBiome {
             	int j = chunk.getZ() * 16 + z;
             	int i2 = i >> 2;
             	int j2 = j >> 2;
-            	if(Custom.noise(noise,i2*2+1, j2*2+1) > 0) {
-            		for(int y = 0; y <= chunk.getWorld().getMaxHeight(); y++) {
-                		setBiome(i, y, j, w, getbase("survie:chaos"));
+            	if(i2*i2 + j2*j2 > 4096L) {
+            		if(Custom.noise(noise,i2*2+1, j2*2+1) > 0) {
+            			for(int y = 0; y <= chunk.getWorld().getMaxHeight(); y++) {
+            				setBiome(i, y, j, w, getbase("survie:chaos"));
+            			}
                 	}
-                }
+            	}
             }
 		}
 		refreshChunksForAll(chunk);

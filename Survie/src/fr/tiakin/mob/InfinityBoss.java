@@ -1,4 +1,4 @@
-package fr.tiakin.boss;
+package fr.tiakin.mob;
 
 import java.util.Random;
 
@@ -13,6 +13,7 @@ import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.craftbukkit.v1_18_R1.CraftWorld;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fireball;
@@ -21,6 +22,7 @@ import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
@@ -41,12 +43,17 @@ public class InfinityBoss implements Listener {
 	public static void spawn(Location loc) {
 		Entity entity = loc.getWorld().spawnEntity(loc, EntityType.ZOMBIE);
 		Zombie zombie = (Zombie) entity;
+		
+		zombie.getPersistentDataContainer().set(new NamespacedKey(Main.getPlugin(Main.class), "Boss"),PersistentDataType.SHORT,(short) 1);
+		
 		zombie.getEquipment().setBoots(Items.infinity_boots.getItemStack());
 		zombie.getEquipment().setLeggings(Items.infinity_leggings.getItemStack());
 		zombie.getEquipment().setChestplate(Items.infinity_chestplate.getItemStack());
 		zombie.getEquipment().setHelmet(Items.infinity_helmet.getItemStack());
 		
-		zombie.getEquipment().setItemInMainHand(Items.infinity_axe.getItemStack());
+		ItemStack is = Items.infinity_axe.getItemStack().clone();
+		is.addEnchantment(Enchantment.DAMAGE_ALL, 5);
+		zombie.getEquipment().setItemInMainHand(is);
 		
 		
 		zombie.getEquipment().setBootsDropChance(0);
@@ -66,6 +73,8 @@ public class InfinityBoss implements Listener {
 		zombie.setCustomName("§4Infinity Boss");
 		BossBar bar = Bukkit.createBossBar("§4Infinity Boss",BarColor.RED, BarStyle.SOLID);
 		
+		
+		
 		loop(zombie,bar);
 	}
 	
@@ -79,7 +88,7 @@ public class InfinityBoss implements Listener {
 						bar.addPlayer(p);
 					
 					Random r = new Random();
-					switch(r.nextInt(300)) {
+					switch(r.nextInt(400)) {
 					case 0:
 						Bukkit.broadcastMessage("§cPar le feu soyez purifier !");
 						for(int i=0;i<50;i++) {
@@ -87,8 +96,8 @@ public class InfinityBoss implements Listener {
 							Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), () -> {
 								Fireball fireball = zombie.getWorld().spawn(new Location(zombie.getWorld(),zombie.getLocation().getX(),zombie.getLocation().getY(),zombie.getLocation().getZ()),Fireball.class);
 								fireball.setDirection(new Vector(Math.cos(j*Math.PI*2/50), 0, Math.sin(j*Math.PI*2/50)));
-								fireball.setVelocity(new Vector(Math.cos(j*Math.PI/50), 0, Math.sin(j*Math.PI/50)));
-							},j);
+								fireball.setVelocity(new Vector(Math.cos(j*Math.PI*2/50), 0, Math.sin(j*Math.PI*2/50)));
+							},j*2);
 						}
 						break;
 					case 1:
@@ -98,16 +107,13 @@ public class InfinityBoss implements Listener {
 								if(entity instanceof Player) {
 									Player p = (Player) entity;
 									if(p.getGameMode() != GameMode.CREATIVE) {
-										p.setVelocity(new Vector(0,2,0));
-										Bukkit.getScheduler().runTaskLaterAsynchronously(Main.getPlugin(Main.class), () -> {
-											p.getVelocity().multiply(4);
-											BukkitTask e = Bukkit.getScheduler().runTaskLaterAsynchronously(Main.getPlugin(Main.class), () -> {
-												if(p.getPersistentDataContainer().has(new NamespacedKey(Main.getPlugin(Main.class), "bossAttack"),PersistentDataType.INTEGER))
-													p.getPersistentDataContainer().remove(new NamespacedKey(Main.getPlugin(Main.class), "bossAttack"));
-											},10000L);
-											p.getPersistentDataContainer().set(new NamespacedKey(Main.getPlugin(Main.class), "bossAttack"), PersistentDataType.INTEGER, e.getTaskId());
+										p.setVelocity(new Vector(0,10,0));
+										BukkitTask e = Bukkit.getScheduler().runTaskLaterAsynchronously(Main.getPlugin(Main.class), () -> {
+											if(p.getPersistentDataContainer().has(new NamespacedKey(Main.getPlugin(Main.class), "bossAttack"),PersistentDataType.INTEGER))
+												p.getPersistentDataContainer().remove(new NamespacedKey(Main.getPlugin(Main.class), "bossAttack"));
+										},2000L);
+										p.getPersistentDataContainer().set(new NamespacedKey(Main.getPlugin(Main.class), "bossAttack"), PersistentDataType.INTEGER, e.getTaskId());
 											
-										},1000L);
 									}
 								}
 							}
@@ -150,6 +156,19 @@ public class InfinityBoss implements Listener {
 						((CraftWorld) e.getEntity().getWorld()).getHandle().l(bp).a(bp, Custom.createCustomBlock(Blocks.chaos_nylium), true);
 					}
 				}
+			}
+		}
+	}
+	
+	@EventHandler
+	public void onDeath(EntityDeathEvent e) {
+		if(e.getEntity() instanceof Zombie) {
+			Zombie z = (Zombie) e.getEntity();
+			if(z.getPersistentDataContainer().has(new NamespacedKey(Main.getPlugin(Main.class), "Boss"), PersistentDataType.SHORT) && 
+			   z.getPersistentDataContainer().get(new NamespacedKey(Main.getPlugin(Main.class), "Boss"), PersistentDataType.SHORT).byteValue() == (short) 1) {
+				e.setDroppedExp(100);
+				Random r = new Random();
+				e.getDrops().add(Custom.multi(Items.infinity_catalyst.getItemStack(), r.nextInt(4)+2));
 			}
 		}
 	}

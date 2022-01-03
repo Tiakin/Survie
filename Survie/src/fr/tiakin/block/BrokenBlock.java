@@ -1,8 +1,8 @@
 package fr.tiakin.block;
 
 
-import java.util.stream.Stream;
-
+import java.util.ArrayList;
+import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
@@ -21,12 +21,12 @@ public class BrokenBlock {
     private double damage = 0;
     private Block block;
     private Boolean InstantBreak = false;
-    private Stream<Block> stream;
+    private List<Block> list = new ArrayList<>();
     
-    public BrokenBlock(Block block, float f, Stream<Block> stream){
+    public BrokenBlock(Block block, float f, List<Block> list){
         this.block = block;
         this.hardeness = f;
-        this.stream = stream;
+        this.list = list;
     }
 
     public void incrementDamage(Player from, float toolMultiplier){
@@ -57,8 +57,9 @@ public class BrokenBlock {
             } else {
             	breakBlock(from);
             	if(Tool.isHammer(from.getInventory().getItemInMainHand()))
-                	stream.forEach(b -> {
-                		from.breakBlock(b);
+                	list.forEach(b -> {
+                		if(Tool.canHarvest(b, from.getInventory().getItemInMainHand()) && Tool.isBestTool(b, from.getInventory().getItemInMainHand()))
+                			from.breakBlock(b);
                 	});
                 
                 
@@ -143,7 +144,7 @@ public class BrokenBlock {
         		break;
         	}
     	
-        if(from.getLocation().getBlock().isLiquid() && (!(from.getInventory().getHelmet() != null) || !(from.getInventory().getHelmet().hasItemMeta()) || !(from.getInventory().getHelmet().getItemMeta().hasEnchants()) || !from.getInventory().getHelmet().containsEnchantment(Enchantment.WATER_WORKER)))
+        if(from.isInWater() && (!(from.getInventory().getHelmet() != null) || !(from.getInventory().getHelmet().hasItemMeta()) || !(from.getInventory().getHelmet().getItemMeta().hasEnchants()) || !from.getInventory().getHelmet().containsEnchantment(Enchantment.WATER_WORKER)))
         	speedMultiplier /= 5;
         if(from.isFlying())
         	speedMultiplier /= 5;

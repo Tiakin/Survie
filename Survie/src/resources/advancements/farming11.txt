@@ -1,14 +1,14 @@
 {
     "display": {
         "title": {
-            "text": "Extreme Serious Dedication"
+            "text": "Supreme Step"
         },
         "description": {
-            "text": "Craft a chaos hoe"
+            "text": "Eat a discordium apple"
         },
         "icon": {
-            "item": "minecraft:netherite_hoe",
-            "nbt": "{display:{Lore:['[{\"text\":\"Chaos Hoe\"}]']}}"
+            "item": "minecraft:golden_apple",
+            "nbt": "{display:{Lore:['{\"text\":\"Discordium Apple\"}']}}"
         },
         "frame": "task",
         "show_toast": true,

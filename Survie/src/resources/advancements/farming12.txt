@@ -1,16 +1,16 @@
 {
     "display": {
         "title": {
-            "text": "Down Bad Serious Dedication"
+            "text": "Relax, Take A Load Off"
         },
         "description": {
-            "text": "Craft an infinity hoe"
+            "text": "Eat an enchanted discordium apple"
         },
         "icon": {
-            "item": "minecraft:netherite_hoe",
-            "nbt": "{display:{Lore:['[{\"text\":\"Infinity Hoe\"}]']}}"
+            "item": "minecraft:enchanted_golden_apple",
+            "nbt": "{display:{Lore:['{\"text\":\"Enchanted Discordium Apple\"}']}}"
         },
-        "frame": "goal",
+        "frame": "task",
         "show_toast": true,
         "announce_to_chat": true,
         "hidden": true

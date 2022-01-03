@@ -1,14 +1,14 @@
 {
     "display": {
         "title": {
-            "text": "Supreme Serious Dedication"
+            "text": "Embrace The Void"
         },
         "description": {
-            "text": "Craft a manyullyn hoe"
+            "text": "Eat an enchanted enderite apple"
         },
         "icon": {
-            "item": "minecraft:netherite_hoe",
-            "nbt": "{display:{Lore:['[{\"text\":\"Manyullyn Hoe\"}]']}}"
+            "item": "minecraft:enchanted_golden_apple",
+            "nbt": "{display:{Lore:['{\"text\":\"Enchanted Enderite Apple\"}']}}"
         },
         "frame": "task",
         "show_toast": true,

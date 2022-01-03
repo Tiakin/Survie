@@ -1,0 +1,20 @@
+{
+    "display": {
+        "title": {
+            "text": "Mega Serious Dedication"
+        },
+        "description": {
+            "text": "Craft a blazite hoe"
+        },
+        "icon": {
+            "item": "minecraft:netherite_hoe",
+            "nbt": "{display:{Lore:['{\"text\":\"Blazite Hoe\"}']}}"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": true
+    },
+    "criteria": {"impossible":{"trigger":"minecraft:impossible"}},
+    "parent": "survie:farming34"
+}

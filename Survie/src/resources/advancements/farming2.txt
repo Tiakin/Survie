@@ -4,7 +4,7 @@
             "text": "Old School"
         },
         "description": {
-            "text": "Craft an enchanted golden apple"
+            "text": "Eat an enchanted golden apple"
         },
         "icon": {
             "item": "minecraft:enchanted_golden_apple"

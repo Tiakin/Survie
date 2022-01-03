@@ -1,14 +1,14 @@
 {
     "display": {
         "title": {
-            "text": "Super Serious Dedication"
+            "text": "Not Very Shiny, But Hard"
         },
         "description": {
-            "text": "Craft a discordium hoe"
+            "text": "Eat an enchanted netherite apple"
         },
         "icon": {
-            "item": "minecraft:netherite_hoe",
-            "nbt": "{display:{Lore:['[{\"text\":\"Discordium Hoe\"}]']}}"
+            "item": "minecraft:enchanted_golden_apple",
+            "nbt": "{display:{Lore:['{\"text\":\"Enchanted Netherite Apple\"}']}}"
         },
         "frame": "task",
         "show_toast": true,

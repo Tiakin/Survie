@@ -1,14 +1,14 @@
 {
     "display": {
         "title": {
-            "text": "Very Serious Dedication"
+            "text": "Super Step"
         },
         "description": {
-            "text": "Craft an enderite hoe"
+            "text": "Eat a netherite apple"
         },
         "icon": {
-            "item": "minecraft:netherite_hoe",
-            "nbt": "{display:{Lore:['[{\"text\":\"Enderite Hoe\"}]']}}"
+            "item": "minecraft:golden_apple",
+            "nbt": "{display:{Lore:['{\"text\":\"Netherite Apple\"}']}}"
         },
         "frame": "task",
         "show_toast": true,
@@ -16,5 +16,5 @@
         "hidden": true
     },
     "criteria": {"impossible":{"trigger":"minecraft:impossible"}},
-    "parent": "survie:farmingroot"
+    "parent": "survie:farming6"
 }

@@ -1,14 +1,14 @@
 {
     "display": {
         "title": {
-            "text": "Mega Serious Dedication"
+            "text": "Mega Step"
         },
         "description": {
-            "text": "Craft a blazite hoe"
+            "text": "Eat an enderite apple"
         },
         "icon": {
-            "item": "minecraft:netherite_hoe",
-            "nbt": "{display:{Lore:['[{\"text\":\"Blazite Hoe\"}]']}}"
+            "item": "minecraft:golden_apple",
+            "nbt": "{display:{Lore:['{\"text\":\"Enderite Apple\"}']}}"
         },
         "frame": "task",
         "show_toast": true,

@@ -1,0 +1,20 @@
+{
+    "display": {
+        "title": {
+            "text": "Void Carrot"
+        },
+        "description": {
+            "text": "Eat an enderite carrot"
+        },
+        "icon": {
+            "item": "minecraft:golden_carrot",
+            "nbt": "{display:{Lore:['{\"text\":\"Enderite Carrot\"}']}}"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": true
+    },
+    "criteria": {"impossible":{"trigger":"minecraft:impossible"}},
+    "parent": "survie:farming25"
+}

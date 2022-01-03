@@ -1,0 +1,20 @@
+{
+    "display": {
+        "title": {
+            "text": "A Balanced Diet+"
+        },
+        "description": {
+            "text": "Eat all custom foods"
+        },
+        "icon": {
+            "item": "minecraft:apple",
+            "nbt": "{display:{Lore:['{\"text\":\"Bacon Cheese Burger\"}']}}"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": true
+    },
+    "criteria": {"impossible":{"trigger":"minecraft:impossible"}},
+    "parent": "survie:farmingroot"
+}

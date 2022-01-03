@@ -1,0 +1,24 @@
+{
+    "display": {
+        "title": {
+            "text": "You must be worthy darling, because you can totally lift my hammer"
+        },
+        "description": {
+            "text": "Craft a chaos hammer"
+        },
+        "icon": {
+            "item": "minecraft:netherite_pickaxe",
+            "nbt": "{display:{Lore:['{\"text\":\"Chaos Hammer\"}']}}"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": true
+    },
+    "criteria": {
+        "Impossible": {
+            "trigger": "minecraft:impossible"
+        }
+    },
+    "parent": "survie:mining13"
+}

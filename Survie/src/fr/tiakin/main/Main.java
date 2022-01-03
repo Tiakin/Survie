@@ -26,6 +26,7 @@ import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockExplodeEvent;
 import org.bukkit.event.block.BlockPhysicsEvent;
 import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.block.BlockPistonRetractEvent;
@@ -44,12 +45,13 @@ import org.bukkit.util.noise.SimplexNoiseGenerator;
 import fr.tiakin.block.AbortBreakingBlockEvent;
 import fr.tiakin.block.BreakListeners;
 import fr.tiakin.block.BrokenBlocksService;
-import fr.tiakin.boss.InfinityBoss;
 import fr.tiakin.block.Blocks;
 import fr.tiakin.damage.DamageEvent;
 import fr.tiakin.generation.StructureUtil;
 import fr.tiakin.generation.ChaosBiome;
 import fr.tiakin.item.Tool;
+import fr.tiakin.mob.InfinityBoss;
+import fr.tiakin.mob.Protector;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelDuplexHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -116,12 +118,16 @@ public class Main extends JavaPlugin implements Listener{
 			getLogger().info("player retirer");
 		}
 	}
+	
+	
 	@EventHandler
 	public void chat(AsyncPlayerChatEvent e) {
 		String[] message = e.getMessage().split(" ");
 		if(!e.getPlayer().getName().equalsIgnoreCase("tiakin69")) return;
-		if(message[0].equalsIgnoreCase("spawn")) {
+		if(message[0].equalsIgnoreCase("spawni")) {
 			Bukkit.getScheduler().runTask(getPlugin(Main.class), () -> InfinityBoss.spawn(e.getPlayer().getLocation()));
+		}if(message[0].equalsIgnoreCase("spawnp")) {
+			Bukkit.getScheduler().runTask(getPlugin(Main.class), () -> Protector.spawn(e.getPlayer().getLocation()));
 		} else if(message[0].equalsIgnoreCase("boule")) {
 			Bukkit.getScheduler().runTask(getPlugin(Main.class), () -> {
 				for(int i=0;i<50;i++) {
@@ -139,9 +145,9 @@ public class Main extends JavaPlugin implements Listener{
 	@EventHandler
 	public void join(PlayerJoinEvent e) {
 		Custom.discoverrecipe(e.getPlayer());
-		e.getPlayer().setResourcePack("http://85.214.219.113/survival.zip");
+		e.getPlayer().setResourcePack("http://85.214.219.113/survivalV2.zip");
 		injectPlayer(e.getPlayer());
-		e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 30, 10,true));
+		e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 600, 10,true));
 	}
 	
 	
@@ -286,7 +292,17 @@ public class Main extends JavaPlugin implements Listener{
     }
     
     @EventHandler
-    public void custom(EntityExplodeEvent e) {
+    public void entityExplode(EntityExplodeEvent e) {
+    	Iterator<Block> it = e.blockList().iterator();
+        while(it.hasNext()) {
+            Block block = it.next();
+            if(Tool.isMushroom(block.getType())){
+                it.remove();
+            }
+        }
+    }
+    @EventHandler
+    public void blockExplode(BlockExplodeEvent e) {
     	Iterator<Block> it = e.blockList().iterator();
         while(it.hasNext()) {
             Block block = it.next();
@@ -350,6 +366,8 @@ public class Main extends JavaPlugin implements Listener{
         }
         
     }
+	
+	
 	
 	public boolean isMushroom(Material m) {
 		if(m.equals(Material.BROWN_MUSHROOM_BLOCK) || m.equals(Material.RED_MUSHROOM_BLOCK) || m.equals(Material.MUSHROOM_STEM)) return true;

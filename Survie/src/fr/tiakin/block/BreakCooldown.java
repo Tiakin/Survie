@@ -14,7 +14,6 @@ public class BreakCooldown {
 	private static Set<Player> cooldownlist = new HashSet<>();
 	
 	public static void addPlayerOnCooldown(Player p){
-    	JavaPlugin.getPlugin(Main.class).getLogger().info("cooldown :x");
     	cooldownlist.add(p);
     	Bukkit.getScheduler().runTaskLater(JavaPlugin.getPlugin(Main.class), new Runnable() {
     		  @Override
@@ -27,7 +26,6 @@ public class BreakCooldown {
     public static void removePlayerOnCooldown(Player p){
     	if(isPlayerOnCooldown(p)) {
     		cooldownlist.remove(p);
-    		JavaPlugin.getPlugin(Main.class).getLogger().info("cooldown enlever :)");
     	}
     }
     

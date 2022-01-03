@@ -1,7 +1,7 @@
 package fr.tiakin.block;
 
 import java.util.HashMap;
-import java.util.stream.Stream;
+import java.util.List;
 
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -14,11 +14,11 @@ public class BrokenBlocksService {
     }
     
     
-    public void createBrokenBlock(Block block, float f, Stream<Block> stream){
+    public void createBrokenBlock(Block block, float f, List<Block> list){
         if(isBrokenBlock(block.getLocation())) return;
         BrokenBlock brokenBlock;
-        if(f == -1) brokenBlock = new BrokenBlock(block, 0, stream);
-        else brokenBlock = new BrokenBlock(block, f, stream);
+        if(f == -1) brokenBlock = new BrokenBlock(block, 0, list);
+        else brokenBlock = new BrokenBlock(block, f, list);
         brokenBlocks.put(block.getLocation(), brokenBlock);
     }
 

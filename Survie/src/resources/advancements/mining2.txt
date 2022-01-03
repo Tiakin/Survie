@@ -8,13 +8,17 @@
         },
         "icon": {
             "item": "minecraft:netherite_ingot",
-            "nbt": "{display:{Lore:['[{\"text\":\"Discordium Ingot\"}]']}}"
+            "nbt": "{display:{Lore:['{\"text\":\"Discordium Ingot\"}']}}"
         },
         "frame": "task",
         "show_toast": true,
         "announce_to_chat": true,
         "hidden": true
     },
-    "criteria": {"impossible":{"trigger":"minecraft:impossible"}},
+    "criteria": {
+        "Impossible": {
+            "trigger": "minecraft:impossible"
+        }
+    },
     "parent": "survie:mining1"
 }

@@ -10,7 +10,7 @@
             "obfuscated": false
         },
         "description": {
-            "text": "not the end",
+            "text": "Not the end",
             "color": "dark_green",
             "bold": false
         },
@@ -23,5 +23,9 @@
         "hidden": true,
         "background": "minecraft:textures/gui/advancements/backgrounds/enderite_block.png"
     },
-    "criteria": {"impossible":{"trigger":"minecraft:impossible"}}
+    "criteria": {
+        "Impossible": {
+            "trigger": "minecraft:impossible"
+        }
+    }
 }

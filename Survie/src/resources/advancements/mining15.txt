@@ -10,13 +10,13 @@
             "item": "minecraft:netherite_pickaxe",
             "nbt": "{display:{Lore:['{\"text\":\"Netherstar Hammer\"}']}}"
         },
-        "frame": "task",
+        "frame": "challenge",
         "show_toast": true,
         "announce_to_chat": true,
         "hidden": true
     },
     "criteria": {
-        "Impossible": {
+        "impossible": {
             "trigger": "minecraft:impossible"
         }
     },

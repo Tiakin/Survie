@@ -35,7 +35,7 @@ public enum Items {
 			this.setItemMeta(im);
 		}
 	}),
-	Chocolate_Caramel_fudge(new ItemStack(Material.APPLE) {
+	chocolate_caramel_fudge(new ItemStack(Material.APPLE) {
 		ItemMeta im;{
 			im = this.getItemMeta();
 			im.setDisplayName(ChatColor.RESET+"Chocolate Caramel Fudge");
@@ -83,7 +83,7 @@ public enum Items {
 			this.setItemMeta(im);
 		}
 	}),
-	 Fish_and_Chips(new ItemStack(Material.APPLE) {
+	fish_and_chips(new ItemStack(Material.APPLE) {
 		ItemMeta im;{
 			im = this.getItemMeta();
 			im.setDisplayName(ChatColor.RESET+"Fish & Chips");

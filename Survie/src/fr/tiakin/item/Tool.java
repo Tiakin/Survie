@@ -163,6 +163,9 @@ public class Tool {
 		default -> 0;
 		};
 	}
+	public static int getOrder(ItemStack itemStack) {
+		return getOrder(getTier(itemStack));
+	}
 	
     public static float getToolSpeed(ItemStack itemStack) {
     	switch(getTier(itemStack)) {

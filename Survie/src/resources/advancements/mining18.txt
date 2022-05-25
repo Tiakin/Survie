@@ -1,14 +1,14 @@
 {
     "display": {
         "title": {
-            "text": "Getting Hammered Tonight"
+            "text": "Cover Me In Wumpus"
         },
         "description": {
-            "text": "Craft an enderite hammer"
+            "text": "Get yourself a full set of discordium"
         },
         "icon": {
-            "item": "minecraft:netherite_pickaxe",
-            "nbt": "{display:{Lore:['{\"text\":\"Enderite Hammer\"}']}}"
+            "item": "minecraft:netherite_chestplate",
+            "nbt": "{display:{Lore:['{\"text\":\"Discordium Chestplate\"}']}}"
         },
         "frame": "task",
         "show_toast": true,
@@ -20,5 +20,5 @@
             "trigger": "minecraft:impossible"
         }
     },
-    "parent": "survie:mining9"
+    "parent": "survie:mining17"
 }

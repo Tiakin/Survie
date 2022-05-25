@@ -19,8 +19,8 @@ import org.bukkit.World.Environment;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.MultipleFacing;
-import org.bukkit.craftbukkit.v1_18_R1.CraftWorld;
-import org.bukkit.craftbukkit.v1_18_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_18_R2.CraftWorld;
+import org.bukkit.craftbukkit.v1_18_R2.entity.CraftPlayer;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fireball;
@@ -256,7 +256,7 @@ public class Main extends JavaPlugin implements Listener{
     }
 	
 	private void removePlayer(Player player) {
-        Channel channel = ((CraftPlayer) player).getHandle().b.a.k;
+        Channel channel = ((CraftPlayer) player).getHandle().b.a.m;
         channel.eventLoop().submit(() -> {
             channel.pipeline().remove(player.getName());
             return null;
@@ -291,7 +291,7 @@ public class Main extends JavaPlugin implements Listener{
 
         };
 
-        ChannelPipeline pipeline = ((CraftPlayer) player).getHandle().b.a.k.pipeline();
+        ChannelPipeline pipeline = ((CraftPlayer) player).getHandle().b.a.m.pipeline();
         pipeline.addBefore("packet_handler", player.getName(), channelDuplexHandler);
 
     }

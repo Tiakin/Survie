@@ -17,9 +17,9 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Jukebox;
 import org.bukkit.block.data.MultipleFacing;
-import org.bukkit.craftbukkit.v1_18_R1.CraftWorld;
-import org.bukkit.craftbukkit.v1_18_R1.block.CraftBlockStates;
-import org.bukkit.craftbukkit.v1_18_R1.block.data.CraftBlockData;
+import org.bukkit.craftbukkit.v1_18_R2.CraftWorld;
+import org.bukkit.craftbukkit.v1_18_R2.block.CraftBlockStates;
+import org.bukkit.craftbukkit.v1_18_R2.block.data.CraftBlockData;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -73,6 +73,9 @@ public class Custom implements Listener {
 	// Recipe :
 	
 	public static void customrecipe() {
+		//comme vous pouvez le voir, 
+		//les crafts se font sur des fonctions différentes suivant le tier de l'item,
+		//c'est exclusivement pour la visibilité, je ne sais parcontre pas si ça peut-être problématique 
 		other();
         Gold();
 		Diamond();
@@ -1342,14 +1345,23 @@ public class Custom implements Listener {
         
 	}
 	
+	/**
+	 * cette fonction permet de changer le nombre d'item dans l'itemstack
+	 * @param itemStack l'item
+	 * @param amount le nombre 
+	 * @return ItemStack 
+	 */
 	public static ItemStack multi(ItemStack itemStack,int amount) {
-		ItemStack is = itemStack.clone();
+		ItemStack is = itemStack.clone(); // Attention : ne pas clone = problème
 		is.setAmount(amount);
 		return is;
 	}
 	
+	/**
+	 * cette fonction permet de faire découvrir à un joueur les recipes suivant son avancer sur la survie
+	 * @param p Player
+	 */
 	public static void discoverrecipe(Player p) {
-		//add recipe for player
 		p.discoverRecipes(recipe.get(0));
 		AdvancementProgress progress = p.getAdvancementProgress(Bukkit.getAdvancement(new NamespacedKey(Main.getPlugin(Main.class), "miningroot")));
 		if(progress.isDone())
@@ -1376,6 +1388,11 @@ public class Custom implements Listener {
 
 		
 	}
+	
+	/**
+	 * cet event permet de faire spawn les boss
+	 * le problème qui va se posé c'est le fais qu'il ne check pas le nom de l'oeuf
+	 */
 	@EventHandler
 	public void spawn(CreatureSpawnEvent e) {
 		if(e.getSpawnReason() == SpawnReason.SPAWNER_EGG) {
@@ -1385,6 +1402,11 @@ public class Custom implements Listener {
 			}
 		}
 	}
+	
+	/**
+	 * cet event permet d'empêcher la duplication et aussi 
+	 * @param e
+	 */
 	@EventHandler
 	public void craft(PrepareItemCraftEvent e) {
 		ItemStack[] itemStacks = e.getInventory().getMatrix();

@@ -24,7 +24,7 @@
         "background": "minecraft:textures/gui/advancements/backgrounds/enderite_block.png"
     },
     "criteria": {
-        "Impossible": {
+        "impossible": {
             "trigger": "minecraft:impossible"
         }
     }

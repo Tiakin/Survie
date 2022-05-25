@@ -21,8 +21,8 @@ public enum Foods {
 				new PotionEffect(PotionEffectType.SATURATION, 4, 0)
 			}
 		),
-	Chocolate_Caramel_fudge(
-			Items.Chocolate_Caramel_fudge,
+	chocolate_caramel_fudge(
+			Items.chocolate_caramel_fudge,
 			new PotionEffect[] {
 				new PotionEffect(PotionEffectType.SATURATION, 2, 0)
 			}
@@ -57,8 +57,8 @@ public enum Foods {
 				new PotionEffect(PotionEffectType.SATURATION, 800, 0)	
 			}
 		),
-	 Fish_and_Chips(
-			 Items.Fish_and_Chips,
+	fish_and_chips(
+			Items.fish_and_chips,
 			new PotionEffect[] {
 					new PotionEffect(PotionEffectType.SATURATION, 400, 0)		
 			}

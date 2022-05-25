@@ -1,10 +1,10 @@
 package fr.tiakin.mob;
 
 import java.util.Random;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
+import org.bukkit.World.Environment;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.block.Block;
@@ -135,26 +135,34 @@ public class InfinityBoss implements Listener {
 	
 	@EventHandler
 	public void fallAttack(EntityDamageEvent e) {
-		if(e.getCause() == DamageCause.FALL && e.getEntity() instanceof Player) {
-			Player p = (Player) e.getEntity();
-			if(p.getPersistentDataContainer().has(new NamespacedKey(Main.getPlugin(Main.class), "bossAttack"),PersistentDataType.INTEGER)) {
-				Bukkit.getScheduler().cancelTask(p.getPersistentDataContainer().get(new NamespacedKey(Main.getPlugin(Main.class), "bossAttack"), PersistentDataType.INTEGER));
-				p.getPersistentDataContainer().remove(new NamespacedKey(Main.getPlugin(Main.class), "bossAttack"));
-				int i = 0;
-				for(ItemStack is : p.getInventory().getArmorContents()) {
-					if(is != null) {
-						if(Tool.getOrder(Tool.getTier(is)) >= 11) { // si l'armure est au dessus de chaos
-							i++;
+		if(e.getCause() == DamageCause.FALL) {
+			if(e.getEntity() instanceof Player) {
+				Player p = (Player) e.getEntity();
+				if(p.getPersistentDataContainer().has(new NamespacedKey(Main.getPlugin(Main.class), "bossAttack"),PersistentDataType.INTEGER)) {
+					Bukkit.getScheduler().cancelTask(p.getPersistentDataContainer().get(new NamespacedKey(Main.getPlugin(Main.class), "bossAttack"), PersistentDataType.INTEGER));
+					p.getPersistentDataContainer().remove(new NamespacedKey(Main.getPlugin(Main.class), "bossAttack"));
+					int i = 0;
+					for(ItemStack is : p.getInventory().getArmorContents()) {
+						if(is != null) {
+							if(Tool.getOrder(Tool.getTier(is)) >= 11) { // si l'armure est au dessus de chaos
+								i++;
+							}
+						}
+					}
+					if(i == 4) {
+						e.setCancelled(true);
+						p.sendMessage("§dVous avez été protéger par le chaos !");
+						for(Block b : Tool.getSquare(p.getLocation().add(0, -1, 0),BlockFace.DOWN,1)) {
+							BlockPosition bp = new BlockPosition(b.getX(),b.getY(),b.getZ());
+							if(Custom.materialsWhitelist(b.getType()))
+								((CraftWorld) e.getEntity().getWorld()).getHandle().l(bp).a(bp, Custom.createCustomBlock(Blocks.chaos_nylium), true);
 						}
 					}
 				}
-				if(i == 4) {
-					e.setCancelled(true);
-					p.sendMessage("§dVous avez été protéger par le chaos !");
-					for(Block b : Tool.getSquare(p.getLocation().add(0, -1, 0),BlockFace.DOWN,1)) {
-						BlockPosition bp = new BlockPosition(b.getX(),b.getY(),b.getZ());
-						((CraftWorld) e.getEntity().getWorld()).getHandle().l(bp).a(bp, Custom.createCustomBlock(Blocks.chaos_nylium), true);
-					}
+			}else if(e.getEntity() instanceof Zombie) {
+				if(e.getEntity().getPersistentDataContainer().has(new NamespacedKey(Main.getPlugin(Main.class), "Boss"), PersistentDataType.SHORT) && 
+				   e.getEntity().getPersistentDataContainer().get(new NamespacedKey(Main.getPlugin(Main.class), "Boss"), PersistentDataType.SHORT).shortValue() == (short) 1) {
+						e.setCancelled(true);
 				}
 			}
 		}
@@ -165,11 +173,15 @@ public class InfinityBoss implements Listener {
 		if(e.getEntity() instanceof Zombie) {
 			Zombie z = (Zombie) e.getEntity();
 			if(z.getPersistentDataContainer().has(new NamespacedKey(Main.getPlugin(Main.class), "Boss"), PersistentDataType.SHORT) && 
-			   z.getPersistentDataContainer().get(new NamespacedKey(Main.getPlugin(Main.class), "Boss"), PersistentDataType.SHORT).byteValue() == (short) 1) {
+			   z.getPersistentDataContainer().get(new NamespacedKey(Main.getPlugin(Main.class), "Boss"), PersistentDataType.SHORT).shortValue() == (short) 1) {
 				e.setDroppedExp(100);
 				Random r = new Random();
-				e.getDrops().add(Custom.multi(Items.infinity_catalyst.getItemStack(), r.nextInt(4)+2));
+				e.getDrops().add(Custom.multi(Items.infinity_catalyst.getItemStack().clone(), r.nextInt(5)+2));
 			}
+			for(Entity fireball : z.getWorld().getEntities()) {
+				if(fireball instanceof Fireball)
+					fireball.remove();
+				}
 		}
 	}
 }

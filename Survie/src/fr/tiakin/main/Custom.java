@@ -86,6 +86,7 @@ public class Custom implements Listener {
         Netherstar();
         Infinity();
 	}
+	
 	private static void other() {
 		//disc
 		key = new NamespacedKey(Main.getPlugin(Main.class), "melo_disc");
@@ -133,9 +134,156 @@ public class Custom implements Listener {
         shapedrecipe.setIngredient('N', Material.NETHER_STAR);
         Bukkit.addRecipe(shapedrecipe);
         
-        //food
+        //carrot
+     	key = new NamespacedKey(Main.getPlugin(Main.class), "diamond_carrot");
+      	recipe.get(0).add(key);
+        shapedrecipe = new ShapedRecipe(key,Items.diamond_carrot.getItemStack());
+        shapedrecipe.shape("III","ICI","III");
+        shapedrecipe.setIngredient('I', Material.DIAMOND);
+        shapedrecipe.setIngredient('C', Material.CARROT);
+        Bukkit.addRecipe(shapedrecipe);
         
+        key = new NamespacedKey(Main.getPlugin(Main.class), "emerald_carrot");
+      	recipe.get(0).add(key);
+        shapedrecipe = new ShapedRecipe(key,Items.emerald_carrot.getItemStack());
+        shapedrecipe.shape("III","ICI","III");
+        shapedrecipe.setIngredient('I', Material.EMERALD);
+        shapedrecipe.setIngredient('C', Material.CARROT);
+        Bukkit.addRecipe(shapedrecipe);
+        
+        key = new NamespacedKey(Main.getPlugin(Main.class), "netherite_carrot");
+      	recipe.get(0).add(key);
+        shapedrecipe = new ShapedRecipe(key,Items.netherite_carrot.getItemStack());
+        shapedrecipe.shape("III","ICI","III");
+        shapedrecipe.setIngredient('I', Material.NETHERITE_INGOT);
+        shapedrecipe.setIngredient('C', Material.CARROT);
+        Bukkit.addRecipe(shapedrecipe);
+        
+        key = new NamespacedKey(Main.getPlugin(Main.class), "enderite_carrot");
+      	recipe.get(0).add(key);
+        shapedrecipe = new ShapedRecipe(key,Items.enderite_carrot.getItemStack());
+        shapedrecipe.shape("III","ICI","III");
+        shapedrecipe.setIngredient('I',  new RecipeChoice.ExactChoice(Items.enderite_ingot.getItemStack()));
+        shapedrecipe.setIngredient('C', Material.CARROT);
+        Bukkit.addRecipe(shapedrecipe);
+        
+        key = new NamespacedKey(Main.getPlugin(Main.class), "discordium_carrot");
+      	recipe.get(0).add(key);
+        shapedrecipe = new ShapedRecipe(key,Items.discordium_carrot.getItemStack());
+        shapedrecipe.shape("III","ICI","III");
+        shapedrecipe.setIngredient('I',  new RecipeChoice.ExactChoice(Items.discordium_ingot.getItemStack()));
+        shapedrecipe.setIngredient('C', Material.CARROT);
+        Bukkit.addRecipe(shapedrecipe);
+        
+        key = new NamespacedKey(Main.getPlugin(Main.class), "blazite_carrot");
+      	recipe.get(0).add(key);
+        shapedrecipe = new ShapedRecipe(key,Items.blazite_carrot.getItemStack());
+        shapedrecipe.shape("III","ICI","III");
+        shapedrecipe.setIngredient('I',  new RecipeChoice.ExactChoice(Items.blazite_ingot.getItemStack()));
+        shapedrecipe.setIngredient('C', Material.CARROT);
+        Bukkit.addRecipe(shapedrecipe);
+        
+        key = new NamespacedKey(Main.getPlugin(Main.class), "manyullyn_carrot");
+      	recipe.get(0).add(key);
+        shapedrecipe = new ShapedRecipe(key,Items.manyullyn_carrot.getItemStack());
+        shapedrecipe.shape("III","ICI","III");
+        shapedrecipe.setIngredient('I', new RecipeChoice.ExactChoice(Items.manyullyn_ingot.getItemStack()));
+        shapedrecipe.setIngredient('C', Material.CARROT);
+        Bukkit.addRecipe(shapedrecipe);
+        
+        key = new NamespacedKey(Main.getPlugin(Main.class), "chaos_carrot");
+      	recipe.get(0).add(key);
+        shapedrecipe = new ShapedRecipe(key,Items.chaos_carrot.getItemStack());
+        shapedrecipe.shape("III","ICI","III");
+        shapedrecipe.setIngredient('I', new RecipeChoice.ExactChoice(Items.chaos_ingot.getItemStack()));
+        shapedrecipe.setIngredient('C', Material.CARROT);
+        Bukkit.addRecipe(shapedrecipe);
+        
+        key = new NamespacedKey(Main.getPlugin(Main.class), "netherstar_carrot");
+      	recipe.get(0).add(key);
+        shapedrecipe = new ShapedRecipe(key,Items.netherstar_carrot.getItemStack());
+        shapedrecipe.shape("III","ICI","III");
+        shapedrecipe.setIngredient('I', Material.NETHER_STAR);
+        shapedrecipe.setIngredient('C', Material.CARROT);
+        Bukkit.addRecipe(shapedrecipe);
+        
+        key = new NamespacedKey(Main.getPlugin(Main.class), "infinity_carrot");
+      	recipe.get(0).add(key);
+        shapedrecipe = new ShapedRecipe(key,Items.infinity_carrot.getItemStack());
+        shapedrecipe.shape("III","ICI","III");
+        shapedrecipe.setIngredient('I', new RecipeChoice.ExactChoice(Items.infinity_ingot.getItemStack()));
+        shapedrecipe.setIngredient('C', Material.CARROT);
+        Bukkit.addRecipe(shapedrecipe);
+        
+        //food
+        key = new NamespacedKey(Main.getPlugin(Main.class), "uncooked_fries");
+        recipe.get(0).add(key);
+        shapelessrecipe = new ShapelessRecipe(key, Items.uncooked_fries.getItemStack());
+        	shapelessrecipe.addIngredient(Material.POTATO);
+        Bukkit.addRecipe(shapelessrecipe);
+        
+        key = new NamespacedKey(Main.getPlugin(Main.class), "cooked_fries");
+        recipe.get(0).add(key);
+        furnacerecipe = new FurnaceRecipe(key,Items.cooked_fries.getItemStack(),new RecipeChoice.ExactChoice(Items.uncooked_fries.getItemStack()),0f,200);
+        Bukkit.addRecipe(furnacerecipe);
+        
+        key = new NamespacedKey(Main.getPlugin(Main.class), "cotton_candy");
+      	recipe.get(0).add(key);
+        shapedrecipe = new ShapedRecipe(key,Items.cotton_candy.getItemStack());
+        shapedrecipe.shape(" A","BC");
+        shapedrecipe.setIngredient('A', Material.SUGAR);
+        shapedrecipe.setIngredient('B', Material.STICK);
+        shapedrecipe.setIngredient('C', Material.FLINT_AND_STEEL);
+        Bukkit.addRecipe(shapedrecipe);
+        
+        key = new NamespacedKey(Main.getPlugin(Main.class), "baguette");
+      	recipe.get(0).add(key);
+        shapedrecipe = new ShapedRecipe(key,Items.baguette.getItemStack());
+        shapedrecipe.shape("A  "," A ","  A");
+        shapedrecipe.setIngredient('A', Material.WHEAT);
+        Bukkit.addRecipe(shapedrecipe);
+        
+        key = new NamespacedKey(Main.getPlugin(Main.class), "hamburger");
+      	recipe.get(0).add(key);
+        shapedrecipe = new ShapedRecipe(key,Items.hamburger.getItemStack());
+        shapedrecipe.shape("A","B","A");
+        shapedrecipe.setIngredient('A', Material.BREAD);
+        shapedrecipe.setIngredient('B', Material.COOKED_BEEF);
+        Bukkit.addRecipe(shapedrecipe);
+        
+        key = new NamespacedKey(Main.getPlugin(Main.class), "cheese_burger");
+      	recipe.get(0).add(key);
+        shapedrecipe = new ShapedRecipe(key,Items.cheese_burger.getItemStack());
+        shapedrecipe.shape("A ","CB","A ");
+        shapedrecipe.setIngredient('A', Material.BREAD);
+        shapedrecipe.setIngredient('B', Material.COOKED_BEEF);
+        shapedrecipe.setIngredient('C', new RecipeChoice.ExactChoice(Items.cheese.getItemStack()));
+        Bukkit.addRecipe(shapedrecipe);
+        
+        key = new NamespacedKey(Main.getPlugin(Main.class), "bacon_cheese_burger");
+      	recipe.get(0).add(key);
+        shapedrecipe = new ShapedRecipe(key,Items.bacon_cheese_burger.getItemStack());
+        shapedrecipe.shape("A ","CB","A ");
+        shapedrecipe.setIngredient('A', Material.BREAD);
+        shapedrecipe.setIngredient('B', Material.COOKED_PORKCHOP);
+        shapedrecipe.setIngredient('C', new RecipeChoice.ExactChoice(Items.cheese.getItemStack()));
+        Bukkit.addRecipe(shapedrecipe);
+        
+        key = new NamespacedKey(Main.getPlugin(Main.class), "fish_and_chips");
+      	recipe.get(0).add(key);
+        shapedrecipe = new ShapedRecipe(key,Items.fish_and_chips.getItemStack());
+        shapedrecipe.shape("A","B","C");
+        shapedrecipe.setIngredient('A', new RecipeChoice.ExactChoice(Items.cooked_fries.getItemStack()));
+        shapedrecipe.setIngredient('B', Material.CARROT);
+        shapedrecipe.setIngredient('C', Material.COOKED_COD);
+        Bukkit.addRecipe(shapedrecipe);
+        
+        key = new NamespacedKey(Main.getPlugin(Main.class), "cheese");
+        recipe.get(0).add(key);
+        furnacerecipe = new FurnaceRecipe(key,Items.cheese.getItemStack(),Material.MILK_BUCKET,0f,200);
+        Bukkit.addRecipe(furnacerecipe);
 	}
+
 	private static void Gold() {
 		//apple
 		key = new NamespacedKey(Main.getPlugin(Main.class), "enchanted_golden_apple");
@@ -200,9 +348,43 @@ public class Custom implements Listener {
         key = new NamespacedKey(Main.getPlugin(Main.class), "netherite_hammer");
         smithingrecipe = new SmithingRecipe(key, Items.netherite_hammer.getItemStack(), new RecipeChoice.ExactChoice(Items.diamond_hammer.getItemStack()), new RecipeChoice.MaterialChoice(Material.NETHERITE_INGOT));
         Bukkit.addRecipe(smithingrecipe);
+	
+        //apple
+        key = new NamespacedKey(Main.getPlugin(Main.class), "netherite_apple");
+        recipe.get(0).add(key);
+        shapedrecipe = new ShapedRecipe(key,Items.netherite_apple.getItemStack());
+        shapedrecipe.shape("GGG","GAG","GGG");
+        shapedrecipe.setIngredient('G', new RecipeChoice.ExactChoice(new ItemStack(Material.NETHERITE_INGOT)));
+        shapedrecipe.setIngredient('A', Material.APPLE);
+        Bukkit.addRecipe(shapedrecipe);
+        
+        key = new NamespacedKey(Main.getPlugin(Main.class), "enchanted_netherite_apple");
+        recipe.get(0).add(key);
+        shapedrecipe = new ShapedRecipe(key,Items.enchanted_netherite_apple.getItemStack());
+        shapedrecipe.shape("GGG","GAG","GGG");
+        shapedrecipe.setIngredient('G', new RecipeChoice.ExactChoice(new ItemStack(Material.NETHERITE_BLOCK)));
+        shapedrecipe.setIngredient('A', Material.APPLE);
+        Bukkit.addRecipe(shapedrecipe);
 	}
 	
 	private static void Enderite() {
+		
+		//apple
+        key = new NamespacedKey(Main.getPlugin(Main.class), "enderite_apple");
+        recipe.get(0).add(key);
+        shapedrecipe = new ShapedRecipe(key,Items.enderite_apple.getItemStack());
+        shapedrecipe.shape("GGG","GAG","GGG");
+        shapedrecipe.setIngredient('G', new RecipeChoice.ExactChoice(Items.enderite_ingot.getItemStack()));
+        shapedrecipe.setIngredient('A', Material.APPLE);
+        Bukkit.addRecipe(shapedrecipe);
+        
+        key = new NamespacedKey(Main.getPlugin(Main.class), "enchanted_enderite_apple");
+        recipe.get(0).add(key);
+        shapedrecipe = new ShapedRecipe(key,Items.enchanted_enderite_apple.getItemStack());
+        shapedrecipe.shape("GGG","GAG","GGG");
+        shapedrecipe.setIngredient('G', new RecipeChoice.ExactChoice(Blocks.enderite_block.getItemStack()));
+        shapedrecipe.setIngredient('A', Material.APPLE);
+        Bukkit.addRecipe(shapedrecipe);
 		
 		//base
 		key = new NamespacedKey(Main.getPlugin(Main.class), "enderite_scrap");
@@ -282,9 +464,27 @@ public class Custom implements Listener {
         key = new NamespacedKey(Main.getPlugin(Main.class), "enderite_boots");
         smithingrecipe = new SmithingRecipe(key, Items.enderite_boots.getItemStack(), new RecipeChoice.MaterialChoice(Material.NETHERITE_BOOTS), new RecipeChoice.ExactChoice(Items.enderite_ingot.getItemStack()));
         Bukkit.addRecipe(smithingrecipe);
+	
 	}
 	
 	private static void Discordium() {
+		
+		//apple
+        key = new NamespacedKey(Main.getPlugin(Main.class), "discordium_apple");
+        recipe.get(0).add(key);
+        shapedrecipe = new ShapedRecipe(key,Items.discordium_apple.getItemStack());
+        shapedrecipe.shape("GGG","GAG","GGG");
+        shapedrecipe.setIngredient('G', new RecipeChoice.ExactChoice(Items.discordium_ingot.getItemStack()));
+        shapedrecipe.setIngredient('A', Material.APPLE);
+        Bukkit.addRecipe(shapedrecipe);
+        
+        key = new NamespacedKey(Main.getPlugin(Main.class), "enchanted_discordium_apple");
+        recipe.get(0).add(key);
+        shapedrecipe = new ShapedRecipe(key,Items.enchanted_discordium_apple.getItemStack());
+        shapedrecipe.shape("GGG","GAG","GGG");
+        shapedrecipe.setIngredient('G', new RecipeChoice.ExactChoice(Blocks.discordium_block.getItemStack()));
+        shapedrecipe.setIngredient('A', Material.APPLE);
+        Bukkit.addRecipe(shapedrecipe);
 		
 		//base
 		key = new NamespacedKey(Main.getPlugin(Main.class), "discordium_chunk");
@@ -409,6 +609,23 @@ public class Custom implements Listener {
 	
 	private static void Blazite() {
 		
+		//apple
+        key = new NamespacedKey(Main.getPlugin(Main.class), "blazite_apple");
+        recipe.get(0).add(key);
+        shapedrecipe = new ShapedRecipe(key,Items.blazite_apple.getItemStack());
+        shapedrecipe.shape("GGG","GAG","GGG");
+        shapedrecipe.setIngredient('G', new RecipeChoice.ExactChoice(Items.blazite_ingot.getItemStack()));
+        shapedrecipe.setIngredient('A', Material.APPLE);
+        Bukkit.addRecipe(shapedrecipe);
+        
+        key = new NamespacedKey(Main.getPlugin(Main.class), "enchanted_blazite_apple");
+        recipe.get(0).add(key);
+        shapedrecipe = new ShapedRecipe(key,Items.enchanted_blazite_apple.getItemStack());
+        shapedrecipe.shape("GGG","GAG","GGG");
+        shapedrecipe.setIngredient('G', new RecipeChoice.ExactChoice(Blocks.blazite_block.getItemStack()));
+        shapedrecipe.setIngredient('A', Material.APPLE);
+        Bukkit.addRecipe(shapedrecipe);
+		
 		//base
 		key = new NamespacedKey(Main.getPlugin(Main.class), "blazite_chunk");
         recipe.get(3).add(key);
@@ -531,6 +748,23 @@ public class Custom implements Listener {
 	}
 	
 	private static void Manyullyn() {
+		
+		//apple
+        key = new NamespacedKey(Main.getPlugin(Main.class), "manyullyn_apple");
+        recipe.get(0).add(key);
+        shapedrecipe = new ShapedRecipe(key,Items.manyullyn_apple.getItemStack());
+        shapedrecipe.shape("GGG","GAG","GGG");
+        shapedrecipe.setIngredient('G', new RecipeChoice.ExactChoice(Items.manyullyn_ingot.getItemStack()));
+        shapedrecipe.setIngredient('A', Material.APPLE);
+        Bukkit.addRecipe(shapedrecipe);
+        
+        key = new NamespacedKey(Main.getPlugin(Main.class), "enchanted_manyullyn_apple");
+        recipe.get(0).add(key);
+        shapedrecipe = new ShapedRecipe(key,Items.enchanted_manyullyn_apple.getItemStack());
+        shapedrecipe.shape("GGG","GAG","GGG");
+        shapedrecipe.setIngredient('G', new RecipeChoice.ExactChoice(Blocks.manyullyn_block.getItemStack()));
+        shapedrecipe.setIngredient('A', Material.APPLE);
+        Bukkit.addRecipe(shapedrecipe);
 		
 		//base
 		key = new NamespacedKey(Main.getPlugin(Main.class), "cobalt_ingot");
@@ -688,6 +922,24 @@ public class Custom implements Listener {
 	}
 	
 	private static void Chaos() {
+		
+		//apple
+        key = new NamespacedKey(Main.getPlugin(Main.class), "chaos_apple");
+        recipe.get(0).add(key);
+        shapedrecipe = new ShapedRecipe(key,Items.chaos_apple.getItemStack());
+        shapedrecipe.shape("GGG","GAG","GGG");
+        shapedrecipe.setIngredient('G', new RecipeChoice.ExactChoice(Items.chaos_ingot.getItemStack()));
+        shapedrecipe.setIngredient('A', Material.APPLE);
+        Bukkit.addRecipe(shapedrecipe);
+        
+        key = new NamespacedKey(Main.getPlugin(Main.class), "enchanted_chaos_apple");
+        recipe.get(0).add(key);
+        shapedrecipe = new ShapedRecipe(key,Items.enchanted_chaos_apple.getItemStack());
+        shapedrecipe.shape("GGG","GAG","GGG");
+        shapedrecipe.setIngredient('G', new RecipeChoice.ExactChoice(Blocks.chaos_block.getItemStack()));
+        shapedrecipe.setIngredient('A', Material.APPLE);
+        Bukkit.addRecipe(shapedrecipe);
+		
 		//log
 		key = new NamespacedKey(Main.getPlugin(Main.class), "chaos_planks");
         recipe.get(5).add(key);
@@ -818,6 +1070,23 @@ public class Custom implements Listener {
 
 	private static void Netherstar() {
         
+		//apple
+        key = new NamespacedKey(Main.getPlugin(Main.class), "netherstar_apple");
+        recipe.get(0).add(key);
+        shapedrecipe = new ShapedRecipe(key,Items.netherstar_apple.getItemStack());
+        shapedrecipe.shape("GGG","GAG","GGG");
+        shapedrecipe.setIngredient('G', Material.NETHER_STAR);
+        shapedrecipe.setIngredient('A', Material.APPLE);
+        Bukkit.addRecipe(shapedrecipe);
+        
+        key = new NamespacedKey(Main.getPlugin(Main.class), "enchanted_netherstar_apple");
+        recipe.get(0).add(key);
+        shapedrecipe = new ShapedRecipe(key,Items.enchanted_netherstar_apple.getItemStack());
+        shapedrecipe.shape("GGG","GAG","GGG");
+        shapedrecipe.setIngredient('G', new RecipeChoice.ExactChoice(Blocks.netherstar_block.getItemStack()));
+        shapedrecipe.setIngredient('A', Material.APPLE);
+        Bukkit.addRecipe(shapedrecipe);
+		
         //block
         key = new NamespacedKey(Main.getPlugin(Main.class), "netherstar_block");
         recipe.get(6).add(key);
@@ -831,6 +1100,7 @@ public class Custom implements Listener {
         shapelessrecipe = new ShapelessRecipe(key,new ItemStack(Material.NETHER_STAR,9));
         	shapelessrecipe.addIngredient(new RecipeChoice.ExactChoice(Blocks.netherstar_block.getItemStack()));
         Bukkit.addRecipe(shapelessrecipe);
+        
         
         //Tool
         key = new NamespacedKey(Main.getPlugin(Main.class), "netherstar_sword");
@@ -852,7 +1122,7 @@ public class Custom implements Listener {
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "netherstar_axe");
         recipe.get(6).add(key);
-        shapedrecipe = new ShapedRecipe(key,Items.infinity_axe.getItemStack());
+        shapedrecipe = new ShapedRecipe(key,Items.netherstar_axe.getItemStack());
         	shapedrecipe.shape("BB","EB","D ");
         	shapedrecipe.setIngredient('B', new RecipeChoice.ExactChoice(Blocks.netherstar_block.getItemStack()));
         	shapedrecipe.setIngredient('D', Material.NETHER_STAR);
@@ -861,7 +1131,7 @@ public class Custom implements Listener {
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "netherstar_shovel");
         recipe.get(6).add(key);
-        shapedrecipe = new ShapedRecipe(key,Items.infinity_shovel.getItemStack());
+        shapedrecipe = new ShapedRecipe(key,Items.netherstar_shovel.getItemStack());
         	shapedrecipe.shape("D","E","B");
         	shapedrecipe.setIngredient('B', new RecipeChoice.ExactChoice(Blocks.netherstar_block.getItemStack()));
         	shapedrecipe.setIngredient('D', Material.NETHER_STAR);
@@ -870,7 +1140,7 @@ public class Custom implements Listener {
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "netherstar_hoe");
         recipe.get(6).add(key);
-        shapedrecipe = new ShapedRecipe(key,Items.infinity_hoe.getItemStack());
+        shapedrecipe = new ShapedRecipe(key,Items.netherstar_hoe.getItemStack());
         	shapedrecipe.shape("BB"," E"," D");
         	shapedrecipe.setIngredient('B', new RecipeChoice.ExactChoice(Blocks.netherstar_block.getItemStack()));
         	shapedrecipe.setIngredient('D', Material.NETHER_STAR);
@@ -879,9 +1149,9 @@ public class Custom implements Listener {
         //hammer
         key = new NamespacedKey(Main.getPlugin(Main.class), "netherstar_hammer");
         recipe.get(6).add(key);
-        shapedrecipe = new ShapedRecipe(key,Items.infinity_hammer.getItemStack());
+        shapedrecipe = new ShapedRecipe(key,Items.netherstar_hammer.getItemStack());
         	shapedrecipe.shape("BDB","BEB"," D ");
-        	shapedrecipe.setIngredient('B', new RecipeChoice.ExactChoice(Blocks.infinity_block.getItemStack()));
+        	shapedrecipe.setIngredient('B', new RecipeChoice.ExactChoice(Blocks.netherstar_block.getItemStack()));
         	shapedrecipe.setIngredient('D', Material.NETHER_STAR);
         	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.chaos_hammer.getItemStack()));
         Bukkit.addRecipe(shapedrecipe);
@@ -889,7 +1159,7 @@ public class Custom implements Listener {
         //armor
         key = new NamespacedKey(Main.getPlugin(Main.class), "netherstar_helmet");
         recipe.get(6).add(key);
-        shapedrecipe = new ShapedRecipe(key,Items.infinity_helmet.getItemStack());
+        shapedrecipe = new ShapedRecipe(key,Items.netherstar_helmet.getItemStack());
         	shapedrecipe.shape("BDB","DED");
         	shapedrecipe.setIngredient('B', new RecipeChoice.ExactChoice(Blocks.netherstar_block.getItemStack()));
         	shapedrecipe.setIngredient('D', Material.NETHER_STAR);
@@ -898,7 +1168,7 @@ public class Custom implements Listener {
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "netherstar_chestplate");
         recipe.get(6).add(key);
-        shapedrecipe = new ShapedRecipe(key,Items.infinity_chestplate.getItemStack());
+        shapedrecipe = new ShapedRecipe(key,Items.netherstar_chestplate.getItemStack());
         	shapedrecipe.shape("DED","DDD","BDB");
         	shapedrecipe.setIngredient('B', new RecipeChoice.ExactChoice(Blocks.netherstar_block.getItemStack()));
         	shapedrecipe.setIngredient('D', Material.NETHER_STAR);
@@ -907,7 +1177,7 @@ public class Custom implements Listener {
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "netherstar_leggings");
         recipe.get(6).add(key);
-        shapedrecipe = new ShapedRecipe(key,Items.infinity_leggings.getItemStack());
+        shapedrecipe = new ShapedRecipe(key,Items.netherstar_leggings.getItemStack());
         	shapedrecipe.shape("BDB","DED","D D");
         	shapedrecipe.setIngredient('B', new RecipeChoice.ExactChoice(Blocks.netherstar_block.getItemStack()));
         	shapedrecipe.setIngredient('D', Material.NETHER_STAR);
@@ -916,7 +1186,7 @@ public class Custom implements Listener {
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "netherstar_boots");
         recipe.get(6).add(key);
-        shapedrecipe = new ShapedRecipe(key,Items.infinity_boots.getItemStack());
+        shapedrecipe = new ShapedRecipe(key,Items.netherstar_boots.getItemStack());
         	shapedrecipe.shape("D D","BEB");
         	shapedrecipe.setIngredient('B', new RecipeChoice.ExactChoice(Blocks.netherstar_block.getItemStack()));
         	shapedrecipe.setIngredient('D', Material.NETHER_STAR);
@@ -927,11 +1197,27 @@ public class Custom implements Listener {
 	
 	private static void Infinity() {
 		
+		//apple
+        key = new NamespacedKey(Main.getPlugin(Main.class), "infinity_apple");
+        recipe.get(0).add(key);
+        shapedrecipe = new ShapedRecipe(key,Items.infinity_apple.getItemStack());
+        shapedrecipe.shape("GGG","GAG","GGG");
+        shapedrecipe.setIngredient('G', new RecipeChoice.ExactChoice(Items.infinity_ingot.getItemStack()));
+        shapedrecipe.setIngredient('A', Material.APPLE);
+        Bukkit.addRecipe(shapedrecipe);
+        
+        key = new NamespacedKey(Main.getPlugin(Main.class), "enchanted_infinity_apple");
+        recipe.get(0).add(key);
+        shapedrecipe = new ShapedRecipe(key,Items.enchanted_infinity_apple.getItemStack());
+        shapedrecipe.shape("GGG","GAG","GGG");
+        shapedrecipe.setIngredient('G', new RecipeChoice.ExactChoice(Blocks.infinity_block.getItemStack()));
+        shapedrecipe.setIngredient('A', Material.APPLE);
+        Bukkit.addRecipe(shapedrecipe);
+		
 		//base
 		key = new NamespacedKey(Main.getPlugin(Main.class), "infinity_egg");
-       // recipe.get(7).add(key);
+        recipe.get(7).add(key);
         shapelessrecipe = new ShapelessRecipe(key,Items.infinity_egg.getItemStack());
-        
         
         shapelessrecipe.addIngredient(Material.NETHERITE_INGOT);
         shapelessrecipe.addIngredient(new RecipeChoice.ExactChoice(Items.enderite_ingot.getItemStack()));
@@ -1465,8 +1751,10 @@ public class Custom implements Listener {
 		
 		int shieldint = Math.round(shield);
 		if(shieldint > 20) {
-			shieldint =-20;
-			totalShield =-20;
+			
+			shieldint -=20;
+			totalShield -=20;
+			
 			
 			frontShield = greenHeart;
 			halfFrontShield = halfGreenHeart;
@@ -1485,6 +1773,10 @@ public class Custom implements Listener {
 					builder.append('\uF802');
 					builder.append(backShield);
 					builder.append("\uF808"); // decalage d'un coeur vers la gauche (-8px)
+				}else if(backgroundShield != '0') {
+					builder.append("\uF802");
+					builder.append(backgroundShield);
+					builder.append("\uF808");
 				}
 				builder.append('\uF802');
 				builder.append(halfFrontShield);
@@ -1558,4 +1850,17 @@ public class Custom implements Listener {
 		return noise.noise(x, y, 9, 0.5, 5);
     	
     }
+
+	public static boolean explosionProtect(ItemStack is) {
+		int order = Tool.getOrder(is);
+		if(order >= 13) {
+			return true;
+		}
+		if(Custom.isSimilar(is,Blocks.infinity_block.getItemStack()))
+			return true;
+		return switch(Custom.getCustomItem(is)) {
+		case infinity_apple,enchanted_infinity_apple,infinity_carrot,infinity_egg,infinity_catalyst,infinity_ingot -> true;
+		default -> false;
+		};
+	}
 }

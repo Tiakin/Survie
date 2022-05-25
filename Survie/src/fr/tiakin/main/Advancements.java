@@ -29,11 +29,11 @@ public class Advancements implements Listener {
 	public void loadAdvancements(){
 		LinkedList<NamespacedKey> list = new LinkedList<>();
 		list.add(new NamespacedKey(Main.getPlugin(Main.class), "farmingroot"));
-		for(int i = 1; i <=39;i++)
+		for(int i = 1; i <=40;i++)
 			list.add(new NamespacedKey(Main.getPlugin(Main.class), "farming"+i));
 				
 		list.add(new NamespacedKey(Main.getPlugin(Main.class), "miningroot"));
-		for(int i = 1; i <=16;i++)
+		for(int i = 1; i <=23;i++)
 			list.add(new NamespacedKey(Main.getPlugin(Main.class), "mining"+i));
 		list.add(new NamespacedKey(Main.getPlugin(Main.class), "adventureroot"));
 		list.add(new NamespacedKey(Main.getPlugin(Main.class), "adventure1"));
@@ -142,8 +142,24 @@ public class Advancements implements Listener {
     			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming38"));
     		else if(is.getType() == Material.NETHERITE_INGOT)
     			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "miningroot"));
-    		else if(Custom.isSimilar(Blocks.infinity_block.getItemStack(), is))
+    		else if(Custom.isSimilar(Blocks.netherstar_block.getItemStack(), is))
     			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "mining6"));
+    		else if(Custom.isSimilar(Blocks.infinity_block.getItemStack(), is))
+    			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "mining7"));
+    		else if(Custom.isSimilar(Items.diamond_hammer.getItemStack(), is))
+    			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "mining8"));
+    		else if(Custom.isSimilar(Items.discordium_hammer.getItemStack(), is))
+    			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "mining11"));
+    		else if(Custom.isSimilar(Items.blazite_hammer.getItemStack(), is))
+    			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "mining12"));
+    		else if(Custom.isSimilar(Items.manyullyn_hammer.getItemStack(), is))
+    			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "mining13"));
+    		else if(Custom.isSimilar(Items.chaos_hammer.getItemStack(), is))
+    			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "mining14"));
+    		else if(Custom.isSimilar(Items.netherstar_hammer.getItemStack(), is))
+    			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "mining15"));
+    		else if(Custom.isSimilar(Items.infinity_hammer.getItemStack(), is))
+    			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "mining16"));
     		else if(Custom.isSimilar(Items.melo_disc.getItemStack(), is))
     			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "easteregg1"));
     		else if(Custom.isSimilar(Items.moonlight_disc.getItemStack(), is))
@@ -166,6 +182,10 @@ public class Advancements implements Listener {
     			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming32"));
     		else if(Custom.isSimilar(Items.manyullyn_ingot.getItemStack(), is))
     			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "mining4"));
+    		else if(Custom.isSimilar(Items.netherite_hammer.getItemStack(), is))
+    			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "mining9"));
+    		else if(Custom.isSimilar(Items.enderite_hammer.getItemStack(), is))
+    			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "mining10"));
     	}
     }
 
@@ -196,6 +216,7 @@ public class Advancements implements Listener {
     		grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "eastereggroot"));
     		
     }
+   
     
     public void grantAdvancement(Player player,NamespacedKey key) {
     	AdvancementProgress progress = player.getAdvancementProgress(Bukkit.getAdvancement(key));

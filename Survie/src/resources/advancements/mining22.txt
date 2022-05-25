@@ -1,16 +1,16 @@
 {
     "display": {
         "title": {
-            "text": "Getting Hammered Tonight"
+            "text": "Cover Me In Stars"
         },
         "description": {
-            "text": "Craft an enderite hammer"
+            "text": "Get yourself a full set of netherstar"
         },
         "icon": {
-            "item": "minecraft:netherite_pickaxe",
-            "nbt": "{display:{Lore:['{\"text\":\"Enderite Hammer\"}']}}"
+            "item": "minecraft:netherite_chestplate",
+            "nbt": "{display:{Lore:['{\"text\":\"Netherstar Chestplate\"}']}}"
         },
-        "frame": "task",
+        "frame": "challenge",
         "show_toast": true,
         "announce_to_chat": true,
         "hidden": true
@@ -20,5 +20,5 @@
             "trigger": "minecraft:impossible"
         }
     },
-    "parent": "survie:mining9"
+    "parent": "survie:mining21"
 }

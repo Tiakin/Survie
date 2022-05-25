@@ -22,7 +22,9 @@ import org.bukkit.block.data.MultipleFacing;
 import org.bukkit.craftbukkit.v1_18_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_18_R1.entity.CraftPlayer;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fireball;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -31,11 +33,13 @@ import org.bukkit.event.block.BlockPhysicsEvent;
 import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.block.BlockPistonRetractEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -51,7 +55,7 @@ import fr.tiakin.generation.StructureUtil;
 import fr.tiakin.generation.ChaosBiome;
 import fr.tiakin.item.Tool;
 import fr.tiakin.mob.InfinityBoss;
-import fr.tiakin.mob.Protector;
+import fr.tiakin.mob.WitherBoss;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelDuplexHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -82,6 +86,7 @@ public class Main extends JavaPlugin implements Listener{
 		Bukkit.getPluginManager().registerEvents(new DamageEvent(), this);
 		Bukkit.getPluginManager().registerEvents(advancement, this);
 		Bukkit.getPluginManager().registerEvents(new InfinityBoss(), this);
+		Bukkit.getPluginManager().registerEvents(new WitherBoss(), this);
 		getCommand("customgive").setExecutor(new customgive());
 		mineableaxe();
 		Timer timer = new Timer();
@@ -127,7 +132,7 @@ public class Main extends JavaPlugin implements Listener{
 		if(message[0].equalsIgnoreCase("spawni")) {
 			Bukkit.getScheduler().runTask(getPlugin(Main.class), () -> InfinityBoss.spawn(e.getPlayer().getLocation()));
 		}if(message[0].equalsIgnoreCase("spawnp")) {
-			Bukkit.getScheduler().runTask(getPlugin(Main.class), () -> Protector.spawn(e.getPlayer().getLocation()));
+			Bukkit.getScheduler().runTask(getPlugin(Main.class), () -> WitherBoss.spawn(e.getPlayer().getLocation()));
 		} else if(message[0].equalsIgnoreCase("boule")) {
 			Bukkit.getScheduler().runTask(getPlugin(Main.class), () -> {
 				for(int i=0;i<50;i++) {
@@ -145,7 +150,7 @@ public class Main extends JavaPlugin implements Listener{
 	@EventHandler
 	public void join(PlayerJoinEvent e) {
 		Custom.discoverrecipe(e.getPlayer());
-		e.getPlayer().setResourcePack("http://85.214.219.113/survivalV2.zip");
+		e.getPlayer().setResourcePack("http://85.214.219.113/survivalV2.2.zip");
 		injectPlayer(e.getPlayer());
 		e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 600, 10,true));
 	}
@@ -289,6 +294,21 @@ public class Main extends JavaPlugin implements Listener{
         ChannelPipeline pipeline = ((CraftPlayer) player).getHandle().b.a.k.pipeline();
         pipeline.addBefore("packet_handler", player.getName(), channelDuplexHandler);
 
+    }
+    
+    @EventHandler
+    private void onEventExplosion(EntityDamageEvent e) {
+        if (e.getEntity().getType() != EntityType.DROPPED_ITEM || !(e.getEntity() instanceof Item)) {
+            return;
+        }
+        if (e.getCause() != EntityDamageEvent.DamageCause.BLOCK_EXPLOSION
+                && e.getCause() != EntityDamageEvent.DamageCause.ENTITY_EXPLOSION) {
+            return;
+        }
+        ItemStack is = ((Item) e.getEntity()).getItemStack();
+        if (Custom.explosionProtect(is)) {
+        	e.setCancelled(true);
+        }
     }
     
     @EventHandler

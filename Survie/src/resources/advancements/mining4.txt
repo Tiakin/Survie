@@ -16,7 +16,7 @@
         "hidden": true
     },
     "criteria": {
-        "Impossible": {
+        "impossible": {
             "trigger": "minecraft:impossible"
         }
     },

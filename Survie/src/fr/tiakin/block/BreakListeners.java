@@ -131,7 +131,7 @@ public class BreakListeners implements Listener {
         	switch(p.getAmplifier()) {
         	case -1:
         		removeSlowDig(breaker);
-        		breaker.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, Integer.MAX_VALUE , -1, false, false));
+        		breaker.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, Integer.MAX_VALUE , -1, false, false,false));
         		break;
         	case 3:
         		removeSlowDig(breaker);
@@ -147,7 +147,7 @@ public class BreakListeners implements Listener {
         		break;
         	}
         } else {
-        	breaker.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, Integer.MAX_VALUE , -1, false, false));
+        	breaker.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, Integer.MAX_VALUE , -1, false, false,false));
         }
     }
 	
@@ -157,7 +157,7 @@ public class BreakListeners implements Listener {
         	switch(p.getAmplifier()) {
         	case -1:
         		removeSlowDig(player);
-        		player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, Integer.MAX_VALUE , -1, false, false));
+        		player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, Integer.MAX_VALUE , -1, false, false,false));
         		
         		break;
         	case 0:
@@ -175,7 +175,7 @@ public class BreakListeners implements Listener {
         	
         	}
         } else {
-        	player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, Integer.MAX_VALUE , -1, false, false));
+        	player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, Integer.MAX_VALUE , -1, false, false,false));
         }
     }
 	

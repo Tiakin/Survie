@@ -144,110 +144,107 @@ public class Main extends JavaPlugin implements Listener{
 					},j);
 				}
 			});
+		} else if(message[0].equalsIgnoreCase("test")) {
+			Location b = e.getPlayer().getLocation();
+			BlockPosition bp = new BlockPosition(b.getX(),b.getY(),b.getZ());
+			((CraftWorld) e.getPlayer().getWorld()).getHandle().l(bp).a(bp, Custom.createCustomBlock(Blocks.chaos_nylium), false);
 		}
 	}
 	
 	@EventHandler
 	public void join(PlayerJoinEvent e) {
 		Custom.discoverrecipe(e.getPlayer());
-		e.getPlayer().setResourcePack("http://85.214.219.113/survivalV2.2.zip");
+		e.getPlayer().setResourcePack("http://85.214.226.235/survivalV2.2.zip");
 		injectPlayer(e.getPlayer());
-		e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 600, 10,true));
+		e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 600, 10,false,true,false));
 	}
 	
 	
 	@EventHandler
     public void chunkLoad(ChunkLoadEvent e){
-		SimplexNoiseGenerator noise = new SimplexNoiseGenerator(e.getWorld().getSeed());
-		Random random = new Random();
-		if(e.getWorld().getEnvironment().equals(Environment.THE_END)) {
-			
-			if(e.isNewChunk()) {
-				ChaosBiome.generateBiome(e.getChunk(),noise);
-				for (int x = 0; x <= 15; x++) {
-					for (int z = 0; z <= 15; z++) {
-						int i = (e.getChunk().getX() * 16 + x) >> 2;
-				      	int j = (e.getChunk().getZ() * 16 + z) >> 2;
-						Block b = Custom.gethighestendstone(e.getWorld(),e.getChunk().getX() * 16 + x, e.getChunk().getZ() * 16 + z);
+		if(e.isNewChunk()) {
+			SimplexNoiseGenerator noise = new SimplexNoiseGenerator(e.getWorld().getSeed());
+			Random random = new Random();
+				
+				if(e.getWorld().getEnvironment().equals(Environment.THE_END)) {
+					ChaosBiome.generateBiome(e.getChunk(),noise);
+					for (int x = 0; x <= 15; x++) {
+						for (int z = 0; z <= 15; z++) {
+							int i = (e.getChunk().getX() * 16 + x) >> 2;
+					      	int j = (e.getChunk().getZ() * 16 + z) >> 2;
+							Block b = Custom.gethighestendstone(e.getWorld(),e.getChunk().getX() * 16 + x, e.getChunk().getZ() * 16 + z);
+							if(b != null) {
+								if(i*i + j*j > 4096L) {
+									if(Custom.noise(noise,i*2+1, j*2+1) > 0) {
+										BlockPosition bp = new BlockPosition(b.getX(),b.getY(),b.getZ());
+										
+										Bukkit.getScheduler().runTask(Main.getPlugin(Main.class), () -> ((CraftWorld) e.getWorld()).getHandle().l(bp).a(bp, Custom.createCustomBlock(Blocks.chaos_nylium), false));
+									}
+								}
+							}
+				        }
+					}
+						int i = (e.getChunk().getX() * 16) >> 2;
+				      	int j = (e.getChunk().getZ() * 16) >> 2;
+						Block b = Custom.gethighestendstone(e.getWorld(),e.getChunk().getX() * 16, e.getChunk().getZ() * 16);
 						if(b != null) {
 							if(i*i + j*j > 4096L) {
 								if(Custom.noise(noise,i*2+1, j*2+1) > 0) {
-									BlockPosition bp = new BlockPosition(b.getX(),b.getY(),b.getZ());
-									((CraftWorld) e.getWorld()).getHandle().l(bp).a(bp, Custom.createCustomBlock(Blocks.chaos_nylium), false);
-								}
+										if(random.nextInt(150) == 0) {
+											StructureUtil.load(b.getLocation().add(0, -2, 0), "arbre1", true);
+											Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.chaos_ore),b.getY()-5,b.getY(),1,1,2,4, true, true);
+										}else if(random.nextInt(100) == 0) {
+											StructureUtil.load(b.getLocation().add(0, -1, 0), "arbre2", true);
+											Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.chaos_ore),b.getY()-5,b.getY(),2,1,3,4, true, true);
+										}else if(random.nextInt(75) == 0) {
+											StructureUtil.load(b.getLocation().add(0, -1, 0), "arbre3", true);
+											Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.chaos_ore),b.getY()-5,b.getY(),3,1,3,2, true, true);
+										}else if(random.nextInt(75) == 0) {
+											StructureUtil.load(b.getLocation().add(0, -1, 0), "arbre4", true);
+											Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.chaos_ore),b.getY()-5,b.getY(),3,1,3,2, true, true);
+										}else if(random.nextInt(50) == 0) {
+											BaseBlockPosition bbp = StructureUtil.getSize(e.getWorld(), "lac1");
+											Block b2 = Custom.gethighestendstone(e.getWorld(), b.getRelative(bbp.u()/2, 0,0).getX() ,b.getRelative(0, 0,bbp.w()/2).getZ());
+											if(b2 != null)
+												if(b.getY() - b2.getY() < 3 )
+													if(random.nextInt(2) == 0) {
+														StructureUtil.load(b.getLocation().add(0, -2, 0), "lac1", true);
+													} else {
+														StructureUtil.load(b.getLocation().add(0, -2, 0), "lavalac1", true);
+													}
+											
+										}else if(random.nextInt(75) == 0) {
+											BaseBlockPosition bbp = StructureUtil.getSize(e.getWorld(), "lac2");
+											Block b2 = Custom.gethighestendstone(e.getWorld(), b.getRelative(bbp.u()/2, 0,0).getX() ,b.getRelative(0, 0,bbp.w()/2).getZ());
+											if(b2 != null) {
+												if(b.getY() - b2.getY() < 3 ) {
+													if(random.nextInt(2) == 0) {
+														StructureUtil.load(b.getLocation().add(0, -4, 0), "lac2", true);
+														if(random.nextInt(2) == 0) {
+															StructureUtil.load(b.getLocation().add(random.nextInt(11) - 5, 5 + random.nextInt(15), random.nextInt(11) - 5), "lac3", true);
+														}
+													}else {
+														StructureUtil.load(b.getLocation().add(0, -4, 0), "lavalac2", true);
+														if(random.nextInt(2) == 0) {
+															StructureUtil.load(b.getLocation().add(random.nextInt(11) - 5, 5 + random.nextInt(15), random.nextInt(11) - 5), "lavalac3", true);
+														}
+													}	
+												}
+											}
+										}										
+								}	
 							}
 						}
-			        }
-				}
-				int i = (e.getChunk().getX() * 16) >> 2;
-		      	int j = (e.getChunk().getZ() * 16) >> 2;
-				Block b = Custom.gethighestendstone(e.getWorld(),e.getChunk().getX() * 16, e.getChunk().getZ() * 16);
-				if(b != null) {
-					if(i*i + j*j > 4096L) {
-						if(Custom.noise(noise,i*2+1, j*2+1) > 0) {
-							if(random.nextInt(150) == 0) {
-								StructureUtil.load(b.getLocation().add(0, -2, 0), "arbre1", true);
-								Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.chaos_ore),b.getY()-5,b.getY(),1,1,2,4, true, true);
-							}else if(random.nextInt(100) == 0) {
-								StructureUtil.load(b.getLocation().add(0, -1, 0), "arbre2", true);
-								Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.chaos_ore),b.getY()-5,b.getY(),2,1,3,4, true, true);
-							}else if(random.nextInt(75) == 0) {
-								StructureUtil.load(b.getLocation().add(0, -1, 0), "arbre3", true);
-								Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.chaos_ore),b.getY()-5,b.getY(),3,1,3,2, true, true);
-							}else if(random.nextInt(75) == 0) {
-								StructureUtil.load(b.getLocation().add(0, -1, 0), "arbre4", true);
-								Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.chaos_ore),b.getY()-5,b.getY(),3,1,3,2, true, true);
-							}else if(random.nextInt(50) == 0) {
-								BaseBlockPosition bbp = StructureUtil.getSize(e.getWorld(), "lac1");
-								Block b2 = Custom.gethighestendstone(e.getWorld(), b.getRelative(bbp.u()/2, 0,0).getX() ,b.getRelative(0, 0,bbp.w()/2).getZ());
-								if(b2 != null)
-									if(b.getY() - b2.getY() < 3 )
-										if(random.nextInt(2) == 0) {
-											StructureUtil.load(b.getLocation().add(0, -2, 0), "lac1", true);
-										} else {
-											StructureUtil.load(b.getLocation().add(0, -2, 0), "lavalac1", true);
-										}
-								
-							}else if(random.nextInt(75) == 0) {
-								BaseBlockPosition bbp = StructureUtil.getSize(e.getWorld(), "lac2");
-								Block b2 = Custom.gethighestendstone(e.getWorld(), b.getRelative(bbp.u()/2, 0,0).getX() ,b.getRelative(0, 0,bbp.w()/2).getZ());
-								if(b2 != null)
-									if(b.getY() - b2.getY() < 3 )
-										if(random.nextInt(2) == 0) {
-											StructureUtil.load(b.getLocation().add(0, -4, 0), "lac2", true);
-											if(random.nextInt(2) == 0) {
-												StructureUtil.load(b.getLocation().add(random.nextInt(11) - 5, 5 + random.nextInt(15), random.nextInt(11) - 5), "lac3", true);
-											}
-										}else {
-											StructureUtil.load(b.getLocation().add(0, -4, 0), "lavalac2", true);
-											if(random.nextInt(2) == 0) {
-												StructureUtil.load(b.getLocation().add(random.nextInt(11) - 5, 5 + random.nextInt(15), random.nextInt(11) - 5), "lavalac3", true);
-											}
-										}
-								
-							}
-							
-							
-						}
-					}
-				}
-				Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.enderite_ore),0,60,5,6,3,4, false, false);
+					Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.enderite_ore),0,60,5,6,3,4, false, false);
 				
-				
-				
-			}
-		}else if(e.getWorld().getEnvironment().equals(Environment.NORMAL)) {
-			if(e.isNewChunk()) {
-				Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.discordium_ore),-60,0,2,3,2,4, false, false);
-				Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.cobalt_ore),-40,10,2,3,2,6, false, false);
-			}
-		}else if(e.getWorld().getEnvironment().equals(Environment.NETHER)) {
-			if(e.isNewChunk()) {
-				Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.blazite_ore),0,20,2,3,2,4, false, false);
-				Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.ardite_ore),100,128,2,3,3,4, false, false);
+			}else if(e.getWorld().getEnvironment().equals(Environment.NORMAL)) {
+					Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.discordium_ore),-60,0,2,3,2,4, false, false);
+					Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.cobalt_ore),-40,10,2,3,2,6, false, false);
+			}else if(e.getWorld().getEnvironment().equals(Environment.NETHER)) {
+					Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.blazite_ore),0,20,2,3,2,4, false, false);
+					Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.ardite_ore),100,128,2,3,3,4, false, false);
 			}
 		}
-		
 	}
 	
 	@EventHandler
@@ -274,6 +271,7 @@ public class Main extends JavaPlugin implements Listener{
             		BlockPosition b = ((PacketPlayInBlockDig) packet).b();
             		EnumDirection c = ((PacketPlayInBlockDig) packet).c();
             		EnumPlayerDigType d = ((PacketPlayInBlockDig) packet).d();
+            		
                 
             		if(d.equals(EnumPlayerDigType.b)) {
             			AbortBreakingBlockEvent event = new AbortBreakingBlockEvent(b,c,player);

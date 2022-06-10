@@ -76,8 +76,24 @@ public class Tool {
 			if((Tag.MINEABLE_HOE.isTagged(block.getType()) && customblocks == null) ||(customblocks != null && customblocks.getTool().equalsIgnoreCase("hoe")))
 				return true;
 			break;
+		case 5:
+			if(block.getType() == Material.COBWEB || block.getType() == Material.BAMBOO)
+				return true;
+			break;
+		case 6:
+			if(isLeaves(block.getType()))
+				return true;
+			break;
+			
 		}
 		return false;
+	}
+	
+	public static boolean isLeaves(Material m) {
+		return switch(m) {
+		case ACACIA_LEAVES,AZALEA_LEAVES,BIRCH_LEAVES,DARK_OAK_LEAVES,FLOWERING_AZALEA_LEAVES,JUNGLE_LEAVES,OAK_LEAVES,SPRUCE_LEAVES -> true;
+		default -> false;
+		};
 	}
 	
 	public static boolean isHammer(ItemStack item) {
@@ -99,6 +115,8 @@ public class Tool {
     		return 4;
     	if(m.toString().contains("_SWORD"))
     		return 5;
+    	if(m.toString().equalsIgnoreCase("SHEARS"))
+    		return 6;
 		return 0;
 	}
 	

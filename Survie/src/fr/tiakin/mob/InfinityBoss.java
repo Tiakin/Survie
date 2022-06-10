@@ -93,9 +93,10 @@ public class InfinityBoss implements Listener {
 						for(int i=0;i<50;i++) {
 							final int j = i;
 							Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), () -> {
-								Fireball fireball = zombie.getWorld().spawn(new Location(zombie.getWorld(),zombie.getLocation().getX(),zombie.getLocation().getY(),zombie.getLocation().getZ()),Fireball.class);
+								Fireball fireball = zombie.getWorld().spawn(zombie.getLocation(),Fireball.class);
 								fireball.setDirection(new Vector(Math.cos(j*Math.PI*2/50), 0, Math.sin(j*Math.PI*2/50)));
 								fireball.setVelocity(new Vector(Math.cos(j*Math.PI*2/50), 0, Math.sin(j*Math.PI*2/50)));
+								Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), () -> fireball.remove(),200l);
 							},j*2);
 						}
 						break;

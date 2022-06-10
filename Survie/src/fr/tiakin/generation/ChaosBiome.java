@@ -24,6 +24,7 @@ import net.minecraft.world.level.biome.BiomeFog.GrassColor;
 import com.mojang.serialization.Lifecycle;
 
 import fr.tiakin.main.Custom;
+import fr.tiakin.main.Main;
 
 public class ChaosBiome {
 	
@@ -43,6 +44,7 @@ public class ChaosBiome {
 		IRegistryWritable<BiomeBase> registrywritable = (IRegistryWritable<BiomeBase>) dedicatedserver.aU().b(IRegistry.aP);
 		BiomeBase oldbiome = registrywritable.a(oldKey);
 		BiomeBase.a newBiome = new BiomeBase.a();
+		newBiome.a(BiomeBase.Geography.r);
 		newBiome.a(oldbiome.c()); //precipitation
 		newBiome.a(BiomeBase.TemperatureModifier.a); //BiomeBase.TemperatureModifier.a = normal
 		newBiome.a(oldbiome.e()); //setting generation
@@ -144,7 +146,8 @@ public class ChaosBiome {
             	}
             }
 		}
-		refreshChunksForAll(chunk);
+		
+		Bukkit.getScheduler().runTask(Main.getPlugin(Main.class), () -> refreshChunksForAll(chunk));
 	}
         
 }

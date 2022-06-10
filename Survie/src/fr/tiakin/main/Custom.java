@@ -42,6 +42,7 @@ import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.inventory.SmithingRecipe;
+import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -1417,7 +1418,7 @@ public class Custom implements Listener {
 			for(int i=0;i<itemStacks.length;i++) {
 				Items item = getCustomItem(itemStacks[i]);
 				if(itemStacks[i] != null) {
-					if(itemStacks[i].hasItemMeta() && itemStacks[i].getItemMeta().hasEnchants()) {
+					if(itemStacks[i].hasItemMeta() && (itemStacks[i].getItemMeta().hasEnchants() || (itemStacks[i].getItemMeta()) instanceof Damageable)) {
 						ench = itemStacks[i].getItemMeta().getEnchants();
 						antidupli = true;
 					}
@@ -1838,35 +1839,38 @@ public class Custom implements Listener {
 	}
 
 	public static void generateOre(World world, Chunk chunk, Random random, IBlockData iBlockData, int minY, int maxY,int chance, int tries,int luck, int maxVein,boolean centered,boolean bypassWhitelist) {
-		int X, Y, Z, vein = 0;
-		boolean Whitelisted;
-		for (int i = 1; i <= tries ; i++) {
-		    if (random.nextInt(chance) == 0) {
-		    	X = centered ? chunk.getX()*16 : random.nextInt(16) + chunk.getX()*16;
-		    	Z = centered ? chunk.getZ()*16 : random.nextInt(16) + chunk.getZ()*16;
-		    	Y = random.nextInt(maxY-minY)+minY;
-		    	if (materialsWhitelist(world.getBlockAt(X, Y, Z).getType()) || bypassWhitelist) {
-		    		Whitelisted = true;
-		    		while (Whitelisted) {
-		    			vein++;
-		    			BlockPosition bp = new BlockPosition(X,Y,Z);
-						((CraftWorld) world).getHandle().l(bp).a(bp, iBlockData, true);
-		    			if (random.nextInt(luck) == 0 && vein <= maxVein)  {
-		    				switch (random.nextInt(6)) {
-								case 0 -> X++;
-								case 1 -> Y++;
-								case 2 -> Z++;
-								case 3 -> X--;
-								case 4 -> Y--;
-								case 5 -> Z--;
-		    				}
-		    			Whitelisted = materialsWhitelist(world.getBlockAt(X, Y, Z).getType()) || bypassWhitelist;
-		    			} 
-		    			else Whitelisted = false;
-		    		}
-		    	}
-		    }
-		}
+		
+			int X, Y, Z, vein = 0;
+			boolean Whitelisted;
+			for (int i = 1; i <= tries ; i++) {
+			    if (random.nextInt(chance) == 0) {
+			    	X = centered ? chunk.getX()*16 : random.nextInt(16) + chunk.getX()*16;
+			    	Z = centered ? chunk.getZ()*16 : random.nextInt(16) + chunk.getZ()*16;
+			    	Y = random.nextInt(maxY-minY)+minY;
+			    	if (materialsWhitelist(world.getBlockAt(X, Y, Z).getType()) || bypassWhitelist) {
+			    		Whitelisted = true;
+			    		while (Whitelisted) {
+			    			vein++;
+			    			BlockPosition bp = new BlockPosition(X,Y,Z);
+			    			
+			    			((CraftWorld) world).getHandle().l(bp).a(bp, iBlockData, true);
+			    			
+			    			if (random.nextInt(luck) == 0 && vein <= maxVein)  {
+			    				switch (random.nextInt(6)) {
+									case 0 -> X++;
+									case 1 -> Y++;
+									case 2 -> Z++;
+									case 3 -> X--;
+									case 4 -> Y--;
+									case 5 -> Z--;
+			    				}
+			    			Whitelisted = materialsWhitelist(world.getBlockAt(X, Y, Z).getType()) || bypassWhitelist;
+			    			} 
+			    			else Whitelisted = false;
+			    		}
+			    	}
+			    }
+			}
 	}
     public static double noise(SimplexNoiseGenerator noise,int x, int y) {
 		return noise.noise(x, y, 9, 0.5, 5);
@@ -1883,6 +1887,13 @@ public class Custom implements Listener {
 		return switch(Custom.getCustomItem(is)) {
 		case infinity_apple,enchanted_infinity_apple,infinity_carrot,infinity_egg,infinity_catalyst,infinity_ingot -> true;
 		default -> false;
+		};
+	}
+	
+	public static boolean isWitherSkeletonSkull(Material m) {
+		return switch(m) {
+		case WITHER_SKELETON_SKULL,WITHER_SKELETON_WALL_SKULL -> true;
+		default -> false;	
 		};
 	}
 }

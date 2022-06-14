@@ -42,7 +42,6 @@ import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.inventory.SmithingRecipe;
-import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -1405,7 +1404,7 @@ public class Custom implements Listener {
 	}
 	
 	/**
-	 * cet event permet d'empêcher la duplication et aussi 
+	 * cet event permet d'empêcher la duplication et aussi pour déplacer les enchantements
 	 * @param e
 	 */
 	@EventHandler
@@ -1418,9 +1417,11 @@ public class Custom implements Listener {
 			for(int i=0;i<itemStacks.length;i++) {
 				Items item = getCustomItem(itemStacks[i]);
 				if(itemStacks[i] != null) {
-					if(itemStacks[i].hasItemMeta() && (itemStacks[i].getItemMeta().hasEnchants() || (itemStacks[i].getItemMeta()) instanceof Damageable)) {
-						ench = itemStacks[i].getItemMeta().getEnchants();
+					if(item != null && Custom.isSimilar(item.getItemStack(), itemStacks[i]) && !Bukkit.getItemFactory().equals(itemStacks[i].getItemMeta(), item.getItemStack().getItemMeta())) {
 						antidupli = true;
+					}
+					if(itemStacks[i].hasItemMeta() && itemStacks[i].getItemMeta().hasEnchants()) {
+						ench = itemStacks[i].getItemMeta().getEnchants();
 					}
 				}
 				

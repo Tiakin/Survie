@@ -172,13 +172,13 @@ public class Main extends JavaPlugin implements Listener{
 						for (int z = 0; z <= 15; z++) {
 							int i = (e.getChunk().getX() * 16 + x) >> 2;
 					      	int j = (e.getChunk().getZ() * 16 + z) >> 2;
-							Block b = Custom.gethighestendstone(e.getWorld(),e.getChunk().getX() * 16 + x, e.getChunk().getZ() * 16 + z);
-							if(b != null) {
-								if(i*i + j*j > 4096L) {
-									if(Custom.noise(noise,i*2+1, j*2+1) > 0) {
+							if(i*i + j*j > 4096L) {
+								if(Custom.noise(noise,i*2+1, j*2+1) > 0) {
+									Block b = Custom.gethighestendstone(e.getWorld(),e.getChunk().getX() * 16 + x, e.getChunk().getZ() * 16 + z);
+									if(b != null) {
 										BlockPosition bp = new BlockPosition(b.getX(),b.getY(),b.getZ());
 										
-										Bukkit.getScheduler().runTask(Main.getPlugin(Main.class), () -> ((CraftWorld) e.getWorld()).getHandle().l(bp).a(bp, Custom.createCustomBlock(Blocks.chaos_nylium), false));
+										((CraftWorld) e.getWorld()).getHandle().l(bp).a(bp, Custom.createCustomBlock(Blocks.chaos_nylium), false);
 									}
 								}
 							}
@@ -186,9 +186,10 @@ public class Main extends JavaPlugin implements Listener{
 					}
 						int i = (e.getChunk().getX() * 16) >> 2;
 				      	int j = (e.getChunk().getZ() * 16) >> 2;
-						Block b = Custom.gethighestendstone(e.getWorld(),e.getChunk().getX() * 16, e.getChunk().getZ() * 16);
-						if(b != null) {
-							if(i*i + j*j > 4096L) {
+						
+						if(i*i + j*j > 4096L) {
+							Block b = Custom.gethighestendstone(e.getWorld(),e.getChunk().getX() * 16, e.getChunk().getZ() * 16);
+							if(b != null) {
 								if(Custom.noise(noise,i*2+1, j*2+1) > 0) {
 										if(random.nextInt(150) == 0) {
 											StructureUtil.load(b.getLocation().add(0, -2, 0), "arbre1", true);

@@ -129,17 +129,17 @@ public class Advancements implements Listener {
     		Player p = (Player) event.getWhoClicked();
     		ItemStack is = event.getCurrentItem();
     		if(Custom.isSimilar(Items.discordium_hoe.getItemStack(), is))
-    			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming33"));
-    		else if(Custom.isSimilar(Items.blazite_hoe.getItemStack(), is))
     			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming34"));
-    		else if(Custom.isSimilar(Items.manyullyn_hoe.getItemStack(), is))
+    		else if(Custom.isSimilar(Items.blazite_hoe.getItemStack(), is))
     			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming35"));
-    		else if(Custom.isSimilar(Items.chaos_hoe.getItemStack(), is))
+    		else if(Custom.isSimilar(Items.manyullyn_hoe.getItemStack(), is))
     			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming36"));
-    		else if(Custom.isSimilar(Items.netherstar_hoe.getItemStack(), is))
+    		else if(Custom.isSimilar(Items.chaos_hoe.getItemStack(), is))
     			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming37"));
-    		else if(Custom.isSimilar(Items.infinity_hoe.getItemStack(), is))
+    		else if(Custom.isSimilar(Items.netherstar_hoe.getItemStack(), is))
     			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming38"));
+    		else if(Custom.isSimilar(Items.infinity_hoe.getItemStack(), is))
+    			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming39"));
     		else if(is.getType() == Material.NETHERITE_INGOT)
     			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "miningroot"));
     		else if(Custom.isSimilar(Blocks.netherstar_block.getItemStack(), is))
@@ -179,7 +179,7 @@ public class Advancements implements Listener {
     		Player p = (Player) event.getWhoClicked();
     		ItemStack is = event.getCurrentItem();
     		if(Custom.isSimilar(Items.enderite_hoe.getItemStack(), is))
-    			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming32"));
+    			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming33"));
     		else if(Custom.isSimilar(Items.manyullyn_ingot.getItemStack(), is))
     			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "mining4"));
     		else if(Custom.isSimilar(Items.netherite_hammer.getItemStack(), is))

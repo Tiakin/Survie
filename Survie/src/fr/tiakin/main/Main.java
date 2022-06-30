@@ -4,6 +4,7 @@ package fr.tiakin.main;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -15,6 +16,7 @@ import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.World.Environment;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -47,12 +49,12 @@ import org.bukkit.util.Vector;
 import org.bukkit.util.noise.SimplexNoiseGenerator;
 
 import fr.tiakin.block.AbortBreakingBlockEvent;
+import fr.tiakin.block.Blocks;
 import fr.tiakin.block.BreakListeners;
 import fr.tiakin.block.BrokenBlocksService;
-import fr.tiakin.block.Blocks;
 import fr.tiakin.damage.DamageEvent;
-import fr.tiakin.generation.StructureUtil;
 import fr.tiakin.generation.ChaosBiome;
+import fr.tiakin.generation.StructureUtil;
 import fr.tiakin.item.Tool;
 import fr.tiakin.mob.InfinityBoss;
 import fr.tiakin.mob.WitherBoss;
@@ -147,7 +149,7 @@ public class Main extends JavaPlugin implements Listener{
 		} else if(message[0].equalsIgnoreCase("test")) {
 			Location b = e.getPlayer().getLocation();
 			BlockPosition bp = new BlockPosition(b.getX(),b.getY(),b.getZ());
-			((CraftWorld) e.getPlayer().getWorld()).getHandle().l(bp).a(bp, Custom.createCustomBlock(Blocks.chaos_nylium), false);
+			((CraftWorld) e.getPlayer().getWorld()).getHandle().l(bp).a(bp, Custom.createCustomBlock(Blocks.chaos_nylium), true);
 		}
 	}
 	
@@ -159,14 +161,17 @@ public class Main extends JavaPlugin implements Listener{
 		e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 600, 10,false,true,false));
 	}
 	
-	
+	private static HashMap<World, SimplexNoiseGenerator> noises = new HashMap<>();
+
 	@EventHandler
     public void chunkLoad(ChunkLoadEvent e){
 		if(e.isNewChunk()) {
-			SimplexNoiseGenerator noise = new SimplexNoiseGenerator(e.getWorld().getSeed());
 			Random random = new Random();
-				
 				if(e.getWorld().getEnvironment().equals(Environment.THE_END)) {
+					if(!noises.containsKey(e.getWorld())) {
+						noises.put(e.getWorld(), new SimplexNoiseGenerator(e.getWorld().getSeed()));
+					}
+					SimplexNoiseGenerator noise = noises.get(e.getWorld());
 					ChaosBiome.generateBiome(e.getChunk(),noise);
 					for (int x = 0; x <= 15; x++) {
 						for (int z = 0; z <= 15; z++) {
@@ -178,7 +183,7 @@ public class Main extends JavaPlugin implements Listener{
 									if(b != null) {
 										BlockPosition bp = new BlockPosition(b.getX(),b.getY(),b.getZ());
 										
-										((CraftWorld) e.getWorld()).getHandle().l(bp).a(bp, Custom.createCustomBlock(Blocks.chaos_nylium), false);
+										((CraftWorld) e.getWorld()).getHandle().a(bp, Custom.createCustomBlock(Blocks.chaos_nylium), 2);
 									}
 								}
 							}
@@ -240,10 +245,10 @@ public class Main extends JavaPlugin implements Listener{
 				
 			}else if(e.getWorld().getEnvironment().equals(Environment.NORMAL)) {
 					Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.discordium_ore),-60,0,2,3,2,4, false, false);
-					Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.cobalt_ore),-40,10,2,3,2,6, false, false);
+					Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.cobalt_ore),-40,10,2,4,2,6, false, false);
 			}else if(e.getWorld().getEnvironment().equals(Environment.NETHER)) {
 					Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.blazite_ore),0,20,2,3,2,4, false, false);
-					Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.ardite_ore),100,128,2,3,3,4, false, false);
+					Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.ardite_ore),100,128,2,4,3,4, false, false);
 			}
 		}
 	}

@@ -182,8 +182,7 @@ public class Main extends JavaPlugin implements Listener{
 									Block b = Custom.gethighestendstone(e.getWorld(),e.getChunk().getX() * 16 + x, e.getChunk().getZ() * 16 + z);
 									if(b != null) {
 										BlockPosition bp = new BlockPosition(b.getX(),b.getY(),b.getZ());
-										
-										((CraftWorld) e.getWorld()).getHandle().a(bp, Custom.createCustomBlock(Blocks.chaos_nylium), 2);
+										((CraftWorld) e.getWorld()).getHandle().l(bp).a(bp, Custom.createCustomBlock(Blocks.chaos_nylium), true);
 									}
 								}
 							}

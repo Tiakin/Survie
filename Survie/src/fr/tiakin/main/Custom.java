@@ -1838,7 +1838,21 @@ public class Custom implements Listener {
 		default ->  false;
 		};
 	}
-
+	/**
+	 * 
+	 * @param world Le monde
+	 * @param chunk Le chunk
+	 * @param random Random
+	 * @param iBlockData Le block
+	 * @param minY La coordonnée minimum en Y
+	 * @param maxY La coordonnée maximum en Y
+	 * @param chance Les chances de drop (1/X)
+	 * @param tries Nombres d'essais
+	 * @param luck La chance pour un minerai en plus a proximité
+	 * @param maxVein Le maximum de minerai a proximité
+	 * @param centered Le minerai sera forcément centrer dans le chunk
+	 * @param bypassWhitelist Le minerai spawnera dans tout les cas
+	 */
 	public static void generateOre(World world, Chunk chunk, Random random, IBlockData iBlockData, int minY, int maxY,int chance, int tries,int luck, int maxVein,boolean centered,boolean bypassWhitelist) {
 		
 			int X, Y, Z, vein = 0;

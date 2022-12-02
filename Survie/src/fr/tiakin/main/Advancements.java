@@ -94,8 +94,8 @@ public class Advancements implements Listener {
 			case enchanted_discordium_apple -> grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming12"));
 			case blazite_apple -> grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming13"));
 			case enchanted_blazite_apple -> grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming14"));
-			case manyullyn_apple -> grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming15"));
-			case enchanted_manyullyn_apple -> grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming16"));
+			case ametrine_apple -> grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming15"));
+			case enchanted_ametrine_apple -> grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming16"));
 			case chaos_apple -> grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming17"));
 			case enchanted_chaos_apple -> grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming18"));
 			case netherstar_apple -> grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming19"));
@@ -109,7 +109,7 @@ public class Advancements implements Listener {
 			case enderite_carrot -> grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming26"));
 			case discordium_carrot -> grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming27"));
 			case blazite_carrot -> grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming28"));
-			case manyullyn_carrot -> grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming29"));
+			case ametrine_carrot -> grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming29"));
 			case chaos_carrot -> grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming30"));
 			case netherstar_carrot -> grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming31"));
 			case infinity_carrot -> grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming32"));
@@ -132,7 +132,7 @@ public class Advancements implements Listener {
     			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming34"));
     		else if(Custom.isSimilar(Items.blazite_hoe.getItemStack(), is))
     			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming35"));
-    		else if(Custom.isSimilar(Items.manyullyn_hoe.getItemStack(), is))
+    		else if(Custom.isSimilar(Items.ametrine_hoe.getItemStack(), is))
     			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming36"));
     		else if(Custom.isSimilar(Items.chaos_hoe.getItemStack(), is))
     			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming37"));
@@ -152,7 +152,7 @@ public class Advancements implements Listener {
     			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "mining11"));
     		else if(Custom.isSimilar(Items.blazite_hammer.getItemStack(), is))
     			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "mining12"));
-    		else if(Custom.isSimilar(Items.manyullyn_hammer.getItemStack(), is))
+    		else if(Custom.isSimilar(Items.ametrine_hammer.getItemStack(), is))
     			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "mining13"));
     		else if(Custom.isSimilar(Items.chaos_hammer.getItemStack(), is))
     			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "mining14"));
@@ -160,10 +160,6 @@ public class Advancements implements Listener {
     			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "mining15"));
     		else if(Custom.isSimilar(Items.infinity_hammer.getItemStack(), is))
     			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "mining16"));
-    		else if(Custom.isSimilar(Items.melo_disc.getItemStack(), is))
-    			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "easteregg1"));
-    		else if(Custom.isSimilar(Items.moonlight_disc.getItemStack(), is))
-    			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "easteregg2"));
     		else if(Custom.isSimilar(Items.ice_disc.getItemStack(), is))
     			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "easteregg3"));
     		else if(Custom.isSimilar(Items.pillaged_disc.getItemStack(), is))
@@ -180,7 +176,7 @@ public class Advancements implements Listener {
     		ItemStack is = event.getCurrentItem();
     		if(Custom.isSimilar(Items.enderite_hoe.getItemStack(), is))
     			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "farming33"));
-    		else if(Custom.isSimilar(Items.manyullyn_ingot.getItemStack(), is))
+    		else if(Custom.isSimilar(Items.ametrine_ingot.getItemStack(), is))
     			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "mining4"));
     		else if(Custom.isSimilar(Items.netherite_hammer.getItemStack(), is))
     			grantAdvancement(p, new NamespacedKey(Main.getPlugin(Main.class), "mining9"));

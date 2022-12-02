@@ -30,6 +30,9 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import fr.tiakin.block.Blocks;
+import fr.tiakin.item.Items;
 import fr.tiakin.main.Custom;
 import fr.tiakin.main.Main;
 
@@ -45,7 +48,7 @@ public class WitherBoss implements Listener {
 		healthAttribute.setBaseValue(800);
 		WBoss.setHealth(800);
 		
-		WBoss.setCustomName("§cThe Wither's Father");
+		WBoss.setCustomName("Â§cThe Wither Grandfather");
 		WBoss.getBossBar().setColor(BarColor.BLUE);
 
 		loop(WBoss);
@@ -175,7 +178,7 @@ public class WitherBoss implements Listener {
 	}
 	
 	public boolean structure(Block b,boolean isZ) {
-		if(b.getRelative(0, -1, 0).getType() == Material.IRON_BLOCK && b.getRelative(0, -2, 0).getType() == Material.SOUL_SAND) {
+		if(Custom.isCustomBlockSimilar(Blocks.wither_core, b.getRelative(0, -1, 0)) && b.getRelative(0, -2, 0).getType() == Material.SOUL_SAND) {
 			if(isZ) {
 				if(b.getRelative(0, -1, -1).getType() == Material.SOUL_SAND && b.getRelative(0, -1, 1).getType() == Material.SOUL_SAND) {
 					return true;
@@ -197,7 +200,14 @@ public class WitherBoss implements Listener {
 			   w.getPersistentDataContainer().get(new NamespacedKey(Main.getPlugin(Main.class), "Boss"), PersistentDataType.SHORT).shortValue() == (short) 2) {
 				e.setDroppedExp(150);
 				Random r = new Random();
-				e.getDrops().set(0,new ItemStack(Material.NETHER_STAR,r.nextInt(4)+2));
+				e.getDrops().set(0,new ItemStack(Material.NETHER_STAR,r.nextInt(7)+2));
+			}
+		} else if(e.getEntity() instanceof WitherSkeleton) {
+			int r = new Random().nextInt(1000);
+			if(r < 3) {
+				e.getDrops().add(Custom.multi(Items.wither_bone.getItemStack(),2));
+			} else if(r < 15) {
+				e.getDrops().add(Items.wither_bone.getItemStack());
 			}
 		}
 	}

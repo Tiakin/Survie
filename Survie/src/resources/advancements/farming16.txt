@@ -4,11 +4,11 @@
             "text": "What It Feels Like To Chew Two Ingots"
         },
         "description": {
-            "text": "Eat an enchanted manyullyn apple"
+            "text": "Eat an enchanted ametrine apple"
         },
         "icon": {
             "item": "minecraft:enchanted_golden_apple",
-            "nbt": "{display:{Lore:['{\"text\":\"Enchanted Manyullyn Apple\"}']}}"
+            "nbt": "{display:{Lore:['{\"text\":\"Enchanted ametrine Apple\"}']}}"
         },
         "frame": "task",
         "show_toast": true,

@@ -79,7 +79,6 @@ public class Main extends JavaPlugin implements Listener{
 		try {
 			ChaosBiome.create();
 		} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		Bukkit.getPluginManager().registerEvents(this, this);
@@ -162,11 +161,11 @@ public class Main extends JavaPlugin implements Listener{
 	}
 	
 	private static HashMap<World, SimplexNoiseGenerator> noises = new HashMap<>();
-
+	Random random = new Random();
+	
 	@EventHandler
-    public void chunkLoad(ChunkLoadEvent e){
+    public void chunkLoad(ChunkLoadEvent e) {
 		if(e.isNewChunk()) {
-			Random random = new Random();
 				if(e.getWorld().getEnvironment().equals(Environment.THE_END)) {
 					if(!noises.containsKey(e.getWorld())) {
 						noises.put(e.getWorld(), new SimplexNoiseGenerator(e.getWorld().getSeed()));
@@ -244,10 +243,10 @@ public class Main extends JavaPlugin implements Listener{
 				
 			}else if(e.getWorld().getEnvironment().equals(Environment.NORMAL)) {
 					Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.discordium_ore),-60,0,2,3,2,4, false, false);
-					Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.cobalt_ore),-40,10,2,4,2,6, false, false);
+					Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.charoite_ore),-40,10,2,4,2,6, false, false);
 			}else if(e.getWorld().getEnvironment().equals(Environment.NETHER)) {
 					Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.blazite_ore),0,20,2,3,2,4, false, false);
-					Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.ardite_ore),100,128,2,4,3,4, false, false);
+					Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.carnelian_ore),100,128,2,4,3,4, false, false);
 			}
 		}
 	}

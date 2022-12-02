@@ -73,9 +73,8 @@ public class Custom implements Listener {
 	// Recipe :
 	
 	public static void customrecipe() {
-		//comme vous pouvez le voir, 
 		//les crafts se font sur des fonctions différentes suivant le tier de l'item,
-		//c'est exclusivement pour la visibilité, je ne sais parcontre pas si ça peut-être problématique 
+		//c'est exclusivement pour la visibilité
 		other();
         Gold();
 		Diamond();
@@ -84,7 +83,7 @@ public class Custom implements Listener {
         Enderite();
         Discordium();
         Blazite();
-        Manyullyn();
+        ametrine();
         Chaos();
         Netherstar();
         Infinity();
@@ -92,23 +91,6 @@ public class Custom implements Listener {
 	
 	private static void other() {
 		//disc
-		key = new NamespacedKey(Main.getPlugin(Main.class), "melo_disc");
-		recipe.get(1).add(key);
-        shapedrecipe = new ShapedRecipe(key,Items.melo_disc.getItemStack());
-        shapedrecipe.shape("MSM","SNS","MSM");
-        shapedrecipe.setIngredient('M', new RecipeChoice.ExactChoice(Items.enderite_ingot.getItemStack()));
-        shapedrecipe.setIngredient('S', Material.END_STONE);
-        shapedrecipe.setIngredient('N', Material.NETHER_STAR);
-        Bukkit.addRecipe(shapedrecipe);
-        
-        key = new NamespacedKey(Main.getPlugin(Main.class), "moonlight_disc");
-		recipe.get(6).add(key);
-        shapedrecipe = new ShapedRecipe(key,Items.moonlight_disc.getItemStack());
-        shapedrecipe.shape("CIC","INI","CIC");
-        shapedrecipe.setIngredient('C', new RecipeChoice.ExactChoice(Items.chaos_ingot.getItemStack()));
-        shapedrecipe.setIngredient('I', new RecipeChoice.ExactChoice(Items.infinity_ingot.getItemStack()));
-        shapedrecipe.setIngredient('N', Material.NETHER_STAR);
-        Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "ice_disc");
 		recipe.get(0).add(key);
@@ -186,11 +168,11 @@ public class Custom implements Listener {
         shapedrecipe.setIngredient('C', Material.CARROT);
         Bukkit.addRecipe(shapedrecipe);
         
-        key = new NamespacedKey(Main.getPlugin(Main.class), "manyullyn_carrot");
+        key = new NamespacedKey(Main.getPlugin(Main.class), "ametrine_carrot");
       	recipe.get(0).add(key);
-        shapedrecipe = new ShapedRecipe(key,Items.manyullyn_carrot.getItemStack());
+        shapedrecipe = new ShapedRecipe(key,Items.ametrine_carrot.getItemStack());
         shapedrecipe.shape("III","ICI","III");
-        shapedrecipe.setIngredient('I', new RecipeChoice.ExactChoice(Items.manyullyn_ingot.getItemStack()));
+        shapedrecipe.setIngredient('I', new RecipeChoice.ExactChoice(Items.ametrine_ingot.getItemStack()));
         shapedrecipe.setIngredient('C', Material.CARROT);
         Bukkit.addRecipe(shapedrecipe);
         
@@ -285,6 +267,35 @@ public class Custom implements Listener {
         recipe.get(0).add(key);
         furnacerecipe = new FurnaceRecipe(key,Items.cheese.getItemStack(),Material.MILK_BUCKET,0f,200);
         Bukkit.addRecipe(furnacerecipe);
+        
+        key = new NamespacedKey(Main.getPlugin(Main.class), "wither_bone_meal");
+        recipe.get(0).add(key);
+        shapelessrecipe = new ShapelessRecipe(key, multi(Items.wither_bone_meal.getItemStack(),3));
+    	shapelessrecipe.addIngredient(new RecipeChoice.ExactChoice(Items.wither_bone.getItemStack()));
+        Bukkit.addRecipe(shapelessrecipe);
+        
+        key = new NamespacedKey(Main.getPlugin(Main.class), "wither_bone_block");
+        recipe.get(0).add(key);
+        shapedrecipe = new ShapedRecipe(key,Blocks.wither_bone_block.getItemStack());
+    	shapedrecipe.shape("DDD","DDD","DDD");
+    	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.wither_bone_meal.getItemStack()));
+    	Bukkit.addRecipe(shapedrecipe);
+    	
+    	key = new NamespacedKey(Main.getPlugin(Main.class), "wither_bone_meal_from_block");
+        recipe.get(0).add(key);
+        shapelessrecipe = new ShapelessRecipe(key, multi(Items.wither_bone_meal.getItemStack(),9));
+    	shapelessrecipe.addIngredient(new RecipeChoice.ExactChoice(Blocks.wither_bone_block.getItemStack()));
+        Bukkit.addRecipe(shapelessrecipe);
+        
+        key = new NamespacedKey(Main.getPlugin(Main.class), "wither_core");
+        recipe.get(5).add(key);
+        shapedrecipe = new ShapedRecipe(key,Blocks.wither_bone_block.getItemStack());
+    	shapedrecipe.shape("PDP","DCD","PDP");
+    	shapedrecipe.setIngredient('P', new RecipeChoice.ExactChoice(Blocks.chaos_planks.getItemStack()));
+    	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.wither_bone_meal.getItemStack()));
+    	shapedrecipe.setIngredient('D', new RecipeChoice.MaterialChoice(Material.COPPER_BLOCK));
+    	Bukkit.addRecipe(shapedrecipe);
+        
 	}
 
 	private static void Gold() {
@@ -750,175 +761,175 @@ public class Custom implements Listener {
         
 	}
 	
-	private static void Manyullyn() {
+	private static void ametrine() {
 		
 		//apple
-        key = new NamespacedKey(Main.getPlugin(Main.class), "manyullyn_apple");
+        key = new NamespacedKey(Main.getPlugin(Main.class), "ametrine_apple");
         recipe.get(0).add(key);
-        shapedrecipe = new ShapedRecipe(key,Items.manyullyn_apple.getItemStack());
+        shapedrecipe = new ShapedRecipe(key,Items.ametrine_apple.getItemStack());
         shapedrecipe.shape("GGG","GAG","GGG");
-        shapedrecipe.setIngredient('G', new RecipeChoice.ExactChoice(Items.manyullyn_ingot.getItemStack()));
+        shapedrecipe.setIngredient('G', new RecipeChoice.ExactChoice(Items.ametrine_ingot.getItemStack()));
         shapedrecipe.setIngredient('A', Material.APPLE);
         Bukkit.addRecipe(shapedrecipe);
         
-        key = new NamespacedKey(Main.getPlugin(Main.class), "enchanted_manyullyn_apple");
+        key = new NamespacedKey(Main.getPlugin(Main.class), "enchanted_ametrine_apple");
         recipe.get(0).add(key);
-        shapedrecipe = new ShapedRecipe(key,Items.enchanted_manyullyn_apple.getItemStack());
+        shapedrecipe = new ShapedRecipe(key,Items.enchanted_ametrine_apple.getItemStack());
         shapedrecipe.shape("GGG","GAG","GGG");
-        shapedrecipe.setIngredient('G', new RecipeChoice.ExactChoice(Blocks.manyullyn_block.getItemStack()));
+        shapedrecipe.setIngredient('G', new RecipeChoice.ExactChoice(Blocks.ametrine_block.getItemStack()));
         shapedrecipe.setIngredient('A', Material.APPLE);
         Bukkit.addRecipe(shapedrecipe);
 		
 		//base
-		key = new NamespacedKey(Main.getPlugin(Main.class), "cobalt_ingot");
+		key = new NamespacedKey(Main.getPlugin(Main.class), "charoite_ingot");
         recipe.get(4).add(key);
-        furnacerecipe = new FurnaceRecipe(key,Items.cobalt_ingot.getItemStack(),new RecipeChoice.ExactChoice(Blocks.cobalt_ore.getItemStack()),12f,600);
+        furnacerecipe = new FurnaceRecipe(key,Items.charoite_ingot.getItemStack(),new RecipeChoice.ExactChoice(Blocks.charoite_ore.getItemStack()),12f,600);
         Bukkit.addRecipe(furnacerecipe);
         
-        key = new NamespacedKey(Main.getPlugin(Main.class), "ardite_ingot");
+        key = new NamespacedKey(Main.getPlugin(Main.class), "carnelian_ingot");
         recipe.get(4).add(key);
-        furnacerecipe = new FurnaceRecipe(key,Items.ardite_ingot.getItemStack(),new RecipeChoice.ExactChoice(Blocks.ardite_ore.getItemStack()),12f,600);
+        furnacerecipe = new FurnaceRecipe(key,Items.carnelian_ingot.getItemStack(),new RecipeChoice.ExactChoice(Blocks.carnelian_ore.getItemStack()),12f,600);
         Bukkit.addRecipe(furnacerecipe);
         
         
-        key = new NamespacedKey(Main.getPlugin(Main.class), "blasting_cobalt_ingot");
+        key = new NamespacedKey(Main.getPlugin(Main.class), "blasting_charoite_ingot");
         recipe.get(4).add(key);
-        blastingrecipe = new BlastingRecipe(key,Items.cobalt_ingot.getItemStack(),new RecipeChoice.ExactChoice(Blocks.cobalt_ore.getItemStack()),12f,300);
+        blastingrecipe = new BlastingRecipe(key,Items.charoite_ingot.getItemStack(),new RecipeChoice.ExactChoice(Blocks.charoite_ore.getItemStack()),12f,300);
         Bukkit.addRecipe(blastingrecipe);
         
-        key = new NamespacedKey(Main.getPlugin(Main.class), "blasting_ardite_ingot");
+        key = new NamespacedKey(Main.getPlugin(Main.class), "blasting_carnelian_ingot");
         recipe.get(4).add(key);
-        blastingrecipe = new BlastingRecipe(key,Items.ardite_ingot.getItemStack(),new RecipeChoice.ExactChoice(Blocks.ardite_ore.getItemStack()),12f,300);
+        blastingrecipe = new BlastingRecipe(key,Items.carnelian_ingot.getItemStack(),new RecipeChoice.ExactChoice(Blocks.carnelian_ore.getItemStack()),12f,300);
         Bukkit.addRecipe(blastingrecipe);
         
-        key = new NamespacedKey(Main.getPlugin(Main.class), "manyullyn_ingot_from_cobalt");
-        smithingrecipe = new SmithingRecipe(key, Items.manyullyn_ingot.getItemStack(), new RecipeChoice.ExactChoice(Items.cobalt_ingot.getItemStack()), new RecipeChoice.ExactChoice(Items.ardite_ingot.getItemStack()));
+        key = new NamespacedKey(Main.getPlugin(Main.class), "ametrine_ingot_from_charoite");
+        smithingrecipe = new SmithingRecipe(key, Items.ametrine_ingot.getItemStack(), new RecipeChoice.ExactChoice(Items.charoite_ingot.getItemStack()), new RecipeChoice.ExactChoice(Items.carnelian_ingot.getItemStack()));
         Bukkit.addRecipe(smithingrecipe);
         
-        key = new NamespacedKey(Main.getPlugin(Main.class), "manyullyn_ingot_from_ardite");
-        smithingrecipe = new SmithingRecipe(key, Items.manyullyn_ingot.getItemStack(), new RecipeChoice.ExactChoice(Items.ardite_ingot.getItemStack()), new RecipeChoice.ExactChoice(Items.cobalt_ingot.getItemStack()));
+        key = new NamespacedKey(Main.getPlugin(Main.class), "ametrine_ingot_from_carnelian");
+        smithingrecipe = new SmithingRecipe(key, Items.ametrine_ingot.getItemStack(), new RecipeChoice.ExactChoice(Items.carnelian_ingot.getItemStack()), new RecipeChoice.ExactChoice(Items.charoite_ingot.getItemStack()));
         Bukkit.addRecipe(smithingrecipe);
         
         //block
-        key = new NamespacedKey(Main.getPlugin(Main.class), "cobalt_block");
+        key = new NamespacedKey(Main.getPlugin(Main.class), "charoite_block");
         recipe.get(4).add(key);
-        shapedrecipe = new ShapedRecipe(key,Blocks.cobalt_block.getItemStack());
+        shapedrecipe = new ShapedRecipe(key,Blocks.charoite_block.getItemStack());
         	shapedrecipe.shape("DDD","DDD","DDD");
-        	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.cobalt_ingot.getItemStack()));
+        	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.charoite_ingot.getItemStack()));
         Bukkit.addRecipe(shapedrecipe);
         
-        key = new NamespacedKey(Main.getPlugin(Main.class), "cobalt_ingot_from_block");
+        key = new NamespacedKey(Main.getPlugin(Main.class), "charoite_ingot_from_block");
         recipe.get(4).add(key);
-        shapelessrecipe = new ShapelessRecipe(key, multi(Items.cobalt_ingot.getItemStack(),9));
-        	shapelessrecipe.addIngredient(new RecipeChoice.ExactChoice(Blocks.cobalt_block.getItemStack()));
+        shapelessrecipe = new ShapelessRecipe(key, multi(Items.charoite_ingot.getItemStack(),9));
+        	shapelessrecipe.addIngredient(new RecipeChoice.ExactChoice(Blocks.charoite_block.getItemStack()));
         Bukkit.addRecipe(shapelessrecipe);
         
-        key = new NamespacedKey(Main.getPlugin(Main.class), "ardite_block");
+        key = new NamespacedKey(Main.getPlugin(Main.class), "carnelian_block");
         recipe.get(4).add(key);
-        shapedrecipe = new ShapedRecipe(key,Blocks.ardite_block.getItemStack());
+        shapedrecipe = new ShapedRecipe(key,Blocks.carnelian_block.getItemStack());
         	shapedrecipe.shape("DDD","DDD","DDD");
-        	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.ardite_ingot.getItemStack()));
+        	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.carnelian_ingot.getItemStack()));
         Bukkit.addRecipe(shapedrecipe);
         
-        key = new NamespacedKey(Main.getPlugin(Main.class), "ardite_ingot_from_block");
+        key = new NamespacedKey(Main.getPlugin(Main.class), "carnelian_ingot_from_block");
         recipe.get(4).add(key);
-        shapelessrecipe = new ShapelessRecipe(key, multi(Items.ardite_ingot.getItemStack(),9));
-        	shapelessrecipe.addIngredient(new RecipeChoice.ExactChoice(Blocks.ardite_block.getItemStack()));
+        shapelessrecipe = new ShapelessRecipe(key, multi(Items.carnelian_ingot.getItemStack(),9));
+        	shapelessrecipe.addIngredient(new RecipeChoice.ExactChoice(Blocks.carnelian_block.getItemStack()));
         Bukkit.addRecipe(shapelessrecipe);
         
-        key = new NamespacedKey(Main.getPlugin(Main.class), "manyullyn_block");
+        key = new NamespacedKey(Main.getPlugin(Main.class), "ametrine_block");
         recipe.get(4).add(key);
-        shapedrecipe = new ShapedRecipe(key,Blocks.manyullyn_block.getItemStack());
+        shapedrecipe = new ShapedRecipe(key,Blocks.ametrine_block.getItemStack());
         	shapedrecipe.shape("DDD","DDD","DDD");
-        	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.manyullyn_ingot.getItemStack()));
+        	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.ametrine_ingot.getItemStack()));
         Bukkit.addRecipe(shapedrecipe);
         
-        key = new NamespacedKey(Main.getPlugin(Main.class), "manyullyn_ingot_from_block");
+        key = new NamespacedKey(Main.getPlugin(Main.class), "ametrine_ingot_from_block");
         recipe.get(4).add(key);
-        shapelessrecipe = new ShapelessRecipe(key, multi(Items.manyullyn_ingot.getItemStack(),9));
-        	shapelessrecipe.addIngredient(new RecipeChoice.ExactChoice(Blocks.manyullyn_block.getItemStack()));
+        shapelessrecipe = new ShapelessRecipe(key, multi(Items.ametrine_ingot.getItemStack(),9));
+        	shapelessrecipe.addIngredient(new RecipeChoice.ExactChoice(Blocks.ametrine_block.getItemStack()));
         Bukkit.addRecipe(shapelessrecipe);
         
         //Tool
-        key = new NamespacedKey(Main.getPlugin(Main.class), "manyullyn_sword");
+        key = new NamespacedKey(Main.getPlugin(Main.class), "ametrine_sword");
         recipe.get(4).add(key);
-        shapedrecipe = new ShapedRecipe(key,Items.manyullyn_sword.getItemStack());
+        shapedrecipe = new ShapedRecipe(key,Items.ametrine_sword.getItemStack());
         	shapedrecipe.shape("D","D","E");
-        	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.manyullyn_ingot.getItemStack()));
+        	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.ametrine_ingot.getItemStack()));
         	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.blazite_sword.getItemStack()));
         Bukkit.addRecipe(shapedrecipe);
         
-        key = new NamespacedKey(Main.getPlugin(Main.class), "manyullyn_pickaxe");
+        key = new NamespacedKey(Main.getPlugin(Main.class), "ametrine_pickaxe");
         recipe.get(4).add(key);
-        shapedrecipe = new ShapedRecipe(key,Items.manyullyn_pickaxe.getItemStack());
+        shapedrecipe = new ShapedRecipe(key,Items.ametrine_pickaxe.getItemStack());
         	shapedrecipe.shape("DDD"," E "," D ");
-        	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.manyullyn_ingot.getItemStack()));
+        	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.ametrine_ingot.getItemStack()));
         	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.blazite_pickaxe.getItemStack()));
         Bukkit.addRecipe(shapedrecipe);
         
-        key = new NamespacedKey(Main.getPlugin(Main.class), "manyullyn_axe");
+        key = new NamespacedKey(Main.getPlugin(Main.class), "ametrine_axe");
         recipe.get(4).add(key);
-        shapedrecipe = new ShapedRecipe(key,Items.manyullyn_axe.getItemStack());
+        shapedrecipe = new ShapedRecipe(key,Items.ametrine_axe.getItemStack());
         	shapedrecipe.shape("DD","ED","D ");
-        	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.manyullyn_ingot.getItemStack()));
+        	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.ametrine_ingot.getItemStack()));
         	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.blazite_axe.getItemStack()));
         Bukkit.addRecipe(shapedrecipe);
         
-        key = new NamespacedKey(Main.getPlugin(Main.class), "manyullyn_shovel");
+        key = new NamespacedKey(Main.getPlugin(Main.class), "ametrine_shovel");
         recipe.get(4).add(key);
-        shapedrecipe = new ShapedRecipe(key,Items.manyullyn_shovel.getItemStack());
+        shapedrecipe = new ShapedRecipe(key,Items.ametrine_shovel.getItemStack());
         	shapedrecipe.shape("D","E","D");
-        	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.manyullyn_ingot.getItemStack()));
+        	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.ametrine_ingot.getItemStack()));
         	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.blazite_shovel.getItemStack()));
         Bukkit.addRecipe(shapedrecipe);
         
-        key = new NamespacedKey(Main.getPlugin(Main.class), "manyullyn_hoe");
+        key = new NamespacedKey(Main.getPlugin(Main.class), "ametrine_hoe");
         recipe.get(4).add(key);
-        shapedrecipe = new ShapedRecipe(key,Items.manyullyn_hoe.getItemStack());
+        shapedrecipe = new ShapedRecipe(key,Items.ametrine_hoe.getItemStack());
         	shapedrecipe.shape("DD"," E"," D");
-        	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.manyullyn_ingot.getItemStack()));
+        	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.ametrine_ingot.getItemStack()));
         	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.blazite_hoe.getItemStack()));
         Bukkit.addRecipe(shapedrecipe);
         //hammer
-        key = new NamespacedKey(Main.getPlugin(Main.class), "manyullyn_hammer");
+        key = new NamespacedKey(Main.getPlugin(Main.class), "ametrine_hammer");
         recipe.get(4).add(key);
-        shapedrecipe = new ShapedRecipe(key,Items.manyullyn_hammer.getItemStack());
+        shapedrecipe = new ShapedRecipe(key,Items.ametrine_hammer.getItemStack());
         	shapedrecipe.shape("DBD","DED"," D ");
-        	shapedrecipe.setIngredient('B', new RecipeChoice.ExactChoice(Blocks.manyullyn_block.getItemStack()));
-        	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.manyullyn_ingot.getItemStack()));
+        	shapedrecipe.setIngredient('B', new RecipeChoice.ExactChoice(Blocks.ametrine_block.getItemStack()));
+        	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.ametrine_ingot.getItemStack()));
         	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.blazite_hammer.getItemStack()));
         Bukkit.addRecipe(shapedrecipe);
         
         //armor
-        key = new NamespacedKey(Main.getPlugin(Main.class), "manyullyn_helmet");
+        key = new NamespacedKey(Main.getPlugin(Main.class), "ametrine_helmet");
         recipe.get(4).add(key);
-        shapedrecipe = new ShapedRecipe(key,Items.manyullyn_helmet.getItemStack());
+        shapedrecipe = new ShapedRecipe(key,Items.ametrine_helmet.getItemStack());
         	shapedrecipe.shape("DDD","DED");
-        	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.manyullyn_ingot.getItemStack()));
+        	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.ametrine_ingot.getItemStack()));
         	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.blazite_helmet.getItemStack()));
         Bukkit.addRecipe(shapedrecipe);
         
-        key = new NamespacedKey(Main.getPlugin(Main.class), "manyullyn_chestplate");
+        key = new NamespacedKey(Main.getPlugin(Main.class), "ametrine_chestplate");
         recipe.get(4).add(key);
-        shapedrecipe = new ShapedRecipe(key,Items.manyullyn_chestplate.getItemStack());
+        shapedrecipe = new ShapedRecipe(key,Items.ametrine_chestplate.getItemStack());
         	shapedrecipe.shape("DED","DDD","DDD");
-        	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.manyullyn_ingot.getItemStack()));
+        	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.ametrine_ingot.getItemStack()));
         	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.blazite_chestplate.getItemStack()));
         Bukkit.addRecipe(shapedrecipe);
         
-        key = new NamespacedKey(Main.getPlugin(Main.class), "manyullyn_leggings");
+        key = new NamespacedKey(Main.getPlugin(Main.class), "ametrine_leggings");
         recipe.get(4).add(key);
-        shapedrecipe = new ShapedRecipe(key,Items.manyullyn_leggings.getItemStack());
+        shapedrecipe = new ShapedRecipe(key,Items.ametrine_leggings.getItemStack());
         	shapedrecipe.shape("DDD","DED","D D");
-        	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.manyullyn_ingot.getItemStack()));
+        	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.ametrine_ingot.getItemStack()));
         	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.blazite_leggings.getItemStack()));
         Bukkit.addRecipe(shapedrecipe);
         
-        key = new NamespacedKey(Main.getPlugin(Main.class), "manyullyn_boots");
+        key = new NamespacedKey(Main.getPlugin(Main.class), "ametrine_boots");
         recipe.get(4).add(key);
-        shapedrecipe = new ShapedRecipe(key,Items.manyullyn_boots.getItemStack());
+        shapedrecipe = new ShapedRecipe(key,Items.ametrine_boots.getItemStack());
         	shapedrecipe.shape("D D","DED");
-        	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.manyullyn_ingot.getItemStack()));
+        	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.ametrine_ingot.getItemStack()));
         	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.blazite_boots.getItemStack()));
         Bukkit.addRecipe(shapedrecipe);
         
@@ -992,7 +1003,7 @@ public class Custom implements Listener {
         shapedrecipe = new ShapedRecipe(key,Items.chaos_sword.getItemStack());
         	shapedrecipe.shape("D","D","E");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.chaos_ingot.getItemStack()));
-        	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.manyullyn_sword.getItemStack()));
+        	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.ametrine_sword.getItemStack()));
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "chaos_pickaxe");
@@ -1000,7 +1011,7 @@ public class Custom implements Listener {
         shapedrecipe = new ShapedRecipe(key,Items.chaos_pickaxe.getItemStack());
         	shapedrecipe.shape("DDD"," E "," D ");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.chaos_ingot.getItemStack()));
-        	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.manyullyn_pickaxe.getItemStack()));
+        	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.ametrine_pickaxe.getItemStack()));
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "chaos_axe");
@@ -1008,7 +1019,7 @@ public class Custom implements Listener {
         shapedrecipe = new ShapedRecipe(key,Items.chaos_axe.getItemStack());
         	shapedrecipe.shape("DD","ED","D ");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.chaos_ingot.getItemStack()));
-        	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.manyullyn_axe.getItemStack()));
+        	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.ametrine_axe.getItemStack()));
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "chaos_shovel");
@@ -1016,7 +1027,7 @@ public class Custom implements Listener {
         shapedrecipe = new ShapedRecipe(key,Items.chaos_shovel.getItemStack());
         	shapedrecipe.shape("D","E","D");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.chaos_ingot.getItemStack()));
-        	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.manyullyn_shovel.getItemStack()));
+        	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.ametrine_shovel.getItemStack()));
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "chaos_hoe");
@@ -1024,7 +1035,7 @@ public class Custom implements Listener {
         shapedrecipe = new ShapedRecipe(key,Items.chaos_hoe.getItemStack());
         	shapedrecipe.shape("DD"," E"," D");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.chaos_ingot.getItemStack()));
-        	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.manyullyn_hoe.getItemStack()));
+        	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.ametrine_hoe.getItemStack()));
         Bukkit.addRecipe(shapedrecipe);
         //hammer
         key = new NamespacedKey(Main.getPlugin(Main.class), "chaos_hammer");
@@ -1033,7 +1044,7 @@ public class Custom implements Listener {
         	shapedrecipe.shape("DBD","DED"," D ");
         	shapedrecipe.setIngredient('B', new RecipeChoice.ExactChoice(Blocks.chaos_block.getItemStack()));
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.chaos_ingot.getItemStack()));
-        	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.manyullyn_hammer.getItemStack()));
+        	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.ametrine_hammer.getItemStack()));
         Bukkit.addRecipe(shapedrecipe);
         
         //armor
@@ -1042,7 +1053,7 @@ public class Custom implements Listener {
         shapedrecipe = new ShapedRecipe(key,Items.chaos_helmet.getItemStack());
         	shapedrecipe.shape("DDD","DED");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.chaos_ingot.getItemStack()));
-        	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.manyullyn_helmet.getItemStack()));
+        	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.ametrine_helmet.getItemStack()));
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "chaos_chestplate");
@@ -1050,7 +1061,7 @@ public class Custom implements Listener {
         shapedrecipe = new ShapedRecipe(key,Items.chaos_chestplate.getItemStack());
         	shapedrecipe.shape("DED","DDD","DDD");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.chaos_ingot.getItemStack()));
-        	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.manyullyn_chestplate.getItemStack()));
+        	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.ametrine_chestplate.getItemStack()));
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "chaos_leggings");
@@ -1058,7 +1069,7 @@ public class Custom implements Listener {
         shapedrecipe = new ShapedRecipe(key,Items.chaos_leggings.getItemStack());
         	shapedrecipe.shape("DDD","DED","D D");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.chaos_ingot.getItemStack()));
-        	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.manyullyn_leggings.getItemStack()));
+        	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.ametrine_leggings.getItemStack()));
         Bukkit.addRecipe(shapedrecipe);
         
         key = new NamespacedKey(Main.getPlugin(Main.class), "chaos_boots");
@@ -1066,7 +1077,7 @@ public class Custom implements Listener {
         shapedrecipe = new ShapedRecipe(key,Items.chaos_boots.getItemStack());
         	shapedrecipe.shape("D D","DED");
         	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.chaos_ingot.getItemStack()));
-        	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.manyullyn_boots.getItemStack()));
+        	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.ametrine_boots.getItemStack()));
         Bukkit.addRecipe(shapedrecipe);
         
 	}
@@ -1117,7 +1128,7 @@ public class Custom implements Listener {
         key = new NamespacedKey(Main.getPlugin(Main.class), "netherstar_pickaxe");
         recipe.get(6).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.netherstar_pickaxe.getItemStack());
-        	shapedrecipe.shape("BBB"," E "," D ");
+        	shapedrecipe.shape("DBD"," E "," D ");
         	shapedrecipe.setIngredient('B', new RecipeChoice.ExactChoice(Blocks.netherstar_block.getItemStack()));
         	shapedrecipe.setIngredient('D', Material.NETHER_STAR);
         	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.chaos_pickaxe.getItemStack()));
@@ -1126,7 +1137,7 @@ public class Custom implements Listener {
         key = new NamespacedKey(Main.getPlugin(Main.class), "netherstar_axe");
         recipe.get(6).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.netherstar_axe.getItemStack());
-        	shapedrecipe.shape("BB","EB","D ");
+        	shapedrecipe.shape("DD","ED","B ");
         	shapedrecipe.setIngredient('B', new RecipeChoice.ExactChoice(Blocks.netherstar_block.getItemStack()));
         	shapedrecipe.setIngredient('D', Material.NETHER_STAR);
         	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.chaos_axe.getItemStack()));
@@ -1144,7 +1155,7 @@ public class Custom implements Listener {
         key = new NamespacedKey(Main.getPlugin(Main.class), "netherstar_hoe");
         recipe.get(6).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.netherstar_hoe.getItemStack());
-        	shapedrecipe.shape("BB"," E"," D");
+        	shapedrecipe.shape("DD"," E"," B");
         	shapedrecipe.setIngredient('B', new RecipeChoice.ExactChoice(Blocks.netherstar_block.getItemStack()));
         	shapedrecipe.setIngredient('D', Material.NETHER_STAR);
         	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.chaos_hoe.getItemStack()));
@@ -1153,7 +1164,7 @@ public class Custom implements Listener {
         key = new NamespacedKey(Main.getPlugin(Main.class), "netherstar_hammer");
         recipe.get(6).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.netherstar_hammer.getItemStack());
-        	shapedrecipe.shape("BDB","BEB"," D ");
+        	shapedrecipe.shape("BBB","DED"," D ");
         	shapedrecipe.setIngredient('B', new RecipeChoice.ExactChoice(Blocks.netherstar_block.getItemStack()));
         	shapedrecipe.setIngredient('D', Material.NETHER_STAR);
         	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.chaos_hammer.getItemStack()));
@@ -1163,8 +1174,7 @@ public class Custom implements Listener {
         key = new NamespacedKey(Main.getPlugin(Main.class), "netherstar_helmet");
         recipe.get(6).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.netherstar_helmet.getItemStack());
-        	shapedrecipe.shape("BDB","DED");
-        	shapedrecipe.setIngredient('B', new RecipeChoice.ExactChoice(Blocks.netherstar_block.getItemStack()));
+        	shapedrecipe.shape("DDD","DED");
         	shapedrecipe.setIngredient('D', Material.NETHER_STAR);
         	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.chaos_helmet.getItemStack()));
         Bukkit.addRecipe(shapedrecipe);
@@ -1172,7 +1182,7 @@ public class Custom implements Listener {
         key = new NamespacedKey(Main.getPlugin(Main.class), "netherstar_chestplate");
         recipe.get(6).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.netherstar_chestplate.getItemStack());
-        	shapedrecipe.shape("DED","DDD","BDB");
+        	shapedrecipe.shape("DED","DDD","DBD");
         	shapedrecipe.setIngredient('B', new RecipeChoice.ExactChoice(Blocks.netherstar_block.getItemStack()));
         	shapedrecipe.setIngredient('D', Material.NETHER_STAR);
         	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.chaos_chestplate.getItemStack()));
@@ -1181,7 +1191,7 @@ public class Custom implements Listener {
         key = new NamespacedKey(Main.getPlugin(Main.class), "netherstar_leggings");
         recipe.get(6).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.netherstar_leggings.getItemStack());
-        	shapedrecipe.shape("BDB","DED","D D");
+        	shapedrecipe.shape("DBD","DED","D D");
         	shapedrecipe.setIngredient('B', new RecipeChoice.ExactChoice(Blocks.netherstar_block.getItemStack()));
         	shapedrecipe.setIngredient('D', Material.NETHER_STAR);
         	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.chaos_leggings.getItemStack()));
@@ -1190,8 +1200,7 @@ public class Custom implements Listener {
         key = new NamespacedKey(Main.getPlugin(Main.class), "netherstar_boots");
         recipe.get(6).add(key);
         shapedrecipe = new ShapedRecipe(key,Items.netherstar_boots.getItemStack());
-        	shapedrecipe.shape("D D","BEB");
-        	shapedrecipe.setIngredient('B', new RecipeChoice.ExactChoice(Blocks.netherstar_block.getItemStack()));
+        	shapedrecipe.shape("D D","DED");
         	shapedrecipe.setIngredient('D', Material.NETHER_STAR);
         	shapedrecipe.setIngredient('E', new RecipeChoice.ExactChoice(Items.chaos_boots.getItemStack()));
         Bukkit.addRecipe(shapedrecipe);
@@ -1227,9 +1236,9 @@ public class Custom implements Listener {
         shapelessrecipe.addIngredient(new RecipeChoice.ExactChoice(Items.discordium_ingot.getItemStack()));
         shapelessrecipe.addIngredient(new RecipeChoice.ExactChoice(Items.blazite_ingot.getItemStack()));
         shapelessrecipe.addIngredient(Material.DIAMOND_BLOCK);
-        shapelessrecipe.addIngredient(new RecipeChoice.ExactChoice(Items.cobalt_ingot.getItemStack()));
-        shapelessrecipe.addIngredient(new RecipeChoice.ExactChoice(Items.ardite_ingot.getItemStack()));
-        shapelessrecipe.addIngredient(new RecipeChoice.ExactChoice(Items.manyullyn_ingot.getItemStack()));
+        shapelessrecipe.addIngredient(new RecipeChoice.ExactChoice(Items.charoite_ingot.getItemStack()));
+        shapelessrecipe.addIngredient(new RecipeChoice.ExactChoice(Items.carnelian_ingot.getItemStack()));
+        shapelessrecipe.addIngredient(new RecipeChoice.ExactChoice(Items.ametrine_ingot.getItemStack()));
         shapelessrecipe.addIngredient(new RecipeChoice.ExactChoice(Items.chaos_ingot.getItemStack()));
         
         Bukkit.addRecipe(shapelessrecipe);
@@ -1496,8 +1505,8 @@ public class Custom implements Listener {
 					  if(isSimilar(tool, Items.netherite_hammer.getItemStack())) {
 						  result = Items.enderite_hammer.getItemStack().clone();
 					  }
-				  }else if((isSimilar(ingot, Items.ardite_ingot.getItemStack()) && isSimilar(tool, Items.cobalt_ingot.getItemStack())) || (isSimilar(ingot, Items.cobalt_ingot.getItemStack()) && isSimilar(tool, Items.ardite_ingot.getItemStack()))) {
-					  result = Items.manyullyn_ingot.getItemStack().clone();
+				  }else if((isSimilar(ingot, Items.carnelian_ingot.getItemStack()) && isSimilar(tool, Items.charoite_ingot.getItemStack())) || (isSimilar(ingot, Items.charoite_ingot.getItemStack()) && isSimilar(tool, Items.carnelian_ingot.getItemStack()))) {
+					  result = Items.ametrine_ingot.getItemStack().clone();
 				  }
 			  } else if(tool.getItemMeta().hasLore() && !ingot.getItemMeta().hasLore()) {
 				  if(ingot.getType().equals(Material.NETHERITE_INGOT)) {
@@ -1541,6 +1550,18 @@ public class Custom implements Listener {
 	public static boolean isCustomBlockSimilar(Material customBlockMaterial,MultipleFacing blockdata,Block block) {
 		if(block.getType().equals(customBlockMaterial) && block.getBlockData().matches(blockdata))
 			return true;
+		return false;
+	}
+	public static boolean isCustomBlockSimilar(Blocks cblock,Block block) {
+		if(block.getBlockData() instanceof MultipleFacing) {
+			MultipleFacing e = (MultipleFacing) block.getBlockData();
+			for(BlockFace face : faces) {
+				if(!e.getAllowedFaces().contains(face)) return false;
+				e.setFace(face, cblock.getBlockFace(face));
+				}
+			if(isCustomBlockSimilar(cblock.getMaterial(),e,block))
+				return true;
+		}
 		return false;
 	}
 	
@@ -1846,7 +1867,7 @@ public class Custom implements Listener {
 	 * @param iBlockData Le block
 	 * @param minY La coordonnée minimum en Y
 	 * @param maxY La coordonnée maximum en Y
-	 * @param chance Les chances de drop (1/X)
+	 * @param chance Les chances de spawn (1/X)
 	 * @param tries Nombres d'essais
 	 * @param luck La chance pour un minerai en plus a proximité
 	 * @param maxVein Le maximum de minerai a proximité

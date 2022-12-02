@@ -13,6 +13,10 @@ import net.minecraft.network.protocol.game.PacketPlayOutBlockBreakAnimation;
 
 public class NmsHandler {
 
+	//
+	// S/O to Kapstok and TheDarkSword for the tutorial to create a custom breaking system, I have personally made a lot improvement and change.
+	//
+	
     public static void sendBreakPacket(int animation, Block block) {
         ((CraftServer) Bukkit.getServer()).getHandle().a(null, block.getX(), block.getY(), block.getZ(), 120,
                 ((CraftWorld) block.getWorld()).getHandle().aa(), new PacketPlayOutBlockBreakAnimation(getBlockEntityId(block), getBlockPosition(block), animation));

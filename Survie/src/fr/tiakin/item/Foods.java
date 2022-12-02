@@ -118,8 +118,8 @@ public enum Foods {
 					new PotionEffect(PotionEffectType.FAST_DIGGING, 12000, 1)
 					}
 		),
-	manyullyn_carrot(
-			Items.manyullyn_carrot,
+	ametrine_carrot(
+			Items.ametrine_carrot,
 			new PotionEffect[] {
 					new PotionEffect(PotionEffectType.SATURATION, 6000, 0),
 					new PotionEffect(PotionEffectType.GLOWING, 18000, 0),
@@ -248,15 +248,15 @@ public enum Foods {
 					new PotionEffect(PotionEffectType.FAST_DIGGING, 18000, 2)
 					}
 		),
-	manyullyn_apple(
-			Items.manyullyn_apple,
+	ametrine_apple(
+			Items.ametrine_apple,
 			new PotionEffect[] {
 					new PotionEffect(PotionEffectType.GLOWING, 18000, 0),
 					new PotionEffect(PotionEffectType.LUCK, 18000, 0)
 					}
 		),
-	enchanted_manyullyn_apple(
-			Items.enchanted_manyullyn_apple,
+	enchanted_ametrine_apple(
+			Items.enchanted_ametrine_apple,
 			new PotionEffect[] {
 					new PotionEffect(PotionEffectType.SATURATION, 24000, 0),
 					new PotionEffect(PotionEffectType.GLOWING, 30000, 0),

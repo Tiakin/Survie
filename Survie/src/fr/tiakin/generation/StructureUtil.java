@@ -26,6 +26,14 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.DefinedStruct
 
 public class StructureUtil {
     
+	
+	//
+	// Massive S/O to Minidigger for this class, I have modified the code a little bit, But for the story, 
+	// while looking for how to make the structure spawn, I couldn't find his work and so I was looking
+	// by mixing the minecraft source code and the minidigger tool to find the obfuscated names and at 
+	// one point while I was doing the class little by little I did a search with the class names and I found his work.
+	//
+	
     public static boolean save(Location start, Vector size, String name, String author) {
         BlockPosition startPos = new BlockPosition(start.getBlockX(), start.getBlockY(), start.getBlockZ());
         BlockPosition sizePos = new BlockPosition(size.getBlockX(),size.getBlockY(),size.getBlockZ());

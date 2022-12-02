@@ -4,11 +4,11 @@
             "text": "Cover Me In Not Stolen Texture"
         },
         "description": {
-            "text": "Get yourself a full set of manyullyn"
+            "text": "Get yourself a full set of ametrine"
         },
         "icon": {
             "item": "minecraft:netherite_chestplate",
-            "nbt": "{display:{Lore:['{\"text\":\"Manyullyn Chestplate\"}']}}"
+            "nbt": "{display:{Lore:['{\"text\":\"ametrine Chestplate\"}']}}"
         },
         "frame": "task",
         "show_toast": true,

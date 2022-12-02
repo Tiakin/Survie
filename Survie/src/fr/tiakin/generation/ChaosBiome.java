@@ -28,6 +28,9 @@ import fr.tiakin.main.Main;
 
 public class ChaosBiome {
 	
+	
+	// S/o Kapstok
+	
 	static Server server = Bukkit.getServer();
 	static CraftServer craftserver = (CraftServer)server;
 	static DedicatedServer dedicatedserver = craftserver.getServer();

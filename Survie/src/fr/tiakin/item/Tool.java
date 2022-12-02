@@ -137,7 +137,7 @@ public class Tool {
 				case "Enderite" -> "enderite";
 				case "Discordium" -> "discordium";
     			case "Blazite" -> "blazite";
-    			case "Manyullyn" -> "manyullyn";
+    			case "ametrine" -> "ametrine";
     			case "Chaos" -> "chaos";
     			case "Netherstar" -> "netherstar";
     			case "Infinity" -> "infinity";
@@ -174,7 +174,7 @@ public class Tool {
 		case "enderite" -> 7;
 		case "discordium" -> 8;
 		case "blazite" -> 9;
-		case "manyullyn" -> 10;
+		case "ametrine" -> 10;
 		case "chaos" -> 11;
 		case "netherstar" -> 12;
 		case "infinity" -> 13;
@@ -205,7 +205,7 @@ public class Tool {
     		return 16;
     	case "blazite":
 			return 22;
-		case "manyullyn":
+		case "ametrine":
 			return 26;
 		case "chaos":
 			return 30;

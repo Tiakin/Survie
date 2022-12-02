@@ -4,11 +4,11 @@
             "text": "Supreme Serious Dedication"
         },
         "description": {
-            "text": "Craft a manyullyn hoe"
+            "text": "Craft a ametrine hoe"
         },
         "icon": {
             "item": "minecraft:netherite_hoe",
-            "nbt": "{display:{Lore:['{\"text\":\"Manyullyn Hoe\"}']}}"
+            "nbt": "{display:{Lore:['{\"text\":\"ametrine Hoe\"}']}}"
         },
         "frame": "task",
         "show_toast": true,

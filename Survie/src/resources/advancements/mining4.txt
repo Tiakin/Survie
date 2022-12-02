@@ -1,14 +1,14 @@
 {
     "display": {
         "title": {
-            "text": "Cobalt + Ardite = Manyullyn"
+            "text": "Charoite + Carnelian = ametrine"
         },
         "description": {
             "text": "10$ for the one who can pronouce it"
         },
         "icon": {
             "item": "minecraft:netherite_ingot",
-            "nbt": "{display:{Lore:['{\"text\":\"Manyullyn Ingot\"}']}}"
+            "nbt": "{display:{Lore:['{\"text\":\"ametrine Ingot\"}']}}"
         },
         "frame": "task",
         "show_toast": true,

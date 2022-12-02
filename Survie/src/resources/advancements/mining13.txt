@@ -4,11 +4,11 @@
             "text": "Hammer Through The Window"
         },
         "description": {
-            "text": "Craft a manyullyn hammer"
+            "text": "Craft a ametrine hammer"
         },
         "icon": {
             "item": "minecraft:netherite_pickaxe",
-            "nbt": "{display:{Lore:['{\"text\":\"Manyullyn Hammer\"}']}}"
+            "nbt": "{display:{Lore:['{\"text\":\"ametrine Hammer\"}']}}"
         },
         "frame": "task",
         "show_toast": true,

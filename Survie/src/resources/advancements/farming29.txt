@@ -4,11 +4,11 @@
             "text": "Broke A Tooth Carrot"
         },
         "description": {
-            "text": "Eat a manyullyn carrot"
+            "text": "Eat a ametrine carrot"
         },
         "icon": {
             "item": "minecraft:golden_carrot",
-            "nbt": "{display:{Lore:['{\"text\":\"Manyullyn Carrot\"}']}}"
+            "nbt": "{display:{Lore:['{\"text\":\"ametrine Carrot\"}']}}"
         },
         "frame": "task",
         "show_toast": true,

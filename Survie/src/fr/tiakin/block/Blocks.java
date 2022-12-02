@@ -20,7 +20,7 @@ public enum Blocks {
 				ItemMeta im;{
 					im = this.getItemMeta();
 					im.setDisplayName(ChatColor.RESET+"Enderite Ore");
-					im.setCustomModelData(2000);
+					im.setCustomModelData(6942000);
 					im.setLore(Arrays.asList("Enderite Ore"));
 					this.setItemMeta(im);
 				}
@@ -38,7 +38,7 @@ public enum Blocks {
 				ItemMeta im;{
 					im = this.getItemMeta();
 					im.setDisplayName(ChatColor.RESET+"Enderite Block");
-					im.setCustomModelData(2001);
+					im.setCustomModelData(6942001);
 					im.setLore(Arrays.asList("Enderite Block"));
 					this.setItemMeta(im);
 				}
@@ -58,7 +58,7 @@ public enum Blocks {
 				ItemMeta im;{
 					im = this.getItemMeta();
 					im.setDisplayName(ChatColor.RESET+"Discordium Ore");
-					im.setCustomModelData(2002);
+					im.setCustomModelData(6942002);
 					im.setLore(Arrays.asList("Discordium Ore"));
 					this.setItemMeta(im);
 				}
@@ -76,7 +76,7 @@ public enum Blocks {
 				ItemMeta im;{
 					im = this.getItemMeta();
 					im.setDisplayName(ChatColor.RESET+"Discordium Block");
-					im.setCustomModelData(2003);
+					im.setCustomModelData(6942003);
 					im.setLore(Arrays.asList("Discordium Block"));
 					this.setItemMeta(im);
 				}
@@ -96,7 +96,7 @@ public enum Blocks {
 				ItemMeta im;{
 					im = this.getItemMeta();
 					im.setDisplayName(ChatColor.RESET+"Blazite Ore");
-					im.setCustomModelData(2004);
+					im.setCustomModelData(6942004);
 					im.setLore(Arrays.asList("Blazite Ore"));
 					this.setItemMeta(im);
 				}
@@ -114,7 +114,7 @@ public enum Blocks {
 				ItemMeta im;{
 					im = this.getItemMeta();
 					im.setDisplayName(ChatColor.RESET+"Blazite Block");
-					im.setCustomModelData(2005);
+					im.setCustomModelData(6942005);
 					im.setLore(Arrays.asList("Blazite Block"));
 					this.setItemMeta(im);
 				}
@@ -128,14 +128,14 @@ public enum Blocks {
 		),
 		
 		
-		//ardite -> manyullyn
-		ardite_ore(
+		//carnelian -> ametrine
+		carnelian_ore(
 			new ItemStack(Material.PLAYER_HEAD) {
 				ItemMeta im;{
 					im = this.getItemMeta();
-					im.setDisplayName(ChatColor.RESET+"Ardite Ore");
-					im.setCustomModelData(2006);
-					im.setLore(Arrays.asList("Ardite Ore"));
+					im.setDisplayName(ChatColor.RESET+"Carnelian Ore");
+					im.setCustomModelData(6942006);
+					im.setLore(Arrays.asList("Carnelian Ore"));
 					this.setItemMeta(im);
 				}
 			}, 
@@ -147,13 +147,13 @@ public enum Blocks {
 			Material.STONE
 		),
 		
-		ardite_block(
+		carnelian_block(
 			new ItemStack(Material.PLAYER_HEAD) {
 				ItemMeta im;{
 					im = this.getItemMeta();
-					im.setDisplayName(ChatColor.RESET+"Ardite Block");
-					im.setCustomModelData(2007);
-					im.setLore(Arrays.asList("Ardite Block"));
+					im.setDisplayName(ChatColor.RESET+"Carnelian Block");
+					im.setCustomModelData(6942007);
+					im.setLore(Arrays.asList("Carnelian Block"));
 					this.setItemMeta(im);
 				}
 			},
@@ -165,14 +165,14 @@ public enum Blocks {
 			Material.STONE
 		),
 		
-		//cobalt -> manyullyn
-		cobalt_ore(
+		//charoite -> ametrine
+		charoite_ore(
 			new ItemStack(Material.PLAYER_HEAD) {
 				ItemMeta im;{
 					im = this.getItemMeta();
-					im.setDisplayName(ChatColor.RESET+"Cobalt Ore");
-					im.setCustomModelData(2008);
-					im.setLore(Arrays.asList("Cobalt Ore"));
+					im.setDisplayName(ChatColor.RESET+"Charoite Ore");
+					im.setCustomModelData(6942008);
+					im.setLore(Arrays.asList("Charoite Ore"));
 					this.setItemMeta(im);
 				}
 			}, 
@@ -184,13 +184,13 @@ public enum Blocks {
 			Material.STONE
 		),
 		
-		cobalt_block(
+		charoite_block(
 			new ItemStack(Material.PLAYER_HEAD) {
 				ItemMeta im;{
 					im = this.getItemMeta();
-					im.setDisplayName(ChatColor.RESET+"Cobalt Block");
-					im.setCustomModelData(2009);
-					im.setLore(Arrays.asList("Cobalt Block"));
+					im.setDisplayName(ChatColor.RESET+"Charoite Block");
+					im.setCustomModelData(6942009);
+					im.setLore(Arrays.asList("Charoite Block"));
 					this.setItemMeta(im);
 				}
 			},
@@ -202,14 +202,14 @@ public enum Blocks {
 			Material.STONE
 		),
 		
-		//manyullyn
-		manyullyn_block(
+		//ametrine
+		ametrine_block(
 			new ItemStack(Material.PLAYER_HEAD) {
 				ItemMeta im;{
 					im = this.getItemMeta();
-					im.setDisplayName(ChatColor.RESET+"Manyullyn Block");
-					im.setCustomModelData(2010);
-					im.setLore(Arrays.asList("Manyullyn Block"));
+					im.setDisplayName(ChatColor.RESET+"Ametrine Block");
+					im.setCustomModelData(6942010);
+					im.setLore(Arrays.asList("Ametrine Block"));
 					this.setItemMeta(im);
 				}
 			},
@@ -228,13 +228,13 @@ public enum Blocks {
 				ItemMeta im;{
 					im = this.getItemMeta();
 					im.setDisplayName(ChatColor.RESET+"Chaos Ore");
-					im.setCustomModelData(2011);
+					im.setCustomModelData(6942011);
 					im.setLore(Arrays.asList("Chaos Ore"));
 					this.setItemMeta(im);
 				}
 			}, 
 			Material.MUSHROOM_STEM,
-			"pickaxe","manyullyn",
+			"pickaxe","ametrine",
 			110,
 			false,Items.chaos_chunk.getItemStack(),
 			false,false,true,true,false,false,
@@ -246,13 +246,13 @@ public enum Blocks {
 				ItemMeta im;{
 					im = this.getItemMeta();
 					im.setDisplayName(ChatColor.RESET+"Chaos Block");
-					im.setCustomModelData(2012);
+					im.setCustomModelData(6942012);
 					im.setLore(Arrays.asList("Chaos Block"));
 					this.setItemMeta(im);
 				}
 			},
 			Material.MUSHROOM_STEM,
-			"pickaxe","manyullyn",
+			"pickaxe","ametrine",
 			130,
 			true,null,
 			false,false,true,true,false,true,
@@ -264,14 +264,14 @@ public enum Blocks {
 				ItemMeta im;{
 					im = this.getItemMeta();
 					im.setDisplayName(ChatColor.RESET+"Chaos Nylium");
-					im.setCustomModelData(2013);
+					im.setCustomModelData(6942013);
 					im.setLore(Arrays.asList("Chaos Nylium"));
 					this.setItemMeta(im);
 				}
 			},
 			Material.MUSHROOM_STEM,
 			"pickaxe","netherite",
-			60,
+			35,
 			true,null,
 			true,false,true,true,false,false,
 			Material.STONE
@@ -282,14 +282,14 @@ public enum Blocks {
 				ItemMeta im;{
 					im = this.getItemMeta();
 					im.setDisplayName(ChatColor.RESET+"Chaos Log");
-					im.setCustomModelData(2014);
+					im.setCustomModelData(6942014);
 					im.setLore(Arrays.asList("Chaos Log"));
 					this.setItemMeta(im);
 				}
 			},
 			Material.MUSHROOM_STEM,
-			"axe","manyullyn",
-			90,
+			"axe","ametrine",
+			50,
 			true,null,
 			true,false,true,true,false,true,
 			Material.OAK_LOG
@@ -301,14 +301,14 @@ public enum Blocks {
 					ItemMeta im;{
 						im = this.getItemMeta();
 						im.setDisplayName(ChatColor.RESET+"Chaos Planks");
-						im.setCustomModelData(2015);
+						im.setCustomModelData(6942015);
 						im.setLore(Arrays.asList("Chaos Planks"));
 						this.setItemMeta(im);
 					}
 				},
 				Material.MUSHROOM_STEM,
-				"axe","manyullyn",
-				80,
+				"axe","ametrine",
+				45,
 				true,null,
 				false,false,false,false,true,false,
 				Material.OAK_LOG
@@ -319,14 +319,14 @@ public enum Blocks {
 					ItemMeta im;{
 						im = this.getItemMeta();
 						im.setDisplayName(ChatColor.RESET+"Netherstar Block");
-						im.setCustomModelData(2016);
+						im.setCustomModelData(6942016);
 						im.setLore(Arrays.asList("Netherstar Block"));
 						this.setItemMeta(im);
 					}
 				},
 				Material.MUSHROOM_STEM,
 				"pickaxe","chaos",
-				130,
+				110,
 				true,null,
 				true,false,false,false,true,false,
 				Material.STONE
@@ -338,7 +338,7 @@ public enum Blocks {
 				ItemMeta im;{
 					im = this.getItemMeta();
 					im.setDisplayName(ChatColor.RESET+"Infinity Block");
-					im.setCustomModelData(666);
+					im.setCustomModelData(6942666);
 					im.setLore(Arrays.asList("Infinity Block"));
 					this.setItemMeta(im);
 				}
@@ -349,7 +349,41 @@ public enum Blocks {
 			true,null,
 			false,false,false,false,true,true,
 			Material.STONE
-		);
+		), 
+		
+		wither_bone_block(new ItemStack(Material.PLAYER_HEAD) {
+				ItemMeta im;{
+					im = this.getItemMeta();
+					im.setDisplayName(ChatColor.RESET+"Wither Bone Block");
+					im.setCustomModelData(6942017);
+					im.setLore(Arrays.asList("Wither Bone Block"));
+					this.setItemMeta(im);
+				}
+			},
+			Material.MUSHROOM_STEM,
+			"pickaxe","netherite",
+			30,
+			true,null,
+			true,false,false,false,true,true,
+			Material.STONE
+			),
+		
+		wither_core(new ItemStack(Material.PLAYER_HEAD) {
+				ItemMeta im;{
+					im = this.getItemMeta();
+					im.setDisplayName(ChatColor.RESET+"Wither Core");
+					im.setCustomModelData(6942018);
+					im.setLore(Arrays.asList("Wither Core"));
+					this.setItemMeta(im);
+				}
+			},
+			Material.MUSHROOM_STEM,
+			"pickaxe","netherite",
+			70,
+			true,null,
+			false,false,false,true,true,false,
+			Material.STONE
+			);
 	
 		private ItemStack is;
 		

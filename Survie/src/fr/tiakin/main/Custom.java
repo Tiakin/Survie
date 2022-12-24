@@ -29,6 +29,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
+import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.event.inventory.PrepareSmithingEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -292,7 +293,7 @@ public class Custom implements Listener {
         shapedrecipe = new ShapedRecipe(key,Blocks.wither_bone_block.getItemStack());
     	shapedrecipe.shape("PDP","DCD","PDP");
     	shapedrecipe.setIngredient('P', new RecipeChoice.ExactChoice(Blocks.chaos_planks.getItemStack()));
-    	shapedrecipe.setIngredient('D', new RecipeChoice.ExactChoice(Items.wither_bone_meal.getItemStack()));
+    	shapedrecipe.setIngredient('C', new RecipeChoice.ExactChoice(Items.wither_bone_meal.getItemStack()));
     	shapedrecipe.setIngredient('D', new RecipeChoice.MaterialChoice(Material.COPPER_BLOCK));
     	Bukkit.addRecipe(shapedrecipe);
         
@@ -1462,7 +1463,29 @@ public class Custom implements Listener {
 		}
 	}
 	
+	/**
+	 * cet event permet de garder les items qui ne doit pas être consumé
+	 * @param e
+	 */
+	@EventHandler
+	public void craftkeep(CraftItemEvent e) {
+		ItemStack[] itemStacks = e.getInventory().getMatrix();
+		if(itemStacks.length == 9) {
+			for(int i=0;i<itemStacks.length;i++) {
+				if(itemStacks[i] != null && itemStacks[i].getType() ==  Material.FLINT_AND_STEEL) {
+					if(e.getWhoClicked() instanceof Player) {
+			    		Player p = (Player) e.getWhoClicked();
+			    		p.getInventory().addItem(itemStacks[i]);
+					}
+				}
+			}
+		}	
+	}
 	
+	/**
+	 * cet event permet de faire fonctionner le smith
+	 * @param e
+	 */
 	@EventHandler
 	public void smith(PrepareSmithingEvent e) {
 		  ItemStack tool = e.getInventory().getItem(0);
@@ -1538,9 +1561,11 @@ public class Custom implements Listener {
 				if(!is1.hasItemMeta() && !is2.hasItemMeta()) {
 					return true;
 				}else if(is1.hasItemMeta() && is2.hasItemMeta()) {
-					if(is1.getItemMeta().hasLore() && is2.getItemMeta().hasLore())
-						if(is1.getItemMeta().getLore().equals(is2.getItemMeta().getLore()))
+					if(is1.getItemMeta().hasLore() && is2.getItemMeta().hasLore()) {
+						if(is1.getItemMeta().getLore().equals(is2.getItemMeta().getLore())) {
 							return true;
+						}
+					}
 				}
 			}
 		}

@@ -48,7 +48,7 @@ public class WitherBoss implements Listener {
 		healthAttribute.setBaseValue(800);
 		WBoss.setHealth(800);
 		
-		WBoss.setCustomName("Â§cThe Wither Grandfather");
+		WBoss.setCustomName("§cThe Wither Grandfather");
 		WBoss.getBossBar().setColor(BarColor.BLUE);
 
 		loop(WBoss);
@@ -72,11 +72,11 @@ public class WitherBoss implements Listener {
 						Bukkit.getScheduler().runTask(Main.getPlugin(Main.class), () -> {
 						WBoss.getWorld().playSound(WBoss.getLocation(),Sound.ENTITY_ELDER_GUARDIAN_CURSE, 1, 1);
 							for(Entity entity : WBoss.getWorld().getNearbyEntities(WBoss.getLocation(), 20, 20, 20)) {
-								Player p = (Player) entity;
-								if(p.getGameMode() != GameMode.CREATIVE) {
-									p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 15, 0));
+								if(entity instanceof Player p) {
+									if(p.getGameMode() != GameMode.CREATIVE) {
+										p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 15, 0));
+									}
 								}
-								
 							}
 						});
 						break;
@@ -94,7 +94,9 @@ public class WitherBoss implements Listener {
 						Bukkit.getScheduler().runTask(Main.getPlugin(Main.class), () -> {
 							Fireball fireball = WBoss.getWorld().spawn(WBoss.getEyeLocation(),Fireball.class);
 							Player[] ps = (Player[]) WBoss.getWorld().getNearbyEntities(WBoss.getLocation(), 20, 20, 20, (e) -> e instanceof Player).toArray();
-							fireball.setVelocity(ps[r.nextInt(ps.length)].getLocation().toVector());
+							if(ps.length > 0) {
+								fireball.setVelocity(ps[r.nextInt(ps.length)].getLocation().toVector());
+							}
 						});
 						break;
 					}
@@ -203,7 +205,7 @@ public class WitherBoss implements Listener {
 				e.getDrops().set(0,new ItemStack(Material.NETHER_STAR,r.nextInt(7)+2));
 			}
 		} else if(e.getEntity() instanceof WitherSkeleton) {
-			int r = new Random().nextInt(1000);
+			int r = new Random().nextInt(100);
 			if(r < 3) {
 				e.getDrops().add(Custom.multi(Items.wither_bone.getItemStack(),2));
 			} else if(r < 15) {

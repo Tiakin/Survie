@@ -41,8 +41,8 @@ public class Advancements implements Listener {
 		list.add(new NamespacedKey(Main.getPlugin(Main.class), "adventure3"));
 		list.add(new NamespacedKey(Main.getPlugin(Main.class), "adventure4"));
 		list.add(new NamespacedKey(Main.getPlugin(Main.class), "eastereggroot"));
-		list.add(new NamespacedKey(Main.getPlugin(Main.class), "easteregg1"));
-		list.add(new NamespacedKey(Main.getPlugin(Main.class), "easteregg2"));
+		//list.add(new NamespacedKey(Main.getPlugin(Main.class), "easteregg1"));
+		//list.add(new NamespacedKey(Main.getPlugin(Main.class), "easteregg2"));
 		list.add(new NamespacedKey(Main.getPlugin(Main.class), "easteregg3"));
 		list.add(new NamespacedKey(Main.getPlugin(Main.class), "easteregg4"));
 		list.add(new NamespacedKey(Main.getPlugin(Main.class), "easteregg5"));
@@ -213,7 +213,7 @@ public class Advancements implements Listener {
     		
     }
    
-    
+    //faire grant advancement avec condition (mettre un string pour le savoir)
     public void grantAdvancement(Player player,NamespacedKey key) {
     	AdvancementProgress progress = player.getAdvancementProgress(Bukkit.getAdvancement(key));
     	for(String criteria : progress.getRemainingCriteria())

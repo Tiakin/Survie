@@ -111,7 +111,7 @@ public class ChaosBiome {
     private static void setBiome(int x, int y, int z, World w, BiomeBase bb) {
           BlockPosition pos = new BlockPosition(x, 0, z);
           if (w.n(pos)) {
-             net.minecraft.world.level.chunk.Chunk chunk = w.l(pos);
+             net.minecraft.world.level.chunk.Chunk chunk = w.getChunkAtWorldCoords(pos);
              if (chunk != null) {
                 chunk.setBiome(x >> 2, y >> 2, z >> 2, Holder.a(bb));
                 

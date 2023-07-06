@@ -85,10 +85,10 @@ public class StructureUtil {
         } else {
             DefinedStructureInfo structureInfo = (new DefinedStructureInfo()).a(EnumBlockMirror.a).a(EnumBlockRotation.a).a(false).c(true);
             BaseBlockPosition BBP = structure.a();
-            BlockPosition originPos2 = new BlockPosition(origin.getBlockX()+BBP.u(), origin.getBlockY()+BBP.v(), origin.getBlockZ()+BBP.w());
+            BlockPosition originPos2 = new BlockPosition(origin.getBlockX()+BBP.getX(), origin.getBlockY()+BBP.getY(), origin.getBlockZ()+BBP.getZ());
             if(centered) {
-            	originPos = new BlockPosition(origin.getBlockX()-(int) (BBP.u()/2), origin.getBlockY(), origin.getBlockZ()-(int) (BBP.w()/2));
-            	originPos2 = new BlockPosition(origin.getBlockX()+(int) (BBP.u()/2), origin.getBlockY()+BBP.v(), origin.getBlockZ()+(int) (BBP.w()/2));
+            	originPos = new BlockPosition(origin.getBlockX()-(int) (BBP.getX()/2), origin.getBlockY(), origin.getBlockZ()-(int) (BBP.getZ()/2));
+            	originPos2 = new BlockPosition(origin.getBlockX()+(int) (BBP.getX()/2), origin.getBlockY()+BBP.getY(), origin.getBlockZ()+(int) (BBP.getZ()/2));
             }
             final BlockPosition foriginPos = originPos;
             final BlockPosition foriginPos2 = originPos2;

@@ -20,7 +20,7 @@ import org.bukkit.World.Environment;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.MultipleFacing;
-import org.bukkit.craftbukkit.v1_18_R2.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_17_R1.entity.CraftPlayer;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
@@ -175,7 +175,7 @@ public class Main extends JavaPlugin implements Listener{
 										Custom.generateOre(e.getWorld(),e.getChunk(),random,Blocks.chaos_ore,b.getY()-5,b.getY(),3,1,3,2, true, true);
 									}else if(random.nextInt(50) == 0) {
 										BaseBlockPosition bbp = StructureUtil.getSize(e.getWorld(), "lac1");
-										Block b2 = Custom.gethighestendstone(e.getWorld(), b.getRelative(bbp.u()/2, 0,0).getX() ,b.getRelative(0, 0,bbp.w()/2).getZ());
+										Block b2 = Custom.gethighestendstone(e.getWorld(), b.getRelative(bbp.getX()/2, 0,0).getX() ,b.getRelative(0, 0,bbp.getZ()/2).getZ());
 										if(b2 != null)
 											if(b.getY() - b2.getY() < 3 )
 												if(random.nextInt(2) == 0) {
@@ -186,7 +186,7 @@ public class Main extends JavaPlugin implements Listener{
 										
 									}else if(random.nextInt(75) == 0) {
 										BaseBlockPosition bbp = StructureUtil.getSize(e.getWorld(), "lac2");
-										Block b2 = Custom.gethighestendstone(e.getWorld(), b.getRelative(bbp.u()/2, 0,0).getX() ,b.getRelative(0, 0,bbp.w()/2).getZ());
+										Block b2 = Custom.gethighestendstone(e.getWorld(), b.getRelative(bbp.getX()/2, 0,0).getX() ,b.getRelative(0, 0,bbp.getZ()/2).getZ());
 										if(b2 != null) {
 											if(b.getY() - b2.getY() < 3 ) {
 												if(random.nextInt(2) == 0) {
@@ -223,7 +223,7 @@ public class Main extends JavaPlugin implements Listener{
     }
 	
 	private void removePlayer(Player player) {
-        Channel channel = ((CraftPlayer) player).getHandle().b.a.m;
+        Channel channel = ((CraftPlayer) player).getHandle().b.a.k;
         channel.eventLoop().submit(() -> {
             channel.pipeline().remove(player.getName());
             return null;
@@ -259,7 +259,7 @@ public class Main extends JavaPlugin implements Listener{
 
         };
 
-        ChannelPipeline pipeline = ((CraftPlayer) player).getHandle().b.a.m.pipeline();
+        ChannelPipeline pipeline = ((CraftPlayer) player).getHandle().b.a.k.pipeline();
         pipeline.addBefore("packet_handler", player.getName(), channelDuplexHandler);
 
     }

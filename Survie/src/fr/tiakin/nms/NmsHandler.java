@@ -5,8 +5,8 @@ import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
-import org.bukkit.craftbukkit.v1_18_R2.CraftServer;
-import org.bukkit.craftbukkit.v1_18_R2.CraftWorld;
+import org.bukkit.craftbukkit.v1_17_R1.CraftServer;
+import org.bukkit.craftbukkit.v1_17_R1.CraftWorld;
 import org.bukkit.entity.Player;
 
 import fr.tiakin.block.Blocks;
@@ -22,8 +22,8 @@ public class NmsHandler {
 	//
 	
     public static void sendBreakPacket(int animation, Block block) {
-        ((CraftServer) Bukkit.getServer()).getHandle().a(null, block.getX(), block.getY(), block.getZ(), 120,
-                ((CraftWorld) block.getWorld()).getHandle().aa(), new PacketPlayOutBlockBreakAnimation(getBlockEntityId(block), getBlockPosition(block), animation));
+        ((CraftServer) Bukkit.getServer()).getHandle().sendPacketNearby(null, block.getX(), block.getY(), block.getZ(), 120,
+                ((CraftWorld) block.getWorld()).getHandle().getDimensionKey(), new PacketPlayOutBlockBreakAnimation(getBlockEntityId(block), getBlockPosition(block), animation));
     }
 
     public static void sendBreakBlock(Player player, Block block) {
@@ -38,13 +38,13 @@ public class NmsHandler {
     }
     public static void place(Location loc, Blocks block) {
     	BlockPosition bp = new BlockPosition(loc.getX(),loc.getY(),loc.getZ());
-		((CraftWorld) loc.getWorld()).getHandle().l(bp).a(bp, Custom.createCustomBlock(block), true);
+		((CraftWorld) loc.getWorld()).getHandle().A(bp).a(bp, Custom.createCustomBlock(block), true);
 		
     }
     //getX getY getZ
     public static Location getLocation(BlockPosition block, World w) {
     	
-		return new Location(w,block.u(),block.v(),block.w());
+		return new Location(w,block.getX(),block.getY(),block.getZ());
 		
     }
     private static BlockPosition getBlockPosition(Block block){

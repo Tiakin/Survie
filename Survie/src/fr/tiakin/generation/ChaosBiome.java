@@ -1,7 +1,5 @@
 package fr.tiakin.generation;
 
-import java.lang.reflect.Field;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Server;
@@ -10,10 +8,8 @@ import org.bukkit.craftbukkit.v1_17_R1.CraftWorld;
 import org.bukkit.util.noise.SimplexNoiseGenerator;
 
 import net.minecraft.core.BlockPosition;
-import net.minecraft.core.Holder;
 import net.minecraft.core.IRegistry;
 import net.minecraft.core.IRegistryWritable;
-import net.minecraft.core.RegistryMaterials;
 import net.minecraft.resources.MinecraftKey;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.dedicated.DedicatedServer;
@@ -110,10 +106,10 @@ public class ChaosBiome {
  
     private static void setBiome(int x, int y, int z, World w, BiomeBase bb) {
           BlockPosition pos = new BlockPosition(x, 0, z);
-          if (w.n(pos)) {
+          if (w.o(pos)) {
              net.minecraft.world.level.chunk.Chunk chunk = w.getChunkAtWorldCoords(pos);
              if (chunk != null) {
-                chunk.setBiome(x >> 2, y >> 2, z >> 2, Holder.a(bb));
+                chunk.getBiomeIndex().setBiome(x >> 2, y >> 2, z >> 2, bb);
                 
              }
           }

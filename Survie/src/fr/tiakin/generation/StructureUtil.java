@@ -9,7 +9,7 @@ import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.craftbukkit.v1_18_R2.CraftWorld;
+import org.bukkit.craftbukkit.v1_20_R1.CraftWorld;
 import org.bukkit.util.Vector;
 
 import fr.tiakin.main.Main;
@@ -22,7 +22,7 @@ import net.minecraft.world.level.block.EnumBlockMirror;
 import net.minecraft.world.level.block.EnumBlockRotation;
 import net.minecraft.world.level.levelgen.structure.templatesystem.DefinedStructure;
 import net.minecraft.world.level.levelgen.structure.templatesystem.DefinedStructureInfo;
-import net.minecraft.world.level.levelgen.structure.templatesystem.DefinedStructureManager;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
 
 public class StructureUtil {
     
@@ -39,7 +39,7 @@ public class StructureUtil {
         BlockPosition sizePos = new BlockPosition(size.getBlockX(),size.getBlockY(),size.getBlockZ());
         WorldServer world = ((CraftWorld) start.getWorld()).getHandle();
         //MinecraftServer server = world.getMinecraftServer();
-        DefinedStructureManager structureManager = world.p();
+        StructureTemplateManager structureManager = world.p();
         DefinedStructure structure = structureManager.a(new MinecraftKey(name));
         structure.a(world, startPos, sizePos, true, Blocks.dj); // false -> do not includ entities, dj -> stucture void
         structure.a(author);
@@ -78,7 +78,7 @@ public class StructureUtil {
         BlockPosition originPos = new BlockPosition(origin.getBlockX(), origin.getBlockY(), origin.getBlockZ());
         	
         WorldServer world = ((CraftWorld) origin.getWorld()).getHandle();
-        DefinedStructureManager structureManager = world.p();
+        StructureTemplateManager structureManager = world.p();
         DefinedStructure structure = structureManager.b(new MinecraftKey(name)).get();
         if (structure == null) {
             return false;
@@ -100,7 +100,7 @@ public class StructureUtil {
     public static BaseBlockPosition getSize(World w,String name) {
         	
         WorldServer world = ((CraftWorld) w).getHandle();
-        DefinedStructureManager structureManager = world.p();
+        StructureTemplateManager structureManager = world.p();
         DefinedStructure structure = structureManager.b(new MinecraftKey(name)).get();
         if (structure == null) {
             return null;

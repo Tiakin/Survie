@@ -5,8 +5,8 @@ import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
-import org.bukkit.craftbukkit.v1_18_R2.CraftServer;
-import org.bukkit.craftbukkit.v1_18_R2.CraftWorld;
+import org.bukkit.craftbukkit.v1_20_R1.CraftServer;
+import org.bukkit.craftbukkit.v1_20_R1.CraftWorld;
 import org.bukkit.entity.Player;
 
 import fr.tiakin.block.Blocks;
@@ -37,7 +37,7 @@ public class NmsHandler {
     	
     }
     public static void place(Location loc, Blocks block) {
-    	BlockPosition bp = new BlockPosition(loc.getX(),loc.getY(),loc.getZ());
+    	BlockPosition bp = new BlockPosition(loc.getBlockX(),loc.getBlockY(),loc.getBlockZ());
 		((CraftWorld) loc.getWorld()).getHandle().l(bp).a(bp, Custom.createCustomBlock(block), true);
 		
     }

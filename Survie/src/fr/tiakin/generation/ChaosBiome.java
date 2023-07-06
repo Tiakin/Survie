@@ -5,8 +5,8 @@ import java.lang.reflect.Field;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Server;
-import org.bukkit.craftbukkit.v1_18_R2.CraftServer;
-import org.bukkit.craftbukkit.v1_18_R2.CraftWorld;
+import org.bukkit.craftbukkit.v1_17_R1.CraftServer;
+import org.bukkit.craftbukkit.v1_17_R1.CraftWorld;
 import org.bukkit.util.noise.SimplexNoiseGenerator;
 
 import net.minecraft.core.BlockPosition;
@@ -36,15 +36,11 @@ public class ChaosBiome {
 	static DedicatedServer dedicatedserver = craftserver.getServer();
 	
 	public static void create() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
-		 RegistryMaterials<BiomeBase> materials = ((RegistryMaterials<BiomeBase>) dedicatedserver.aU().b(IRegistry.aP));
-         Field isFrozen = materials.getClass().getDeclaredField("bL");
-         isFrozen.setAccessible(true);
-         isFrozen.set(materials, false);
          
-		ResourceKey<BiomeBase> newKey = ResourceKey.a(IRegistry.aP, new MinecraftKey("survie", "chaos"));
+		ResourceKey<BiomeBase> newKey = ResourceKey.a(IRegistry.aO, new MinecraftKey("survie", "chaos"));
 		
-		ResourceKey<BiomeBase> oldKey = ResourceKey.a(IRegistry.aP, new MinecraftKey("minecraft", "end_highlands"));
-		IRegistryWritable<BiomeBase> registrywritable = (IRegistryWritable<BiomeBase>) dedicatedserver.aU().b(IRegistry.aP);
+		ResourceKey<BiomeBase> oldKey = ResourceKey.a(IRegistry.aO, new MinecraftKey("minecraft", "end_highlands"));
+		IRegistryWritable<BiomeBase> registrywritable = (IRegistryWritable<BiomeBase>) dedicatedserver.getCustomRegistry().b(IRegistry.aO);
 		BiomeBase oldbiome = registrywritable.a(oldKey);
 		BiomeBase.a newBiome = new BiomeBase.a();
 		newBiome.a(BiomeBase.Geography.r);
@@ -52,7 +48,7 @@ public class ChaosBiome {
 		newBiome.a(BiomeBase.TemperatureModifier.a); //BiomeBase.TemperatureModifier.a = normal
 		newBiome.a(oldbiome.e()); //setting generation
 		newBiome.a(oldbiome.b()); //setting mob
-		newBiome.a(oldbiome.i()); //temperature
+		newBiome.c(0.7F); //temperature
 		newBiome.b(oldbiome.h()); // downfall
 		
 		BiomeFog.a newFog = new BiomeFog.a();
@@ -72,19 +68,17 @@ public class ChaosBiome {
 		
 		newBiome.a(newFog.a());
 		
-		((IRegistryWritable<BiomeBase>) dedicatedserver.aU().b(IRegistry.aP)).a(newKey, newBiome.a(), Lifecycle.stable());
-		
-		isFrozen.set(materials, true); 
+		((IRegistryWritable<BiomeBase>) dedicatedserver.getCustomRegistry().b(IRegistry.aO)).a(newKey, newBiome.a(), Lifecycle.stable());
 	}
 	public static BiomeBase getbase(String newBiomeName) {
 		BiomeBase base;
-        IRegistryWritable<BiomeBase> registrywritable = (IRegistryWritable<BiomeBase>) dedicatedserver.aU().b(IRegistry.aP);
+        IRegistryWritable<BiomeBase> registrywritable = (IRegistryWritable<BiomeBase>) dedicatedserver.getCustomRegistry().b(IRegistry.aO);
    
-        ResourceKey<BiomeBase> rkey = ResourceKey.a(IRegistry.aP, new MinecraftKey(newBiomeName.toLowerCase()));
+        ResourceKey<BiomeBase> rkey = ResourceKey.a(IRegistry.aO, new MinecraftKey(newBiomeName.toLowerCase()));
         base = registrywritable.a(rkey);
         if(base == null) {
             if(newBiomeName.contains(":")) {
-                ResourceKey<BiomeBase> newrkey = ResourceKey.a(IRegistry.aP, new MinecraftKey(newBiomeName.split(":")[0].toLowerCase(), newBiomeName.split(":")[1].toLowerCase()));
+                ResourceKey<BiomeBase> newrkey = ResourceKey.a(IRegistry.aO, new MinecraftKey(newBiomeName.split(":")[0].toLowerCase(), newBiomeName.split(":")[1].toLowerCase()));
                 base = registrywritable.a(newrkey);
                 if(base == null) {
                     return null;

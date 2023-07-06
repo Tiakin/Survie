@@ -38,7 +38,7 @@ public class NmsHandler {
     }
     public static void place(Location loc, Blocks block) {
     	BlockPosition bp = new BlockPosition(loc.getX(),loc.getY(),loc.getZ());
-		((CraftWorld) loc.getWorld()).getHandle().A(bp).a(bp, Custom.createCustomBlock(block), true);
+		((CraftWorld) loc.getWorld()).getHandle().getChunkAtWorldCoords(bp).setType(bp, Custom.createCustomBlock(block), true);
 		
     }
     //getX getY getZ

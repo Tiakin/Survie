@@ -20,7 +20,6 @@ import org.bukkit.World.Environment;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.MultipleFacing;
-import org.bukkit.craftbukkit.v1_18_R2.entity.CraftPlayer;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
@@ -35,7 +34,6 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -43,7 +41,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.noise.SimplexNoiseGenerator;
 
-import fr.tiakin.block.AbortBreakingBlockEvent;
 import fr.tiakin.block.Blocks;
 import fr.tiakin.block.BreakListeners;
 import fr.tiakin.block.BrokenBlocksService;
@@ -55,17 +52,7 @@ import fr.tiakin.mob.InfinityBoss;
 import fr.tiakin.mob.WitherBoss;
 import fr.tiakin.nms.NmsHandler;
 
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelDuplexHandler;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelPipeline;
-import io.netty.channel.ChannelPromise;
-
 import net.minecraft.core.BaseBlockPosition;
-import net.minecraft.core.BlockPosition;
-import net.minecraft.core.EnumDirection;
-import net.minecraft.network.protocol.game.PacketPlayInBlockDig;
-import net.minecraft.network.protocol.game.PacketPlayInBlockDig.EnumPlayerDigType;
 
 public class Main extends JavaPlugin implements Listener{
 	public static BrokenBlocksService brokenBlocksService = new BrokenBlocksService();
@@ -96,7 +83,6 @@ public class Main extends JavaPlugin implements Listener{
 		
 		for(Player p : Bukkit.getOnlinePlayers()) {
 			Custom.discoverrecipe(p.getPlayer());
-			injectPlayer(p.getPlayer());
 		}
 	}
 	
@@ -115,16 +101,12 @@ public class Main extends JavaPlugin implements Listener{
 
 	public void onDisable() {
 		getLogger().info("Plugin Survie éteint !");
-		for(Player p : Bukkit.getOnlinePlayers()) {
-			removePlayer(p.getPlayer());
-		}
 	}
 	
 	@EventHandler
 	public void join(PlayerJoinEvent e) {
 		Custom.discoverrecipe(e.getPlayer());
 		e.getPlayer().setResourcePack("http://85.214.226.235/survivalV2.3.zip");
-		injectPlayer(e.getPlayer());
 		e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 600, 10,false,true,false));
 	}
 	
@@ -216,53 +198,6 @@ public class Main extends JavaPlugin implements Listener{
 			}
 		}
 	}
-	
-	@EventHandler
-    public void onLeave(PlayerQuitEvent e){
-        removePlayer(e.getPlayer());
-    }
-	
-	private void removePlayer(Player player) {
-        Channel channel = ((CraftPlayer) player).getHandle().b.a.m;
-        channel.eventLoop().submit(() -> {
-            channel.pipeline().remove(player.getName());
-            return null;
-        });
-    }
-	
-    private void injectPlayer(Player player) {
-    	
-        ChannelDuplexHandler channelDuplexHandler = new ChannelDuplexHandler() {
-
-            @Override
-            public void channelRead(ChannelHandlerContext channelHandlerContext, Object packet) throws Exception {
-            	super.channelRead(channelHandlerContext, packet);
-            	if(packet instanceof PacketPlayInBlockDig) {
-            		BlockPosition b = ((PacketPlayInBlockDig) packet).b();
-            		EnumDirection c = ((PacketPlayInBlockDig) packet).c();
-            		EnumPlayerDigType d = ((PacketPlayInBlockDig) packet).d();
-            		
-                
-            		if(d.equals(EnumPlayerDigType.b)) {
-            			AbortBreakingBlockEvent event = new AbortBreakingBlockEvent(b,c,player);
-            			Bukkit.getScheduler().runTask(getPlugin(Main.class), () -> Bukkit.getPluginManager().callEvent(event));
-                }
-            	}
-                
-            }
-            
-            @Override
-            public void write(ChannelHandlerContext channelHandlerContext, Object packet, ChannelPromise channelPromise) throws Exception {
-                super.write(channelHandlerContext, packet, channelPromise);
-            }
-
-
-        };
-
-        ChannelPipeline pipeline = ((CraftPlayer) player).getHandle().b.a.m.pipeline();
-        pipeline.addBefore("packet_handler", player.getName(), channelDuplexHandler);
-
-    }
     
     @EventHandler
     private void onEventExplosion(EntityDamageEvent e) {

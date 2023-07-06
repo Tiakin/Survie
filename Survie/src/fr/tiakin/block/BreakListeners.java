@@ -6,7 +6,6 @@ import java.util.List;
 import org.bukkit.FluidCollisionMode;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -24,11 +23,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import fr.tiakin.nms.NmsHandler;
 import fr.tiakin.item.Tool;
 import fr.tiakin.main.Custom;
 import fr.tiakin.main.Main;
-import net.minecraft.core.BlockPosition;
 
 public class BreakListeners implements Listener {
 
@@ -80,12 +77,9 @@ public class BreakListeners implements Listener {
     
     
     @EventHandler
-    public void onAbortBlock(AbortBreakingBlockEvent event){
-    	Main.getPlugin(Main.class).getLogger().info("abortevent");
+    public void onAbortBlock(BlockDamageAbortEvent event){
     	Player p = event.getPlayer();
-    	World w = p.getWorld();
-    	BlockPosition b = event.getBlockPosition();
-        Location loc = NmsHandler.getLocation(b,w);
+        Location loc = event.getBlock().getLocation();
         BrokenBlock a = Main.brokenBlocksService.getBrokenBlock(loc);
         
         if(a.getDamage() != 0 || a.getHardeness() == 0 || a.isBroken()) {

@@ -11,7 +11,6 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
-import org.bukkit.craftbukkit.v1_18_R2.CraftWorld;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -35,7 +34,7 @@ import fr.tiakin.item.Items;
 import fr.tiakin.item.Tool;
 import fr.tiakin.main.Custom;
 import fr.tiakin.main.Main;
-import net.minecraft.core.BlockPosition;
+import fr.tiakin.nms.NmsHandler;
 
 public class InfinityBoss implements Listener {
 	
@@ -153,9 +152,9 @@ public class InfinityBoss implements Listener {
 						e.setCancelled(true);
 						p.sendMessage("§dVous avez été protéger par le chaos !");
 						for(Block b : Tool.getSquare(p.getLocation().add(0, -1, 0),BlockFace.DOWN,1)) {
-							BlockPosition bp = new BlockPosition(b.getX(),b.getY(),b.getZ());
-							if(Custom.materialsWhitelist(b.getType()))
-								((CraftWorld) e.getEntity().getWorld()).getHandle().l(bp).a(bp, Custom.createCustomBlock(Blocks.chaos_nylium), true);
+							if(Custom.materialsWhitelist(b.getType())) {
+								NmsHandler.place(b.getLocation(), Blocks.chaos_nylium);
+							}
 						}
 					}
 				}
@@ -179,8 +178,9 @@ public class InfinityBoss implements Listener {
 				e.getDrops().add(Custom.multi(Items.infinity_catalyst.getItemStack().clone(), r.nextInt(5)+2));
 			}
 			for(Entity fireball : z.getWorld().getEntities()) {
-				if(fireball instanceof Fireball)
+				if(fireball instanceof Fireball) {
 					fireball.remove();
+				}
 				}
 		}
 	}

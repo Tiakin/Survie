@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockDamageAbortEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.event.entity.EntityPotionEffectEvent.Cause;
@@ -23,6 +24,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import fr.tiakin.nms.NmsHandler;
 import fr.tiakin.item.Tool;
 import fr.tiakin.main.Custom;
 import fr.tiakin.main.Main;
@@ -76,13 +78,14 @@ public class BreakListeners implements Listener {
     	addSlowDig(event.getPlayer());
     }
     
+    
     @EventHandler
     public void onAbortBlock(AbortBreakingBlockEvent event){
+    	Main.getPlugin(Main.class).getLogger().info("abortevent");
     	Player p = event.getPlayer();
     	World w = p.getWorld();
     	BlockPosition b = event.getBlockPosition();
-    	// u v w ?
-        Location loc = new Location(w,b.u(),b.v(),b.w());
+        Location loc = NmsHandler.getLocation(b,w);
         BrokenBlock a = Main.brokenBlocksService.getBrokenBlock(loc);
         
         if(a.getDamage() != 0 || a.getHardeness() == 0 || a.isBroken()) {

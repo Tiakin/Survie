@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffectType;
 
-import fr.tiakin.block.nms.NmsHandler;
+import fr.tiakin.nms.NmsHandler;
 import fr.tiakin.item.Tool;
 import fr.tiakin.main.Main;
 
@@ -56,12 +56,13 @@ public class BrokenBlock {
                 
             } else {
             	breakBlock(from);
-            	if(Tool.isHammer(from.getInventory().getItemInMainHand()))
+            	if(Tool.isHammer(from.getInventory().getItemInMainHand()) && list != null) {
+            		
                 	list.forEach(b -> {
                 		if(Tool.canHarvest(b, from.getInventory().getItemInMainHand()) && Tool.isBestTool(b, from.getInventory().getItemInMainHand()))
                 			from.breakBlock(b);
                 	});
-                
+            	}
                 
                 return;
             }

@@ -7,6 +7,7 @@ import java.util.Random;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.HeightMap;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.SoundCategory;
@@ -17,7 +18,6 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Jukebox;
 import org.bukkit.block.data.MultipleFacing;
-import org.bukkit.craftbukkit.v1_18_R2.CraftWorld;
 import org.bukkit.craftbukkit.v1_18_R2.block.CraftBlockStates;
 import org.bukkit.craftbukkit.v1_18_R2.block.data.CraftBlockData;
 import org.bukkit.enchantments.Enchantment;
@@ -51,10 +51,10 @@ import org.bukkit.util.noise.SimplexNoiseGenerator;
 import fr.tiakin.block.Blocks;
 import fr.tiakin.item.Tool;
 import fr.tiakin.mob.InfinityBoss;
+import fr.tiakin.nms.NmsHandler;
 import fr.tiakin.item.Discs;
 import fr.tiakin.item.Foods;
 import fr.tiakin.item.Items;
-import net.minecraft.core.BlockPosition;
 import net.minecraft.world.level.block.state.IBlockData;
 
 public class Custom implements Listener {
@@ -1889,7 +1889,7 @@ public class Custom implements Listener {
 	 * @param world Le monde
 	 * @param chunk Le chunk
 	 * @param random Random
-	 * @param iBlockData Le block
+	 * @param Blocks Le block
 	 * @param minY La coordonnée minimum en Y
 	 * @param maxY La coordonnée maximum en Y
 	 * @param chance Les chances de spawn (1/X)
@@ -1899,7 +1899,7 @@ public class Custom implements Listener {
 	 * @param centered Le minerai sera forcément centrer dans le chunk
 	 * @param bypassWhitelist Le minerai spawnera dans tout les cas
 	 */
-	public static void generateOre(World world, Chunk chunk, Random random, IBlockData iBlockData, int minY, int maxY,int chance, int tries,int luck, int maxVein,boolean centered,boolean bypassWhitelist) {
+	public static void generateOre(World world, Chunk chunk, Random random, Blocks block, int minY, int maxY,int chance, int tries,int luck, int maxVein,boolean centered,boolean bypassWhitelist) {
 		
 			int X, Y, Z, vein = 0;
 			boolean Whitelisted;
@@ -1912,9 +1912,9 @@ public class Custom implements Listener {
 			    		Whitelisted = true;
 			    		while (Whitelisted) {
 			    			vein++;
-			    			BlockPosition bp = new BlockPosition(X,Y,Z);
 			    			
-			    			((CraftWorld) world).getHandle().l(bp).a(bp, iBlockData, true);
+			    			NmsHandler.place(new Location(world,X,Y,Z), block);
+			    			
 			    			
 			    			if (random.nextInt(luck) == 0 && vein <= maxVein)  {
 			    				switch (random.nextInt(6)) {

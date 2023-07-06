@@ -137,7 +137,7 @@ public class Tool {
 				case "Enderite" -> "enderite";
 				case "Discordium" -> "discordium";
     			case "Blazite" -> "blazite";
-    			case "ametrine" -> "ametrine";
+    			case "Ametrine" -> "ametrine";
     			case "Chaos" -> "chaos";
     			case "Netherstar" -> "netherstar";
     			case "Infinity" -> "infinity";

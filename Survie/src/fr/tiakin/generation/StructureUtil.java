@@ -92,7 +92,7 @@ public class StructureUtil {
             }
             final BlockPosition foriginPos = originPos;
             final BlockPosition foriginPos2 = originPos2;
-            Bukkit.getScheduler().runTask(Main.getPlugin(Main.class), () -> structure.a(world, foriginPos, foriginPos2, structureInfo, new Random(origin.getWorld().getSeed()), 2));
+            Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), () -> structure.a(world, foriginPos, foriginPos2, structureInfo, new Random(origin.getWorld().getSeed()), 2),1L);
             return true;
         }
     }

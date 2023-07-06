@@ -14,18 +14,15 @@ import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.World.Environment;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.MultipleFacing;
-import org.bukkit.craftbukkit.v1_18_R2.CraftWorld;
 import org.bukkit.craftbukkit.v1_18_R2.entity.CraftPlayer;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -37,7 +34,6 @@ import org.bukkit.event.block.BlockPistonRetractEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
@@ -45,7 +41,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.util.Vector;
 import org.bukkit.util.noise.SimplexNoiseGenerator;
 
 import fr.tiakin.block.AbortBreakingBlockEvent;
@@ -58,11 +53,14 @@ import fr.tiakin.generation.StructureUtil;
 import fr.tiakin.item.Tool;
 import fr.tiakin.mob.InfinityBoss;
 import fr.tiakin.mob.WitherBoss;
+import fr.tiakin.nms.NmsHandler;
+
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelDuplexHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.ChannelPromise;
+
 import net.minecraft.core.BaseBlockPosition;
 import net.minecraft.core.BlockPosition;
 import net.minecraft.core.EnumDirection;
@@ -75,7 +73,7 @@ public class Main extends JavaPlugin implements Listener{
 	Advancements advancement = new Advancements();
 	
 	public void onEnable(){
-		getLogger().info("c lancer");
+		getLogger().info("Plugin Survie lancé !");
 		try {
 			ChaosBiome.create();
 		} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
@@ -99,7 +97,6 @@ public class Main extends JavaPlugin implements Listener{
 		for(Player p : Bukkit.getOnlinePlayers()) {
 			Custom.discoverrecipe(p.getPlayer());
 			injectPlayer(p.getPlayer());
-			getLogger().info("player ciblé");
 		}
 	}
 	
@@ -111,44 +108,15 @@ public class Main extends JavaPlugin implements Listener{
         		FileUtils.copyURLToFile(Main.class.getResource("/src/resources/axe.json"), tagblock);
 				
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
         }
 	}
 
 	public void onDisable() {
-		getLogger().info("c stop");
+		getLogger().info("Plugin Survie éteint !");
 		for(Player p : Bukkit.getOnlinePlayers()) {
 			removePlayer(p.getPlayer());
-			getLogger().info("player retirer");
-		}
-	}
-	
-	
-	@EventHandler
-	public void chat(AsyncPlayerChatEvent e) {
-		String[] message = e.getMessage().split(" ");
-		if(!e.getPlayer().getName().equalsIgnoreCase("tiakin69")) return;
-		if(message[0].equalsIgnoreCase("spawni")) {
-			Bukkit.getScheduler().runTask(getPlugin(Main.class), () -> InfinityBoss.spawn(e.getPlayer().getLocation()));
-		}if(message[0].equalsIgnoreCase("spawnp")) {
-			Bukkit.getScheduler().runTask(getPlugin(Main.class), () -> WitherBoss.spawn(e.getPlayer().getLocation()));
-		} else if(message[0].equalsIgnoreCase("boule")) {
-			Bukkit.getScheduler().runTask(getPlugin(Main.class), () -> {
-				for(int i=0;i<50;i++) {
-					final int j = i;
-					Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), () -> {
-						Fireball fireball = e.getPlayer().getWorld().spawn(new Location(e.getPlayer().getWorld(),e.getPlayer().getLocation().getX(),e.getPlayer().getLocation().getY(),e.getPlayer().getLocation().getZ()),Fireball.class);
-						fireball.setDirection(new Vector(Math.cos(j*Math.PI*2/50), 0, Math.sin(j*Math.PI*2/50)));
-						fireball.setVelocity(new Vector(Math.cos(j*Math.PI*2/50), 0, Math.sin(j*Math.PI*2/50)));
-					},j);
-				}
-			});
-		} else if(message[0].equalsIgnoreCase("test")) {
-			Location b = e.getPlayer().getLocation();
-			BlockPosition bp = new BlockPosition(b.getX(),b.getY(),b.getZ());
-			((CraftWorld) e.getPlayer().getWorld()).getHandle().l(bp).a(bp, Custom.createCustomBlock(Blocks.chaos_nylium), true);
 		}
 	}
 	
@@ -180,8 +148,7 @@ public class Main extends JavaPlugin implements Listener{
 							if(Custom.noise(noise,i*2+1, j*2+1) > 0) {
 								Block b = Custom.gethighestendstone(e.getWorld(),e.getChunk().getX() * 16 + x, e.getChunk().getZ() * 16 + z);
 								if(b != null) {
-									BlockPosition bp = new BlockPosition(b.getX(),b.getY(),b.getZ());
-									Bukkit.getScheduler().runTask(Main.getPlugin(Main.class), () -> ((CraftWorld) e.getWorld()).getHandle().l(bp).a(bp, Custom.createCustomBlock(Blocks.chaos_nylium), true));
+									NmsHandler.place(b.getLocation(), Blocks.chaos_nylium);
 								}
 							}
 						}
@@ -196,16 +163,16 @@ public class Main extends JavaPlugin implements Listener{
 							if(Custom.noise(noise,i*2+1, j*2+1) > 0) {
 									if(random.nextInt(150) == 0) {
 										StructureUtil.load(b.getLocation().add(0, -2, 0), "arbre1", true);
-										Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.chaos_ore),b.getY()-5,b.getY(),1,1,2,4, true, true);
+										Custom.generateOre(e.getWorld(),e.getChunk(),random,Blocks.chaos_ore,b.getY()-5,b.getY(),1,1,2,4, true, true);
 									}else if(random.nextInt(100) == 0) {
 										StructureUtil.load(b.getLocation().add(0, -1, 0), "arbre2", true);
-										Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.chaos_ore),b.getY()-5,b.getY(),2,1,3,4, true, true);
+										Custom.generateOre(e.getWorld(),e.getChunk(),random,Blocks.chaos_ore,b.getY()-5,b.getY(),2,1,3,4, true, true);
 									}else if(random.nextInt(75) == 0) {
 										StructureUtil.load(b.getLocation().add(0, -1, 0), "arbre3", true);
-										Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.chaos_ore),b.getY()-5,b.getY(),3,1,3,2, true, true);
+										Custom.generateOre(e.getWorld(),e.getChunk(),random,Blocks.chaos_ore,b.getY()-5,b.getY(),3,1,3,2, true, true);
 									}else if(random.nextInt(75) == 0) {
 										StructureUtil.load(b.getLocation().add(0, -1, 0), "arbre4", true);
-										Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.chaos_ore),b.getY()-5,b.getY(),3,1,3,2, true, true);
+										Custom.generateOre(e.getWorld(),e.getChunk(),random,Blocks.chaos_ore,b.getY()-5,b.getY(),3,1,3,2, true, true);
 									}else if(random.nextInt(50) == 0) {
 										BaseBlockPosition bbp = StructureUtil.getSize(e.getWorld(), "lac1");
 										Block b2 = Custom.gethighestendstone(e.getWorld(), b.getRelative(bbp.u()/2, 0,0).getX() ,b.getRelative(0, 0,bbp.w()/2).getZ());
@@ -239,13 +206,13 @@ public class Main extends JavaPlugin implements Listener{
 							}	
 						}
 					}
-				Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.enderite_ore),0,60,5,6,3,4, false, false);
+				Custom.generateOre(e.getWorld(),e.getChunk(),random,Blocks.enderite_ore,0,60,5,6,3,4, false, false);
 			}else if(e.getWorld().getEnvironment().equals(Environment.NORMAL)) {
-					Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.discordium_ore),-60,0,2,3,2,4, false, false);
-					Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.charoite_ore),-40,10,2,4,2,6, false, false);
+					Custom.generateOre(e.getWorld(),e.getChunk(),random,Blocks.discordium_ore,-60,0,2,3,2,4, false, false);
+					Custom.generateOre(e.getWorld(),e.getChunk(),random,Blocks.charoite_ore,-40,10,2,4,2,6, false, false);
 			}else if(e.getWorld().getEnvironment().equals(Environment.NETHER)) {
-					Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.blazite_ore),0,20,2,3,2,4, false, false);
-					Custom.generateOre(e.getWorld(),e.getChunk(),random,Custom.createCustomBlock(Blocks.carnelian_ore),100,128,2,4,3,4, false, false);
+					Custom.generateOre(e.getWorld(),e.getChunk(),random,Blocks.blazite_ore,0,20,2,3,2,4, false, false);
+					Custom.generateOre(e.getWorld(),e.getChunk(),random,Blocks.carnelian_ore,100,128,2,4,3,4, false, false);
 			}
 		}
 	}

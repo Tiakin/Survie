@@ -11,7 +11,7 @@ import org.bukkit.util.noise.SimplexNoiseGenerator;
 
 import net.minecraft.core.BlockPosition;
 import net.minecraft.core.Holder;
-import net.minecraft.core.IRegistry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.core.IRegistryWritable;
 import net.minecraft.core.RegistryMaterials;
 import net.minecraft.resources.MinecraftKey;
@@ -36,7 +36,7 @@ public class ChaosBiome {
 	static DedicatedServer dedicatedserver = craftserver.getServer();
 	
 	public static void create() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
-		 RegistryMaterials<BiomeBase> materials = ((RegistryMaterials<BiomeBase>) dedicatedserver.aU().b(IRegistry.aP));
+		 RegistryMaterials<BiomeBase> materials = ((RegistryMaterials<BiomeBase>) dedicatedserver.aU().b(Registries.ap));
          Field isFrozen = materials.getClass().getDeclaredField("bL");
          isFrozen.setAccessible(true);
          isFrozen.set(materials, false);

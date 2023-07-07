@@ -1,7 +1,5 @@
 package fr.tiakin.generation;
 
-import java.lang.reflect.Field;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Server;
@@ -13,7 +11,6 @@ import net.minecraft.core.BlockPosition;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.core.IRegistryWritable;
-import net.minecraft.core.RegistryMaterials;
 import net.minecraft.resources.MinecraftKey;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.dedicated.DedicatedServer;
@@ -35,17 +32,12 @@ public class ChaosBiome {
 	static CraftServer craftserver = (CraftServer)server;
 	static DedicatedServer dedicatedserver = craftserver.getServer();
 	
-	@SuppressWarnings("unchecked")
 	public static void create() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
-		 RegistryMaterials<BiomeBase> materials = ((RegistryMaterials<BiomeBase>) dedicatedserver.aV().b(Registries.ap));
-         Field isFrozen = materials.getClass().getDeclaredField("bL");
-         isFrozen.setAccessible(true);
-         isFrozen.set(materials, false);
-         
+		 
 		ResourceKey<BiomeBase> newKey = ResourceKey.a(Registries.ap, new MinecraftKey("survie", "chaos"));
 		
 		ResourceKey<BiomeBase> oldKey = ResourceKey.a(Registries.ap, new MinecraftKey("minecraft", "end_highlands"));
-		IRegistryWritable<BiomeBase> registrywritable = (IRegistryWritable<BiomeBase>) dedicatedserver.aV().b(Registries.ap);
+		IRegistryWritable<BiomeBase> registrywritable = (IRegistryWritable<BiomeBase>) dedicatedserver.aV().d(Registries.ap);
 		BiomeBase oldbiome = registrywritable.a(oldKey);
 		BiomeBase.a newBiome = new BiomeBase.a();
 		newBiome.a(oldbiome.c()); //precipitation
@@ -71,14 +63,11 @@ public class ChaosBiome {
 		
 		newBiome.a(newFog.a());
 		
-		((IRegistryWritable<BiomeBase>) dedicatedserver.aV().b(Registries.ap)).a(newKey, newBiome.a(), Lifecycle.stable());
-		
-		isFrozen.set(materials, true); 
+		((IRegistryWritable<BiomeBase>) dedicatedserver.aV().d(Registries.ap)).a(newKey, newBiome.a(), Lifecycle.stable());
 	}
-	@SuppressWarnings("unchecked")
 	public static BiomeBase getbase(String newBiomeName) {
 		BiomeBase base;
-        IRegistryWritable<BiomeBase> registrywritable = (IRegistryWritable<BiomeBase>) dedicatedserver.aV().b(Registries.ap);
+        IRegistryWritable<BiomeBase> registrywritable = (IRegistryWritable<BiomeBase>) dedicatedserver.aV().d(Registries.ap);
    
         ResourceKey<BiomeBase> rkey = ResourceKey.a(Registries.ap, new MinecraftKey(newBiomeName.toLowerCase()));
         base = registrywritable.a(rkey);

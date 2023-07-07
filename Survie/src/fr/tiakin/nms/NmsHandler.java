@@ -23,7 +23,7 @@ public class NmsHandler {
 	
     public static void sendBreakPacket(int animation, Block block) {
         ((CraftServer) Bukkit.getServer()).getHandle().a(null, block.getX(), block.getY(), block.getZ(), 120,
-                ((CraftWorld) block.getWorld()).getHandle().aa(), new PacketPlayOutBlockBreakAnimation(getBlockEntityId(block), getBlockPosition(block), animation));
+                ((CraftWorld) block.getWorld()).getHandle().ac(), new PacketPlayOutBlockBreakAnimation(getBlockEntityId(block), getBlockPosition(block), animation));
     }
 
     public static void sendBreakBlock(Player player, Block block) {

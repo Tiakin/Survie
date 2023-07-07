@@ -11,6 +11,7 @@ import net.minecraft.core.BlockPosition;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.core.IRegistryWritable;
+import net.minecraft.core.RegistryMaterials;
 import net.minecraft.resources.MinecraftKey;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.dedicated.DedicatedServer;
@@ -33,7 +34,12 @@ public class ChaosBiome {
 	static DedicatedServer dedicatedserver = craftserver.getServer();
 	
 	public static void create() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
-		 
+		
+		RegistryMaterials<BiomeBase> materials = ((RegistryMaterials<BiomeBase>) dedicatedserver.aV().d(Registries.ap));
+        Field isFrozen = materials.getClass().getDeclaredField("l");
+        isFrozen.setAccessible(true);
+        isFrozen.set(materials, false);
+        
 		ResourceKey<BiomeBase> newKey = ResourceKey.a(Registries.ap, new MinecraftKey("survie", "chaos"));
 		
 		ResourceKey<BiomeBase> oldKey = ResourceKey.a(Registries.ap, new MinecraftKey("minecraft", "end_highlands"));
@@ -64,6 +70,8 @@ public class ChaosBiome {
 		newBiome.a(newFog.a());
 		
 		((IRegistryWritable<BiomeBase>) dedicatedserver.aV().d(Registries.ap)).a(newKey, newBiome.a(), Lifecycle.stable());
+		
+		isFrozen.set(materials, true);
 	}
 	public static BiomeBase getbase(String newBiomeName) {
 		BiomeBase base;

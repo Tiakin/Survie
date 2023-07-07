@@ -48,13 +48,11 @@ public class ChaosBiome {
 		IRegistryWritable<BiomeBase> registrywritable = (IRegistryWritable<BiomeBase>) dedicatedserver.aV().b(Registries.ap);
 		BiomeBase oldbiome = registrywritable.a(oldKey);
 		BiomeBase.a newBiome = new BiomeBase.a();
-		newBiome.a(BiomeBase.Geography.r);
 		newBiome.a(oldbiome.c()); //precipitation
 		newBiome.a(BiomeBase.TemperatureModifier.a); //BiomeBase.TemperatureModifier.a = normal
 		newBiome.a(oldbiome.e()); //setting generation
 		newBiome.a(oldbiome.b()); //setting mob
 		newBiome.a(oldbiome.i()); //temperature
-		newBiome.b(oldbiome.h()); // downfall
 		
 		BiomeFog.a newFog = new BiomeFog.a();
 		newFog.a(GrassColor.a); //je sais pas frere(obligé)
@@ -118,7 +116,7 @@ public class ChaosBiome {
  
     private static void setBiome(int x, int y, int z, World w, BiomeBase bb) {
           BlockPosition pos = new BlockPosition(x, 0, z);
-          if (w.n(pos)) {
+          if (w.o(pos)) {
              net.minecraft.world.level.chunk.Chunk chunk = w.l(pos);
              if (chunk != null) {
                 chunk.setBiome(x >> 2, y >> 2, z >> 2, Holder.a(bb));

@@ -3,7 +3,6 @@ package fr.tiakin.generation;
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
-import java.util.Random;
 
 import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
@@ -20,6 +19,7 @@ import net.minecraft.server.level.WorldServer;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EnumBlockMirror;
 import net.minecraft.world.level.block.EnumBlockRotation;
+import net.minecraft.world.level.block.entity.TileEntityStructure;
 import net.minecraft.world.level.levelgen.structure.templatesystem.DefinedStructure;
 import net.minecraft.world.level.levelgen.structure.templatesystem.DefinedStructureInfo;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
@@ -92,7 +92,7 @@ public class StructureUtil {
             }
             final BlockPosition foriginPos = originPos;
             final BlockPosition foriginPos2 = originPos2;
-            Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), () -> structure.a(world, foriginPos, foriginPos2, structureInfo, new Random(origin.getWorld().getSeed()), 2),1L);
+            Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), () -> structure.a(world, foriginPos, foriginPos2, structureInfo, TileEntityStructure.b(origin.getWorld().getSeed()), 2),1L);
             return true;
         }
     }

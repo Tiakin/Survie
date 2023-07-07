@@ -1,6 +1,7 @@
 package fr.tiakin.generation;
 
 import java.lang.reflect.Field;
+import java.util.IdentityHashMap;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
@@ -42,12 +43,20 @@ public class ChaosBiome {
         isFrozen.setAccessible(true);
         isFrozen.set(materials, false);
         
+        
+        
 		ResourceKey<BiomeBase> newKey = ResourceKey.a(Registries.ap, new MinecraftKey("survie", "chaos"));
 		
 		ResourceKey<BiomeBase> oldKey = ResourceKey.a(Registries.ap, new MinecraftKey("minecraft", "end_highlands"));
 		IRegistryWritable<BiomeBase> registrywritable = (IRegistryWritable<BiomeBase>) dedicatedserver.aV().d(Registries.ap);
-		BiomeBase oldbiome = registrywritable.a(oldKey);
+		
+		Field unregisteredIntrusiveHolders = RegistryMaterials.class.getDeclaredField("m");
+        unregisteredIntrusiveHolders.setAccessible(true);
+        unregisteredIntrusiveHolders.set(registrywritable, new IdentityHashMap<>());
+		
+        BiomeBase oldbiome = registrywritable.a(oldKey);
 		BiomeBase.a newBiome = new BiomeBase.a();
+		newBiome.a(oldbiome.d());
 		newBiome.a(oldbiome.c()); //precipitation
 		newBiome.a(BiomeBase.TemperatureModifier.a); //BiomeBase.TemperatureModifier.a = normal
 		newBiome.a(oldbiome.e()); //setting generation
@@ -70,8 +79,12 @@ public class ChaosBiome {
 		newFog.f(darkRed); //grass blocks color
 		
 		newBiome.a(newFog.a());
+		BiomeBase biome = newBiome.a();
+		registrywritable.f(biome);
 		
-		((IRegistryWritable<BiomeBase>) dedicatedserver.aV().d(Registries.ap)).a(newKey, newBiome.a(), Lifecycle.stable());
+		((IRegistryWritable<BiomeBase>) dedicatedserver.aV().d(Registries.ap)).a(newKey, biome, Lifecycle.stable());
+		
+		unregisteredIntrusiveHolders.set(registrywritable, null);
 		
 		isFrozen.set(materials, true);
 	}

@@ -53,7 +53,7 @@ public class ChaosBiome {
 		newBiome.a(oldbiome.e()); //setting generation
 		newBiome.a(oldbiome.b()); //setting mob
 		newBiome.a(oldbiome.i()); //temperature
-		
+		newBiome.b(0.8F); // downfall
 		BiomeFog.a newFog = new BiomeFog.a();
 		newFog.a(GrassColor.a); //je sais pas frere(obligé)
 		
